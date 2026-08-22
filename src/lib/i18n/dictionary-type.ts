@@ -1,0 +1,106 @@
+export type Dictionary = {
+  meta: {
+    siteName: string;
+    title: string;
+    description: string;
+  };
+  nav: {
+    top: string;
+    rooms: string;
+    gallery: string;
+    access: string;
+    faq: string;
+    booking: string;
+    checkAvailability: string;
+  };
+  hero: {
+    title: string;
+    subtitle: string;
+  };
+  statCards: {
+    size: { label: string; value: string };
+    guests: { label: string; value: string };
+    stationOfuna: { label: string; value: string };
+    stationKamakura: { label: string; value: string };
+    wifi: { label: string; value: string };
+  };
+  searchForm: {
+    heading: string;
+    checkIn: string;
+    checkOut: string;
+    guests: string;
+    adults: string;
+    children: string;
+    submit: string;
+  };
+  availability: {
+    heading: string;
+    subheading: string;
+    legendAvailable: string;
+    legendFull: string;
+    legendClosed: string;
+    prevMonth: string;
+    nextMonth: string;
+    weekdays: string[];
+  };
+  results: {
+    roomFee: string;
+    extraGuestFee: string;
+    cleaningFee: string;
+    total: string;
+    perNight: string;
+    perPerson: string;
+    perPersonNote: string;
+    ctaBook: string;
+    unavailable: string;
+    selectDates: string;
+    disclaimer: string;
+  };
+  facility: {
+    heading: string;
+    intro: string;
+    points: string[];
+  };
+  rooms: {
+    bedsHeading: string;
+    beds: { room: string; desc: string }[];
+    policiesHeading: string;
+    policies: { label: string; value: string }[];
+  };
+  amenities: {
+    heading: string;
+    items: { label: string; sub?: string }[];
+  };
+  gallery: {
+    heading: string;
+    categories: Record<string, string>;
+    viewAll: string;
+  };
+  access: {
+    heading: string;
+    lead: string;
+    fromStation: string;
+    note: string;
+  };
+  faq: {
+    heading: string;
+    items: { q: string; a: string }[];
+  };
+  reviews: {
+    heading: string;
+    note: string;
+    items: { rating: number; text: string; source: string }[];
+  };
+  footer: {
+    address: string;
+    poweredBy: string;
+  };
+  stickyCta: {
+    checkAvailability: string;
+    bookNow: string;
+  };
+  language: {
+    ja: string;
+    en: string;
+  };
+};

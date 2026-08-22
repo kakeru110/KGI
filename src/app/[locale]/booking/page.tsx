@@ -1,0 +1,64 @@
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getOffer } from "@/lib/beds24/offers";
+import { buildExternalBookingUrl } from "@/lib/beds24/bookings";
+import { formatCurrency } from "@/lib/i18n/format";
+import BookingWidget from "@/components/BookingWidget";
+import PriceBreakdown from "@/components/PriceBreakdown";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
+
+export default async function BookingPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+
+  const sp = await searchParams;
+  const checkIn = typeof sp.checkin === "string" ? sp.checkin : undefined;
+  const checkOut = typeof sp.checkout === "string" ? sp.checkout : undefined;
+  const adults = Number(typeof sp.adults === "string" ? sp.adults : "0");
+  const children = Number(typeof sp.children === "string" ? sp.children : "0");
+
+  const hasQuery = Boolean(checkIn && checkOut && adults > 0);
+  const offer = hasQuery
+    ? await getOffer({ checkIn: checkIn!, checkOut: checkOut!, guests: { adults, children } })
+    : null;
+
+  return (
+    <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 pb-28 sm:px-6 sm:py-14 md:pb-14">
+      <h1 className="text-2xl font-semibold sm:text-3xl">{dict.searchForm.heading}</h1>
+
+      <BookingWidget
+        locale={locale}
+        dict={dict}
+        initialCheckIn={checkIn}
+        initialCheckOut={checkOut}
+        initialAdults={adults || 2}
+        initialChildren={children}
+      />
+
+      {!hasQuery && <p className="text-sm text-muted">{dict.results.selectDates}</p>}
+
+      {offer && <PriceBreakdown offer={offer} locale={locale} dict={dict} />}
+
+      {offer?.available && (
+        <StickyMobileCTA
+          secondary={dict.results.total}
+          primary={formatCurrency(offer.total)}
+          href={buildExternalBookingUrl({
+            checkIn: offer.checkIn,
+            checkOut: offer.checkOut,
+            guests: { adults: offer.adults, children: offer.children },
+          })}
+          label={dict.stickyCta.bookNow}
+          external
+        />
+      )}
+    </div>
+  );
+}
