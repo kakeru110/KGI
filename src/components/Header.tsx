@@ -9,6 +9,7 @@ export default function Header({ locale, dict }: { locale: Locale; dict: Diction
     { href: `/${locale}/rooms`, label: dict.nav.rooms },
     { href: `/${locale}/gallery`, label: dict.nav.gallery },
     { href: `/${locale}/access`, label: dict.nav.access },
+    { href: `/${locale}/parking`, label: dict.nav.parking },
     { href: `/${locale}/faq`, label: dict.nav.faq },
   ];
 

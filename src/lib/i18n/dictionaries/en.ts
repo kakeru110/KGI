@@ -12,6 +12,7 @@ const en: Dictionary = {
     rooms: "The Place",
     gallery: "Gallery",
     access: "Access",
+    parking: "Parking",
     faq: "FAQ",
     booking: "Check Availability",
     checkAvailability: "Check Availability",
@@ -127,6 +128,17 @@ const en: Dictionary = {
     fromStation: "7-minute walk from Ofuna Station",
     note: "Detailed directions will be sent after booking.",
   },
+  parking: {
+    heading: "Parking",
+    intro:
+      "The property has no dedicated parking. If you're arriving by car, please use one of the nearby coin-operated parking lots below - all within 500m.",
+    addressLabel: "Address",
+    distanceSuffix: "from the property",
+    priceLabel: "Typical rate",
+    mapLinkLabel: "View on map",
+    disclaimer:
+      "Rates and availability may change. Please check each parking operator's official site or app for the latest information before use.",
+  },
   faq: {
     heading: "FAQ",
     items: [
@@ -148,7 +160,7 @@ const en: Dictionary = {
       },
       {
         q: "Is parking available?",
-        a: "Parking availability depends on the property. Please contact us for details.",
+        a: "The property has no dedicated parking. See our Parking page for nearby coin-operated parking lots.",
       },
       {
         q: "Are pets allowed?",

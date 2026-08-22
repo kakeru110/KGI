@@ -9,6 +9,7 @@ export type Dictionary = {
     rooms: string;
     gallery: string;
     access: string;
+    parking: string;
     faq: string;
     booking: string;
     checkAvailability: string;
@@ -83,6 +84,15 @@ export type Dictionary = {
     lead: string;
     fromStation: string;
     note: string;
+  };
+  parking: {
+    heading: string;
+    intro: string;
+    addressLabel: string;
+    distanceSuffix: string;
+    priceLabel: string;
+    mapLinkLabel: string;
+    disclaimer: string;
   };
   faq: {
     heading: string;

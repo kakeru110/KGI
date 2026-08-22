@@ -7,6 +7,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
     { href: `/${locale}/rooms`, label: dict.nav.rooms },
     { href: `/${locale}/gallery`, label: dict.nav.gallery },
     { href: `/${locale}/access`, label: dict.nav.access },
+    { href: `/${locale}/parking`, label: dict.nav.parking },
     { href: `/${locale}/faq`, label: dict.nav.faq },
     { href: `/${locale}/policy`, label: dict.nav.policy },
     { href: `/${locale}/tokushoho`, label: dict.nav.tokushoho },

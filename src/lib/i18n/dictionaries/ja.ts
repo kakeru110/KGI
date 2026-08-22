@@ -12,6 +12,7 @@ const ja: Dictionary = {
     rooms: "施設紹介",
     gallery: "写真",
     access: "アクセス",
+    parking: "駐車場",
     faq: "よくある質問",
     booking: "空室・料金を確認",
     checkAvailability: "空室・料金を確認",
@@ -126,6 +127,17 @@ const ja: Dictionary = {
     fromStation: "大船駅 徒歩約7分",
     note: "詳しいアクセス方法はご予約後にご案内します。",
   },
+  parking: {
+    heading: "駐車場について",
+    intro:
+      "当施設に専用駐車場はございません。お車でお越しの際は、下記の周辺コインパーキングをご利用ください。いずれも施設から500m以内です。",
+    addressLabel: "住所",
+    distanceSuffix: "施設から約",
+    priceLabel: "料金目安",
+    mapLinkLabel: "地図で見る",
+    disclaimer:
+      "料金・空き状況は変動する場合があります。ご利用前に各駐車場の公式サイトやアプリで最新情報をご確認ください。",
+  },
   faq: {
     heading: "よくある質問",
     items: [
@@ -147,7 +159,7 @@ const ja: Dictionary = {
       },
       {
         q: "駐車場はありますか？",
-        a: "駐車場の有無は施設条件によります。詳細はお問い合わせください。",
+        a: "施設に専用駐車場はございません。近くのコインパーキングをご案内しておりますので、「駐車場」ページをご覧ください。",
       },
       {
         q: "ペットは連れて行けますか？",

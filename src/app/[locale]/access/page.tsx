@@ -1,5 +1,6 @@
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { PROPERTY_MAP_EMBED_SRC } from "@/lib/parking";
 
 export default async function AccessPage({
   params,
@@ -16,8 +17,14 @@ export default async function AccessPage({
       <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">{dict.access.lead}</p>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
-        <div className="flex aspect-video items-center justify-center rounded-2xl border border-border bg-surface text-sm text-muted">
-          Map
+        <div className="aspect-video overflow-hidden rounded-2xl border border-border">
+          <iframe
+            src={PROPERTY_MAP_EMBED_SRC}
+            className="h-full w-full"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Kamakura Gate Inn"
+          />
         </div>
         <div className="flex flex-col justify-center gap-4">
           <div className="rounded-2xl border border-border p-5">
