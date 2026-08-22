@@ -1,6 +1,6 @@
 import "server-only";
-import { USE_MOCK_DATA } from "./client";
-import { PROPERTY_CONFIG } from "./property-config";
+import { beds24Fetch, USE_MOCK_DATA } from "./client";
+import { PROPERTY_CONFIG, PROPERTY_ID } from "./property-config";
 import { getRangeAvailability } from "./availability";
 import type { GuestCounts, OfferResult } from "./types";
 
@@ -10,12 +10,30 @@ function nightsBetween(checkIn: string, checkOut: string): number {
   return Math.round((outDate.getTime() - inDate.getTime()) / (1000 * 60 * 60 * 24));
 }
 
+type OffersResponse = {
+  data: { roomId: number; propertyId: number; offers?: { price: number; unitsAvailable: number }[] }[];
+};
+
+/**
+ * GET /inventory/rooms/offers returns the total room price for the exact
+ * occupancy requested - Beds24 already applies its own configured
+ * per-extra-guest surcharge, confirmed to match PROPERTY_CONFIG's rule
+ * (+3000/night per guest past baseOccupancy). Returns null when the stay
+ * isn't bookable for that occupancy (no offer / no units available).
+ */
+async function fetchOfferPrice(checkIn: string, checkOut: string, numAdults: number): Promise<number | null> {
+  const response = await beds24Fetch<OffersResponse>("/inventory/rooms/offers", {
+    query: { propertyId: PROPERTY_ID, arrival: checkIn, departure: checkOut, numAdults },
+  });
+  const offer = response.data[0]?.offers?.[0];
+  if (!offer || offer.unitsAvailable < 1) return null;
+  return offer.price;
+}
+
 /**
  * Returns a full price breakdown for the given stay, or an `available:
- * false` result explaining why not. The UI must render this as-is rather
- * than deriving its own totals - once BEDS24_API_KEY is set this should
- * call `GET /inventory/rooms/offers` for PROPERTY_ID and return its
- * breakdown untouched, keeping displayed and charged amounts identical.
+ * false` result explaining why not. The UI renders this as-is rather than
+ * deriving its own totals, so displayed and charged amounts stay identical.
  */
 export async function getOffer(params: {
   checkIn: string;
@@ -32,8 +50,34 @@ export async function getOffer(params: {
   }
 
   if (!USE_MOCK_DATA) {
-    // TODO: replace with a real Beds24 API V2 call once credentials exist.
-    throw new Error("Beds24 live offers integration not implemented yet.");
+    const baseGuests = Math.min(totalGuests, PROPERTY_CONFIG.baseOccupancy);
+    const roomFee = await fetchOfferPrice(checkIn, checkOut, baseGuests);
+    if (roomFee === null) return { available: false, reason: "unavailable" };
+
+    const occupancyTotal =
+      totalGuests === baseGuests ? roomFee : await fetchOfferPrice(checkIn, checkOut, totalGuests);
+    if (occupancyTotal === null) return { available: false, reason: "unavailable" };
+
+    const extraGuestFee = occupancyTotal - roomFee;
+    const cleaningFee = PROPERTY_CONFIG.cleaningFee;
+    const total = occupancyTotal + cleaningFee;
+
+    return {
+      available: true,
+      checkIn,
+      checkOut,
+      nights,
+      guests: totalGuests,
+      adults: guests.adults,
+      children: guests.children,
+      roomFee,
+      extraGuestFee,
+      cleaningFee,
+      total,
+      perNight: Math.round(total / nights),
+      perPerson: Math.round(total / totalGuests),
+      currency: PROPERTY_CONFIG.currency,
+    };
   }
 
   const days = await getRangeAvailability(checkIn, checkOut);

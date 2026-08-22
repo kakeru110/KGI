@@ -6,6 +6,9 @@
 
 export const PROPERTY_ID = 309861;
 
+/** The property's single bookable room/unit, from GET /inventory/rooms/calendar. */
+export const ROOM_ID = 645592;
+
 export const PROPERTY_CONFIG = {
   maxGuests: 6,
   baseOccupancy: 3,
