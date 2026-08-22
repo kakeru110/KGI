@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
@@ -17,7 +18,8 @@ export default function Header({ locale, dict }: { locale: Locale; dict: Diction
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href={`/${locale}`} className="text-base font-semibold tracking-tight sm:text-lg">
+        <Link href={`/${locale}`} className="flex items-center gap-2 text-base font-semibold tracking-tight sm:text-lg">
+          <Image src="/logo.png" alt="" width={36} height={36} className="h-9 w-9" priority />
           {dict.meta.siteName}
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-muted md:flex">

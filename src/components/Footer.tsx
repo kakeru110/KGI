@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
@@ -17,9 +18,12 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
   return (
     <footer className="mt-16 border-t border-border bg-surface pb-24 md:pb-10">
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-start md:justify-between">
-        <div>
-          <p className="text-base font-semibold">{dict.meta.siteName}</p>
-          <p className="mt-1 text-sm text-muted">{dict.footer.address}</p>
+        <div className="flex items-center gap-3">
+          <Image src="/logo.png" alt="" width={40} height={40} className="h-10 w-10" />
+          <div>
+            <p className="text-base font-semibold">{dict.meta.siteName}</p>
+            <p className="mt-1 text-sm text-muted">{dict.footer.address}</p>
+          </div>
         </div>
         <nav className="flex flex-wrap gap-4 text-sm text-muted">
           {links.map((link) => (
