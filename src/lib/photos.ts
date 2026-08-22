@@ -9,24 +9,21 @@ export type PhotoCategory =
 export type Photo = {
   id: string;
   category: PhotoCategory;
-  /** Real photography not yet available - swap `gradient` for a `src` field once it is. */
-  gradient: string;
+  src: string;
 };
 
-/**
- * Placeholder photo set. Replace with real photography (public/photos/*)
- * before launch - keep the same `category` values so gallery filtering
- * keeps working unchanged.
- */
 export const photos: Photo[] = [
-  { id: "exterior-1", category: "exterior", gradient: "from-emerald-800 to-emerald-950" },
-  { id: "living-1", category: "living", gradient: "from-stone-300 to-stone-500" },
-  { id: "living-2", category: "living", gradient: "from-amber-200 to-stone-400" },
-  { id: "bedroom-1", category: "bedroom", gradient: "from-slate-300 to-slate-500" },
-  { id: "loft-1", category: "loft", gradient: "from-orange-200 to-amber-400" },
-  { id: "kitchen-1", category: "kitchen", gradient: "from-zinc-200 to-zinc-400" },
-  { id: "bathroom-1", category: "bathroom", gradient: "from-sky-200 to-sky-400" },
-  { id: "exterior-2", category: "exterior", gradient: "from-emerald-700 to-emerald-900" },
+  { id: "living-1", category: "living", src: "/photos/living-1.jpg" },
+  { id: "bedroom-1", category: "bedroom", src: "/photos/bedroom-1.jpg" },
+  { id: "loft-1", category: "loft", src: "/photos/loft-1.jpg" },
+  { id: "kitchen-1", category: "kitchen", src: "/photos/kitchen-1.jpg" },
+  { id: "bathroom-1", category: "bathroom", src: "/photos/bathroom-1.jpg" },
+  { id: "exterior-1", category: "exterior", src: "/photos/exterior-1.jpg" },
+  { id: "living-2", category: "living", src: "/photos/living-2.jpg" },
+  { id: "loft-2", category: "loft", src: "/photos/loft-2.jpg" },
+  { id: "kitchen-2", category: "kitchen", src: "/photos/kitchen-2.jpg" },
+  { id: "bathroom-2", category: "bathroom", src: "/photos/bathroom-2.jpg" },
+  { id: "bathroom-3", category: "bathroom", src: "/photos/bathroom-3.jpg" },
 ];
 
 export function getTopPhotos(count = 5): Photo[] {

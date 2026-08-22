@@ -16,8 +16,13 @@ export default function PhotoGrid({ locale, dict }: { locale: Locale; dict: Dict
         </Link>
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
-        {topPhotos.map((photo) => (
-          <PhotoTile key={photo.id} photo={photo} label={dict.gallery.categories[photo.category]} />
+        {topPhotos.map((photo, i) => (
+          <PhotoTile
+            key={photo.id}
+            photo={photo}
+            label={dict.gallery.categories[photo.category]}
+            priority={i === 0}
+          />
         ))}
       </div>
     </section>
