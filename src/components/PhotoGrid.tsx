@@ -21,6 +21,7 @@ export default function PhotoGrid({ locale, dict }: { locale: Locale; dict: Dict
             key={photo.id}
             photo={photo}
             label={dict.gallery.categories[photo.category]}
+            sizes="(min-width: 640px) 220px, 50vw"
             priority={i === 0}
           />
         ))}

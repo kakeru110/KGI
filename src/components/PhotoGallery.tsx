@@ -41,7 +41,11 @@ export default function PhotoGallery({ dict }: { dict: Dictionary }) {
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {filtered.map((photo, i) => (
           <button key={photo.id} onClick={() => setOpenIndex(i)} className="text-left">
-            <PhotoTile photo={photo} label={dict.gallery.categories[photo.category]} />
+            <PhotoTile
+              photo={photo}
+              label={dict.gallery.categories[photo.category]}
+              sizes="(min-width: 640px) 370px, 50vw"
+            />
           </button>
         ))}
       </div>
@@ -73,6 +77,8 @@ export default function PhotoGallery({ dict }: { dict: Dictionary }) {
               photo={filtered[openIndex]}
               label={dict.gallery.categories[filtered[openIndex].category]}
               className="aspect-[4/3]"
+              sizes="(min-width: 640px) 512px, 100vw"
+              quality={95}
             />
           </div>
           <button

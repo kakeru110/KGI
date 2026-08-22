@@ -5,13 +5,15 @@ export default function PhotoTile({
   photo,
   label,
   className = "",
-  sizes = "(min-width: 640px) 20vw, 50vw",
+  sizes = "100vw",
+  quality = 90,
   priority = false,
 }: {
   photo: Photo;
   label?: string;
   className?: string;
   sizes?: string;
+  quality?: number;
   priority?: boolean;
 }) {
   return (
@@ -21,6 +23,7 @@ export default function PhotoTile({
         alt={label ?? photo.id}
         fill
         sizes={sizes}
+        quality={quality}
         priority={priority}
         className="object-cover"
       />
