@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 
@@ -23,11 +24,16 @@ export default function GuestInfoForm({
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!agreed) {
+      setError(dict.guestInfo.errorAgreeRequired);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
@@ -101,11 +107,27 @@ export default function GuestInfoForm({
         />
       </label>
 
+      <label className="flex items-start gap-2 text-sm sm:col-span-2">
+        <input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+          className="mt-1"
+        />
+        <span>
+          {dict.guestInfo.agreePrefix}
+          <Link href={`/${locale}/policy`} target="_blank" className="text-accent underline">
+            {dict.guestInfo.agreeLinkText}
+          </Link>
+          {dict.guestInfo.agreeSuffix}
+        </span>
+      </label>
+
       {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
 
       <button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || !agreed}
         className="rounded-full bg-accent px-4 py-3 font-medium text-accent-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2"
       >
         {submitting ? dict.guestInfo.submitting : dict.guestInfo.submit}

@@ -76,18 +76,20 @@ server.
   creates the real Beds24 booking and shows a confirmation with the
   booking ID.
 
-There is currently no Stripe webhook — payment confirmation happens when
-the guest's browser lands back on the success URL. This is simpler to
-run without a public URL for local development, but means a booking
-won't be created if the guest closes their browser right after paying
-before being redirected back. **Before relying on this in production,
-add a `checkout.session.completed` webhook** that also calls
-`createBooking()`, so payment confirmation doesn't depend on the guest's
-browser completing the redirect.
+- `POST /api/webhooks/stripe` — a `checkout.session.completed` webhook
+  that also creates the booking, independent of whether the guest's
+  browser ever makes it back to `/booking/confirm`. Both paths call the
+  same `completeBookingFromSession()` (`src/lib/checkout.ts`), and
+  `createBooking()`'s de-dupe check makes it safe for both to fire for
+  the same session.
 
 Set `STRIPE_SECRET_KEY` in `.env.local` (test mode `sk_test_...` while
 verifying the flow, live mode `sk_live_...` once ready to accept real
-payments).
+payments). The webhook additionally needs `STRIPE_WEBHOOK_SECRET` — see
+`env.example` for how to get one; the site works without it (the confirm
+page still creates bookings on its own), but the webhook is the more
+reliable path and should be configured before relying on this for real
+payments.
 
 ## Booking flow
 
@@ -108,7 +110,12 @@ Guest picks dates/guests
   fee, cleaning fee, total, per-night, and a prominent per-person price).
 - `/booking/guest-info` → Stripe Checkout → `/booking/confirm`: full
   in-site booking + payment flow, creating a real confirmed Beds24
-  booking on successful payment.
+  booking on successful payment (also backed by a webhook, see above).
+- `/policy`: cancellation policy, linked as a required checkbox on the
+  guest-info form before checkout.
+- `/tokushoho`: legal disclosure page (Japan's Act on Specified
+  Commercial Transactions) — **the business details in
+  `src/lib/business-info.ts` are still empty placeholders**, see below.
 - `/rooms`, `/gallery`, `/access`, `/faq`.
 - Japanese (`/ja`) and English (`/en`) locales.
 - Mobile-first, with a sticky bottom CTA bar.
@@ -116,15 +123,29 @@ Guest picks dates/guests
 Photos are placeholder gradient tiles (see `src/lib/photos.ts`) — swap
 in real photography before launch.
 
-## Before going live
+## Before going live (needs the site owner, not just code)
 
-- Add a Stripe webhook for `checkout.session.completed` (see above) so
-  booking creation doesn't depend on the browser redirect completing.
-- Switch `STRIPE_SECRET_KEY` to a live key only after testing the full
-  flow (a real Stripe test payment + a real Beds24 test booking,
-  cancelled and deleted afterward, is a good way to confirm this).
-- Add a cancellation policy and terms of service, referenced from the
-  guest-info page — not included yet.
-- Confirm Japan's 特定商取引法 (Act on Specified Commercial
-  Transactions) disclosure requirements for online sales and add the
-  required disclosure page if applicable.
+- **Fill in `src/lib/business-info.ts`** (operator name, representative,
+  address, phone, email) — required for the `/tokushoho` legal page.
+  Missing fields currently render as "(未設定)" so it's obvious if this
+  was skipped.
+- **Review `/policy`'s cancellation terms** (`src/lib/i18n/dictionaries/{ja,en}.ts`,
+  the `policy.cancellationRules` arrays) — the current wording is a
+  placeholder default (free cancellation 7+ days out, 50% at 2-6 days,
+  100% inside 1 day / no-show), not a business decision this code can
+  make on its own.
+- **Register the Stripe webhook**: Stripe dashboard → Developers →
+  Webhooks → add endpoint `https://<your-domain>/api/webhooks/stripe`
+  for the `checkout.session.completed` event, then put its signing
+  secret in `STRIPE_WEBHOOK_SECRET`. This needs a real deployed URL —
+  it can't be registered against `localhost`.
+- **Switch `STRIPE_SECRET_KEY` to a live key** only after testing the
+  full flow in test mode (a real Stripe test payment + a real Beds24
+  test booking, cancelled and deleted afterward, is a good way to
+  confirm this — see the git history of this branch for exactly how
+  that was verified).
+- Confirm whether any additional 特定商取引法 disclosure fields apply
+  beyond what's on `/tokushoho` (e.g. return/refund conditions specific
+  to accommodation services can have extra nuance) — worth a quick check
+  with a tax/legal advisor before launch, since this code can draft the
+  page but can't give legal sign-off.

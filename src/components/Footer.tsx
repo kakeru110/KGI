@@ -8,6 +8,8 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
     { href: `/${locale}/gallery`, label: dict.nav.gallery },
     { href: `/${locale}/access`, label: dict.nav.access },
     { href: `/${locale}/faq`, label: dict.nav.faq },
+    { href: `/${locale}/policy`, label: dict.nav.policy },
+    { href: `/${locale}/tokushoho`, label: dict.nav.tokushoho },
   ];
 
   return (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getStripeClient } from "@/lib/stripe/client";
-import { createBooking } from "@/lib/beds24/bookings";
+import { completeBookingFromSession } from "@/lib/checkout";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
 
 export default async function BookingConfirmPage({
@@ -33,24 +33,8 @@ export default async function BookingConfirmPage({
 
   const stripe = getStripeClient();
   const session = await stripe.checkout.sessions.retrieve(sessionId);
-  if (session.payment_status !== "paid") return failure;
-
-  const meta = session.metadata;
-  if (!meta?.checkIn || !meta.checkOut || !meta.total || !meta.firstName || !meta.email) return failure;
-
-  const booking = await createBooking({
-    checkIn: meta.checkIn,
-    checkOut: meta.checkOut,
-    guests: { adults: Number(meta.adults), children: Number(meta.children) },
-    guest: {
-      firstName: meta.firstName,
-      lastName: meta.lastName,
-      email: meta.email,
-      phone: meta.phone,
-    },
-    total: Number(meta.total),
-    stripeSessionId: sessionId,
-  });
+  const booking = await completeBookingFromSession(session);
+  if (!booking) return failure;
 
   return (
     <div className="mx-auto max-w-xl space-y-6 px-4 py-16 text-center sm:px-6">

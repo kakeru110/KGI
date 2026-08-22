@@ -12,6 +12,8 @@ export type Dictionary = {
     faq: string;
     booking: string;
     checkAvailability: string;
+    policy: string;
+    tokushoho: string;
   };
   hero: {
     title: string;
@@ -105,10 +107,43 @@ export type Dictionary = {
     lastName: string;
     email: string;
     phone: string;
+    agreePrefix: string;
+    agreeLinkText: string;
+    agreeSuffix: string;
     submit: string;
     submitting: string;
     errorGeneric: string;
     errorUnavailable: string;
+    errorAgreeRequired: string;
+  };
+  policy: {
+    heading: string;
+    intro: string;
+    cancellationHeading: string;
+    cancellationRules: string[];
+    paymentHeading: string;
+    paymentBody: string;
+    contactHeading: string;
+    contactBody: string;
+  };
+  tokushoho: {
+    heading: string;
+    intro: string;
+    labels: {
+      operatorName: string;
+      representativeName: string;
+      address: string;
+      phone: string;
+      email: string;
+      price: string;
+      additionalFees: string;
+      paymentMethods: string;
+      paymentTiming: string;
+      serviceTiming: string;
+      cancellationPolicy: string;
+    };
+    priceNote: string;
+    paymentMethodsValue: string;
   };
   confirm: {
     verifying: string;
