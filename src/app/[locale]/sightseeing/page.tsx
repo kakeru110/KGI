@@ -51,14 +51,16 @@ export default async function SightseeingPage({
                       >
                         {dict.sightseeing.mapLinkLabel}
                       </a>
-                      <a
-                        href={spot.credit.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-muted hover:underline"
-                      >
-                        {spot.credit.author} / {spot.credit.license}
-                      </a>
+                      {spot.credit && (
+                        <a
+                          href={spot.credit.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-muted hover:underline"
+                        >
+                          {spot.credit.author} / {spot.credit.license}
+                        </a>
+                      )}
                     </div>
                   </div>
                 </li>

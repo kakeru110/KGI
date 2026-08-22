@@ -8,8 +8,12 @@ export type SightseeingSpot = {
   accessJa: string;
   accessEn: string;
   image: string;
-  /** Required attribution for the photo's Wikimedia Commons license. */
-  credit: { author: string; license: string; sourceUrl: string };
+  /**
+   * Attribution for the photo's license, shown as a small credit link.
+   * Omitted for licensed stock photos (no public attribution required);
+   * required for Wikimedia Commons CC-licensed photos.
+   */
+  credit?: { author: string; license: string; sourceUrl: string };
 };
 
 /**
@@ -42,11 +46,6 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "大船駅から鎌倉駅まで電車で約6分、鎌倉駅から徒歩約10分",
     accessEn: "~6 min by train from Ofuna to Kamakura Station, then ~10 min walk",
     image: "/photos/sightseeing/tsurugaoka-hachimangu.jpg",
-    credit: {
-      author: "Ocdp",
-      license: "CC0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Tsurugaoka_Hachimangu_001.jpg",
-    },
   },
   {
     name: "高徳院(鎌倉大仏)",
@@ -99,11 +98,6 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "大船駅から湘南モノレールで湘南江の島駅まで約14分、徒歩約16分",
     accessEn: "~14 min by Shonan Monorail from Ofuna to Shonan-Enoshima Station, then ~16 min walk",
     image: "/photos/sightseeing/enoshima-shrine.jpg",
-    credit: {
-      author: "Daderot",
-      license: "CC0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Enoshima_Shrine_-_Enoshima,_Japan_-_DSC07632.jpg",
-    },
   },
   {
     name: "江の島シーキャンドル",
