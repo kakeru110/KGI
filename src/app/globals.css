@@ -20,10 +20,21 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-soft: var(--accent-soft);
+  --color-price-good: #2f6b4f;
+  --color-price-good-soft: #e6f2ea;
   --font-sans: var(--font-noto-sans-jp);
+  --font-serif: var(--font-shippori-mincho);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Section/card headings use the serif to echo the logo's wordmark;
+   body copy stays on Noto Sans JP for readability. */
+h1,
+h2 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.01em;
 }

@@ -48,6 +48,7 @@ const ja: Dictionary = {
     legendAvailable: "空室あり",
     legendFull: "満室",
     legendClosed: "宿泊不可",
+    bestValue: "お得",
     prevMonth: "前の月",
     nextMonth: "次の月",
     weekdays: ["月", "火", "水", "木", "金", "土", "日"],

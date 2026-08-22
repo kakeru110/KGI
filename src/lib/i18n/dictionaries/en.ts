@@ -49,6 +49,7 @@ const en: Dictionary = {
     legendAvailable: "Available",
     legendFull: "Full",
     legendClosed: "Not bookable",
+    bestValue: "Best value",
     prevMonth: "Previous month",
     nextMonth: "Next month",
     weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],

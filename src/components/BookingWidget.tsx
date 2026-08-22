@@ -75,6 +75,13 @@ export default function BookingWidget({
     return { remainingThisMonth: total, remainingWeekend: weekend };
   }, [days]);
 
+  const minAvailablePrice = useMemo(() => {
+    const prices = days
+      .filter((d) => d.status === "available" && d.price !== null)
+      .map((d) => d.price as number);
+    return prices.length > 0 ? Math.min(...prices) : null;
+  }, [days]);
+
   function handleDayClick(day: DayAvailability) {
     if (day.status !== "available") return;
     if (!checkIn || (checkIn && checkOut) || day.date <= checkIn) {
@@ -194,45 +201,85 @@ export default function BookingWidget({
           </div>
         </div>
 
-        <div className="mt-3 flex gap-4 text-xs text-muted">
-          <span>{formatRemainingThisMonth(remainingThisMonth, locale)}</span>
-          <span>{formatRemainingWeekend(remainingWeekend, locale)}</span>
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted">
+          <span className="font-medium text-foreground">
+            {formatRemainingThisMonth(remainingThisMonth, locale)}
+          </span>
+          <span className="font-medium text-foreground">
+            {formatRemainingWeekend(remainingWeekend, locale)}
+          </span>
+          <span className="ml-auto flex items-center gap-3">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-price-good" />
+              {dict.availability.bestValue}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-border" />
+              {dict.availability.legendFull}
+            </span>
+          </span>
         </div>
 
         <div className="mt-4 grid grid-cols-7 gap-1 text-center text-xs text-muted">
-          {dict.availability.weekdays.map((w) => (
-            <div key={w} className="py-1">
+          {dict.availability.weekdays.map((w, i) => (
+            <div key={w} className={`py-1 font-medium ${i >= 5 ? "text-foreground/70" : ""}`}>
               {w}
             </div>
           ))}
         </div>
-        <div className={`grid grid-cols-7 gap-1 ${loading ? "opacity-40" : ""}`}>
+        <div className={`grid grid-cols-7 gap-1.5 ${loading ? "opacity-40" : ""}`}>
           {Array.from({ length: leadingBlanks }).map((_, i) => (
             <div key={`blank-${i}`} />
           ))}
-          {days.map((day) => {
+          {days.map((day, i) => {
             const isFull = day.status !== "available";
+            const hasRange = Boolean(checkIn && checkOut);
             const isSelected = day.date === checkIn || day.date === checkOut;
-            const inRange = checkIn && checkOut && day.date > checkIn && day.date < checkOut;
+            const inRange = hasRange && day.date > checkIn && day.date < checkOut;
+            const isRangeStart = hasRange && day.date === checkIn;
+            const isRangeEnd = hasRange && day.date === checkOut;
+            const isBandMember = inRange || isRangeStart || isRangeEnd;
+            const isBestValue =
+              !isFull && day.price !== null && minAvailablePrice !== null && day.price === minAvailablePrice;
+            const weekday = (leadingBlanks + i) % 7;
+            const isWeekend = weekday >= 5;
+
             return (
               <button
                 key={day.date}
                 type="button"
                 disabled={isFull}
                 onClick={() => handleDayClick(day)}
-                className={`flex flex-col items-center rounded-lg px-1 py-2 text-xs transition ${
+                className={`relative flex flex-col items-center gap-0.5 px-1 py-2.5 text-xs transition ${
+                  isBandMember ? "rounded-none" : "rounded-xl"
+                } ${isRangeStart ? "rounded-l-xl" : ""} ${isRangeEnd ? "rounded-r-xl" : ""} ${
                   isFull
-                    ? "cursor-not-allowed text-border"
+                    ? "cursor-not-allowed text-border line-through decoration-border"
                     : isSelected
-                      ? "bg-accent text-accent-foreground"
+                      ? "bg-accent font-semibold text-accent-foreground shadow-sm"
                       : inRange
-                        ? "bg-accent-soft"
-                        : "hover:bg-surface"
+                        ? "bg-accent-soft text-foreground"
+                        : `hover:bg-surface ${isWeekend ? "bg-surface/60" : ""}`
                 }`}
               >
-                <span>{Number(day.date.slice(-2))}</span>
-                <span className="mt-0.5">
-                  {isFull ? "×" : day.price ? formatCurrency(day.price) : ""}
+                {isBestValue && !isSelected && (
+                  <span className="absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-price-good" />
+                )}
+                <span className={isWeekend && !isSelected && !inRange ? "text-foreground/80" : ""}>
+                  {Number(day.date.slice(-2))}
+                </span>
+                <span
+                  className={`text-[0.7rem] tabular-nums ${
+                    isFull
+                      ? ""
+                      : isSelected
+                        ? "font-medium"
+                        : isBestValue
+                          ? "font-semibold text-price-good"
+                          : "text-muted"
+                  }`}
+                >
+                  {isFull ? dict.availability.legendFull : day.price ? formatCurrency(day.price) : ""}
                 </span>
               </button>
             );

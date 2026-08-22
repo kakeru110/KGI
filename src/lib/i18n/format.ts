@@ -46,3 +46,17 @@ export function formatDateLabel(date: string, locale: Locale): string {
     timeZone: "UTC",
   });
 }
+
+function formatDateWithWeekday(date: string, locale: Locale): string {
+  const d = new Date(`${date}T00:00:00Z`);
+  return d.toLocaleDateString(locale === "ja" ? "ja-JP" : "en-US", {
+    month: "short",
+    day: "numeric",
+    weekday: "short",
+    timeZone: "UTC",
+  });
+}
+
+export function formatDateRangeLabel(checkIn: string, checkOut: string, locale: Locale): string {
+  return `${formatDateWithWeekday(checkIn, locale)} → ${formatDateWithWeekday(checkOut, locale)}`;
+}

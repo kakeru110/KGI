@@ -1,12 +1,13 @@
+import { Maximize, TrainFront, UsersRound, Wifi } from "lucide-react";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 
 export default function StatCards({ dict }: { dict: Dictionary }) {
   const stats = [
-    dict.statCards.size,
-    dict.statCards.guests,
-    dict.statCards.stationOfuna,
-    dict.statCards.stationKamakura,
-    dict.statCards.wifi,
+    { ...dict.statCards.size, Icon: Maximize },
+    { ...dict.statCards.guests, Icon: UsersRound },
+    { ...dict.statCards.stationOfuna, Icon: TrainFront },
+    { ...dict.statCards.stationKamakura, Icon: TrainFront },
+    { ...dict.statCards.wifi, Icon: Wifi },
   ];
 
   return (
@@ -14,9 +15,10 @@ export default function StatCards({ dict }: { dict: Dictionary }) {
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-2xl border border-border bg-surface px-4 py-5 text-center"
+          className="rounded-2xl border border-border bg-surface px-4 py-5 text-center transition hover:border-accent/30 hover:bg-accent-soft/40"
         >
-          <p className="text-xl font-semibold sm:text-2xl">{stat.value}</p>
+          <stat.Icon className="mx-auto h-5 w-5 text-accent" strokeWidth={1.5} />
+          <p className="mt-2 text-xl font-semibold sm:text-2xl">{stat.value}</p>
           <p className="mt-1 text-xs text-muted">{stat.label}</p>
         </div>
       ))}

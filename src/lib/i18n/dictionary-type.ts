@@ -44,6 +44,7 @@ export type Dictionary = {
     legendAvailable: string;
     legendFull: string;
     legendClosed: string;
+    bestValue: string;
     prevMonth: string;
     nextMonth: string;
     weekdays: string[];
