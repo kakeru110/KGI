@@ -32,3 +32,19 @@ export type OfferBreakdown = {
 export type OfferResult =
   | ({ available: true } & OfferBreakdown)
   | { available: false; reason: "unavailable" | "invalid-dates" | "over-capacity" };
+
+export type GuestDetails = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+};
+
+export type CreatedBooking = {
+  bookingId: number;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  total: number;
+  currency: "JPY";
+};

@@ -99,6 +99,26 @@ export type Dictionary = {
     checkAvailability: string;
     bookNow: string;
   };
+  guestInfo: {
+    heading: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    submit: string;
+    submitting: string;
+    errorGeneric: string;
+    errorUnavailable: string;
+  };
+  confirm: {
+    verifying: string;
+    successHeading: string;
+    successBody: string;
+    bookingIdLabel: string;
+    notPaidHeading: string;
+    notPaidBody: string;
+    backToTop: string;
+  };
   language: {
     ja: string;
     en: string;

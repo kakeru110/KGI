@@ -1,7 +1,7 @@
 import "server-only";
-import { LEGACY_BOOKING_PAGE_URL, USE_MOCK_DATA } from "./client";
-import { PROPERTY_ID } from "./property-config";
-import type { GuestCounts } from "./types";
+import { beds24Fetch, LEGACY_BOOKING_PAGE_URL, USE_MOCK_DATA } from "./client";
+import { PROPERTY_ID, ROOM_ID } from "./property-config";
+import type { CreatedBooking, GuestCounts, GuestDetails } from "./types";
 
 /**
  * Phase 1 handoff: builds a link into the existing hosted Beds24 booking
@@ -43,4 +43,79 @@ export type BookingSummary = {
 export async function listBookings(): Promise<BookingSummary[]> {
   if (USE_MOCK_DATA) return [];
   throw new Error("Beds24 live bookings integration not implemented yet.");
+}
+
+type BookingsGetResponse = { data: { id: number }[] };
+type BookingsPostResponse = { success: boolean; new?: { id: number }; errors?: { message: string }[] }[];
+
+/**
+ * Guards against creating a duplicate booking if a guest reloads the
+ * confirmation page after their Stripe payment already produced one
+ * (Beds24 has no built-in idempotency key for booking creation).
+ */
+async function findExistingBooking(email: string, arrival: string): Promise<number | null> {
+  const response = await beds24Fetch<BookingsGetResponse>("/bookings", {
+    query: { propertyId: PROPERTY_ID, searchString: email, arrival },
+  });
+  return response.data[0]?.id ?? null;
+}
+
+/**
+ * Creates a confirmed Beds24 booking after a successful Stripe payment.
+ * `total` must be the exact amount charged - it's stored as-is on the
+ * booking so Beds24's records match what the guest paid.
+ */
+export async function createBooking(params: {
+  checkIn: string;
+  checkOut: string;
+  guests: GuestCounts;
+  guest: GuestDetails;
+  total: number;
+  stripeSessionId: string;
+}): Promise<CreatedBooking> {
+  const existingId = await findExistingBooking(params.guest.email, params.checkIn);
+  if (existingId !== null) {
+    return {
+      bookingId: existingId,
+      checkIn: params.checkIn,
+      checkOut: params.checkOut,
+      guests: params.guests.adults + params.guests.children,
+      total: params.total,
+      currency: "JPY",
+    };
+  }
+
+  const response = await beds24Fetch<BookingsPostResponse>("/bookings", {
+    method: "POST",
+    body: [
+      {
+        roomId: ROOM_ID,
+        status: "confirmed",
+        arrival: params.checkIn,
+        departure: params.checkOut,
+        numAdult: params.guests.adults,
+        numChild: params.guests.children,
+        firstName: params.guest.firstName,
+        lastName: params.guest.lastName,
+        email: params.guest.email,
+        phone: params.guest.phone,
+        price: params.total,
+        notes: `Booked via website. Stripe checkout session: ${params.stripeSessionId}`,
+      },
+    ],
+  });
+
+  const result = response[0];
+  if (!result?.success || !result.new) {
+    throw new Error(`Beds24 booking creation failed: ${JSON.stringify(result?.errors)}`);
+  }
+
+  return {
+    bookingId: result.new.id,
+    checkIn: params.checkIn,
+    checkOut: params.checkOut,
+    guests: params.guests.adults + params.guests.children,
+    total: params.total,
+    currency: "JPY",
+  };
 }

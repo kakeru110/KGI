@@ -68,6 +68,8 @@ type CalendarResponse = {
 async function fetchCalendarRange(startDate: string, endDate: string): Promise<DayAvailability[]> {
   const response = await beds24Fetch<CalendarResponse>("/inventory/rooms/calendar", {
     query: { propertyId: PROPERTY_ID, startDate, endDate, includePrices: true, includeNumAvail: true },
+    // Spec section 25: the calendar view can tolerate ~60s staleness.
+    revalidateSeconds: 60,
   });
 
   const days: DayAvailability[] = [];

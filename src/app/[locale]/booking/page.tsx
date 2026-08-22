@@ -1,7 +1,6 @@
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getOffer } from "@/lib/beds24/offers";
-import { buildExternalBookingUrl } from "@/lib/beds24/bookings";
 import { formatCurrency } from "@/lib/i18n/format";
 import BookingWidget from "@/components/BookingWidget";
 import PriceBreakdown from "@/components/PriceBreakdown";
@@ -50,13 +49,8 @@ export default async function BookingPage({
         <StickyMobileCTA
           secondary={dict.results.total}
           primary={formatCurrency(offer.total)}
-          href={buildExternalBookingUrl({
-            checkIn: offer.checkIn,
-            checkOut: offer.checkOut,
-            guests: { adults: offer.adults, children: offer.children },
-          })}
+          href={`/${locale}/booking/guest-info?checkin=${offer.checkIn}&checkout=${offer.checkOut}&adults=${offer.adults}&children=${offer.children}`}
           label={dict.stickyCta.bookNow}
-          external
         />
       )}
     </div>

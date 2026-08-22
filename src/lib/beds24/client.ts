@@ -19,9 +19,16 @@ export const LEGACY_BOOKING_PAGE_URL = "https://beds24.com/booking2.php";
 export const USE_MOCK_DATA = !process.env.BEDS24_REFRESH_TOKEN;
 
 type Beds24RequestInit = {
-  method?: "GET" | "POST";
+  method?: "GET" | "POST" | "DELETE";
   query?: Record<string, string | number | boolean | undefined>;
   body?: unknown;
+  /**
+   * Next.js fetch cache revalidation window in seconds. Omit (the default)
+   * for money- or inventory-mutating calls - availability.ts opts into
+   * 60s caching explicitly per spec section 25; everything else must see
+   * fresh data (spec section 26: always re-verify right before booking).
+   */
+  revalidateSeconds?: number;
 };
 
 /**
@@ -77,8 +84,8 @@ export async function beds24Fetch<T>(path: string, init: Beds24RequestInit = {})
       token: accessToken,
     },
     body: init.body ? JSON.stringify(init.body) : undefined,
-    // Short revalidation window per spec section 25 (cache availability ~60s).
-    next: { revalidate: 60 },
+    cache: init.revalidateSeconds === undefined ? "no-store" : undefined,
+    next: init.revalidateSeconds === undefined ? undefined : { revalidate: init.revalidateSeconds },
   });
 
   if (!response.ok) {

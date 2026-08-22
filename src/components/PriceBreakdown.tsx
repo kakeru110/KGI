@@ -1,8 +1,8 @@
+import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { OfferResult } from "@/lib/beds24/types";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
-import { buildExternalBookingUrl } from "@/lib/beds24/bookings";
 
 export default function PriceBreakdown({
   offer,
@@ -61,16 +61,12 @@ export default function PriceBreakdown({
         <p className="mt-2 text-xs text-muted">{dict.results.perPersonNote}</p>
       </div>
 
-      <a
-        href={buildExternalBookingUrl({
-          checkIn: offer.checkIn,
-          checkOut: offer.checkOut,
-          guests: { adults: offer.adults, children: offer.children },
-        })}
+      <Link
+        href={`/${locale}/booking/guest-info?checkin=${offer.checkIn}&checkout=${offer.checkOut}&adults=${offer.adults}&children=${offer.children}`}
         className="mt-6 block rounded-full bg-accent px-4 py-3 text-center font-medium text-accent-foreground transition hover:opacity-90"
       >
         {dict.results.ctaBook}
-      </a>
+      </Link>
 
       <p className="mt-4 text-center text-xs text-muted">{dict.results.disclaimer}</p>
     </div>
