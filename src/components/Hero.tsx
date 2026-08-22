@@ -13,7 +13,7 @@ export default function Hero({ dict }: { dict: Dictionary }) {
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
-      <div className="relative mx-auto w-full max-w-6xl px-4 py-12 text-white sm:px-6 sm:py-16">
+      <div className="relative mx-auto w-full max-w-6xl px-4 pt-12 pb-16 text-white sm:px-6 sm:pt-16 sm:pb-24">
         <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">{dict.hero.title}</h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
           {dict.hero.subtitle}
