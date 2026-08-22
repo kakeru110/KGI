@@ -1,6 +1,6 @@
 import "server-only";
 import { beds24Fetch, USE_MOCK_DATA } from "./client";
-import { ROOM_ID } from "./property-config";
+import { PROPERTY_ID, ROOM_ID } from "./property-config";
 
 export type Review = {
   /** 0-5 scale, normalized from each platform's native scoring */
@@ -38,8 +38,11 @@ export async function getReviews(limit = 6): Promise<Review[]> {
       query: { roomId: ROOM_ID },
       revalidateSeconds: 1800,
     }),
+    // Booking.com's endpoint takes propertyId + a required "from" date
+    // (unlike Airbnb's, which takes roomId and no date range) - "2015-01-01"
+    // just needs to predate this property's earliest possible review.
     beds24Fetch<BookingReviewsResponse>("/channels/booking/reviews", {
-      query: { roomId: ROOM_ID },
+      query: { propertyId: PROPERTY_ID, from: "2015-01-01" },
       revalidateSeconds: 1800,
     }),
   ]);
