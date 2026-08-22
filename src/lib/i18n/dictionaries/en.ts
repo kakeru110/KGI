@@ -21,7 +21,7 @@ const en: Dictionary = {
   hero: {
     title: "Kamakura Gate Inn",
     subtitle:
-      "Your base for exploring Kamakura and Shonan. A private 58sqm stay for up to 6 guests, 7 minutes on foot from Ofuna Station.",
+      "Your base for exploring Kamakura and Shonan. A private 58sqm Japandi-style stay for up to 6 guests, 7 minutes on foot from Ofuna Station.",
   },
   statCards: {
     size: { label: "Size", value: "58 sqm" },
@@ -67,8 +67,9 @@ const en: Dictionary = {
   facility: {
     heading: "About the Place",
     intro:
-      "A whole-house terrace stay just 7 minutes on foot from Ofuna Station, ideal as a base for exploring Kamakura. The 58sqm 1LDK + loft layout sleeps up to 6, perfect for families and groups.",
+      "A whole-house terrace stay just 7 minutes on foot from Ofuna Station, ideal as a base for exploring Kamakura, with a Japandi interior blending Japanese and Scandinavian design. The 58sqm 1LDK + loft layout sleeps up to 6, perfect for families and groups.",
     points: [
+      "Japandi-style interior",
       "Sleeps up to 6 guests",
       "58 sqm whole-house rental, 1LDK + loft",
       "Great for families and groups",
@@ -162,7 +163,6 @@ const en: Dictionary = {
   reviews: {
     heading: "Guest Reviews",
     note: "Reviews shown are from actual guests.",
-    items: [],
   },
   footer: {
     address: "Sakae Ward, Yokohama, Kanagawa, Japan",
@@ -219,6 +219,8 @@ const en: Dictionary = {
     },
     priceNote: "Varies by dates and number of guests - shown on the booking page.",
     paymentMethodsValue: "Credit card (Visa / Mastercard / American Express / JCB)",
+    disclosureOnRequest: "Disclosed without delay upon request.",
+    phoneNotAvailable: "Please contact us by email.",
   },
   confirm: {
     verifying: "Confirming your payment…",

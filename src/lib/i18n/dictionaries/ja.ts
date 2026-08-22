@@ -21,7 +21,7 @@ const ja: Dictionary = {
   hero: {
     title: "Kamakura Gate Inn",
     subtitle:
-      "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のプライベートステイ。",
+      "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のJapandiなプライベートステイ。",
   },
   statCards: {
     size: { label: "広さ", value: "58㎡" },
@@ -66,8 +66,9 @@ const ja: Dictionary = {
   facility: {
     heading: "施設について",
     intro:
-      "大船駅から徒歩約7分、鎌倉観光の拠点に最適な一棟貸しのテラスハウスです。58㎡・1LDK＋ロフトの空間に最大6名まで宿泊でき、家族やグループでゆったりと過ごせます。",
+      "大船駅から徒歩約7分、鎌倉観光の拠点に最適な、和と北欧テイストが調和するJapandiデザインの一棟貸しテラスハウスです。58㎡・1LDK＋ロフトの空間に最大6名まで宿泊でき、家族やグループでゆったりと過ごせます。",
     points: [
+      "Japandiデザインの内装",
       "最大6名まで宿泊可能",
       "58㎡・1LDK＋ロフトの一棟貸し",
       "家族・グループ旅行に最適",
@@ -161,7 +162,6 @@ const ja: Dictionary = {
   reviews: {
     heading: "ゲストの声",
     note: "掲載しているレビューは実際の宿泊者によるものです。",
-    items: [],
   },
   footer: {
     address: "神奈川県横浜市栄区",
@@ -218,6 +218,8 @@ const ja: Dictionary = {
     },
     priceNote: "日程・人数により変動します。予約画面にてご確認いただけます。",
     paymentMethodsValue: "クレジットカード（Visa / Mastercard / American Express / JCB）",
+    disclosureOnRequest: "ご請求があれば遅滞なく開示いたします。",
+    phoneNotAvailable: "メールにてお問い合わせください。",
   },
   confirm: {
     verifying: "決済を確認しています…",

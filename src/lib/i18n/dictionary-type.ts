@@ -91,7 +91,6 @@ export type Dictionary = {
   reviews: {
     heading: string;
     note: string;
-    items: { rating: number; text: string; source: string }[];
   };
   footer: {
     address: string;
@@ -144,6 +143,8 @@ export type Dictionary = {
     };
     priceNote: string;
     paymentMethodsValue: string;
+    disclosureOnRequest: string;
+    phoneNotAvailable: string;
   };
   confirm: {
     verifying: string;

@@ -1,6 +1,7 @@
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getMonthAvailability } from "@/lib/beds24/availability";
+import { getReviews } from "@/lib/beds24/reviews";
 import { formatFromPrice } from "@/lib/i18n/format";
 import Hero from "@/components/Hero";
 import BookingWidget from "@/components/BookingWidget";
@@ -25,6 +26,7 @@ export default async function TopPage({
   const days = await getMonthAvailability(month);
   const prices = days.filter((d) => d.status === "available" && d.price !== null).map((d) => d.price as number);
   const fromPrice = prices.length > 0 ? Math.min(...prices) : null;
+  const reviews = await getReviews();
 
   return (
     <>
@@ -39,7 +41,7 @@ export default async function TopPage({
         <PhotoGrid locale={locale} dict={dict} />
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
-        <ReviewsSection dict={dict} />
+        <ReviewsSection dict={dict} reviews={reviews} />
       </div>
 
       {fromPrice !== null && (
