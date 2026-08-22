@@ -11,6 +11,7 @@ export type Dictionary = {
     access: string;
     parking: string;
     faq: string;
+    reviews: string;
     booking: string;
     checkAvailability: string;
     policy: string;
@@ -101,6 +102,7 @@ export type Dictionary = {
   reviews: {
     heading: string;
     note: string;
+    viewAll: string;
   };
   footer: {
     address: string;

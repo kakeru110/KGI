@@ -14,6 +14,7 @@ const ja: Dictionary = {
     access: "アクセス",
     parking: "駐車場",
     faq: "よくある質問",
+    reviews: "ゲストの声",
     booking: "空室・料金を確認",
     checkAvailability: "空室・料金を確認",
     policy: "キャンセルポリシー",
@@ -174,6 +175,7 @@ const ja: Dictionary = {
   reviews: {
     heading: "ゲストの声",
     note: "掲載しているレビューは実際の宿泊者によるものです。",
+    viewAll: "すべてのレビューを見る",
   },
   footer: {
     address: "神奈川県横浜市栄区",

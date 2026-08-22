@@ -14,6 +14,7 @@ const en: Dictionary = {
     access: "Access",
     parking: "Parking",
     faq: "FAQ",
+    reviews: "Reviews",
     booking: "Check Availability",
     checkAvailability: "Check Availability",
     policy: "Cancellation Policy",
@@ -175,6 +176,7 @@ const en: Dictionary = {
   reviews: {
     heading: "Guest Reviews",
     note: "Reviews shown are from actual guests.",
+    viewAll: "View all reviews",
   },
   footer: {
     address: "Sakae Ward, Yokohama, Kanagawa, Japan",

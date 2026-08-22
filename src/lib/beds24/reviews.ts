@@ -1,6 +1,8 @@
 import "server-only";
 import { beds24Fetch, USE_MOCK_DATA } from "./client";
 import { PROPERTY_ID, ROOM_ID } from "./property-config";
+import { translateTexts } from "../translate";
+import type { Locale } from "../i18n/config";
 
 export type Review = {
   /** 0-5 scale, normalized from each platform's native scoring */
@@ -27,7 +29,7 @@ type BookingReviewsResponse = {
  * these calls 401 and are swallowed below, so the site just shows no
  * reviews rather than erroring.
  */
-export async function getReviews(limit = 6): Promise<Review[]> {
+export async function getReviews(locale: Locale, limit = 6): Promise<Review[]> {
   if (USE_MOCK_DATA) return [];
 
   // Reviews change slowly and aren't money-sensitive, so cache like the
@@ -66,5 +68,14 @@ export async function getReviews(limit = 6): Promise<Review[]> {
     }
   }
 
-  return reviews.slice(0, limit);
+  const limited = reviews.slice(0, limit);
+
+  // Reviews arrive in whatever language the guest wrote them (Chinese,
+  // English, Japanese, ...) - translate them all to the page's locale so
+  // every visitor can read every review, regardless of source language.
+  const translatedTexts = await translateTexts(
+    limited.map((r) => r.text),
+    locale
+  );
+  return limited.map((r, i) => ({ ...r, text: translatedTexts[i] }));
 }

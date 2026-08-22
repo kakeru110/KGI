@@ -26,7 +26,7 @@ export default async function TopPage({
   const days = await getMonthAvailability(month);
   const prices = days.filter((d) => d.status === "available" && d.price !== null).map((d) => d.price as number);
   const fromPrice = prices.length > 0 ? Math.min(...prices) : null;
-  const reviews = await getReviews();
+  const reviews = await getReviews(locale, 6);
 
   return (
     <>
@@ -41,7 +41,7 @@ export default async function TopPage({
         <PhotoGrid locale={locale} dict={dict} />
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
-        <ReviewsSection dict={dict} reviews={reviews} />
+        <ReviewsSection locale={locale} dict={dict} reviews={reviews} showViewAll />
       </div>
 
       {fromPrice !== null && (
