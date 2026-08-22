@@ -7,6 +7,9 @@ export type SightseeingSpot = {
   descEn: string;
   accessJa: string;
   accessEn: string;
+  image: string;
+  /** Required attribution for the photo's Wikimedia Commons license. */
+  credit: { author: string; license: string; sourceUrl: string };
 };
 
 /**
@@ -24,6 +27,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "A 25m-tall white bodhisattva statue, the symbol of the Ofuna area - visible right from the station.",
     accessJa: "大船駅西口から徒歩5〜10分",
     accessEn: "5–10 min walk from Ofuna Station (west exit)",
+    image: "/photos/sightseeing/ofuna-kannon.jpg",
+    credit: {
+      author: "Urashimataro",
+      license: "Public domain",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Ofuna-Kannon.jpg",
+    },
   },
   {
     name: "鶴岡八幡宮",
@@ -32,6 +41,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Kamakura's iconic shrine, at the end of the famous Wakamiya-oji approach road.",
     accessJa: "大船駅から鎌倉駅まで電車で約6分、鎌倉駅から徒歩約10分",
     accessEn: "~6 min by train from Ofuna to Kamakura Station, then ~10 min walk",
+    image: "/photos/sightseeing/tsurugaoka-hachimangu.jpg",
+    credit: {
+      author: "Ocdp",
+      license: "CC0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Tsurugaoka_Hachimangu_001.jpg",
+    },
   },
   {
     name: "高徳院(鎌倉大仏)",
@@ -40,6 +55,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Home to the Great Buddha of Kamakura, a National Treasure.",
     accessJa: "鎌倉駅から江ノ電で長谷駅(約4分)、徒歩約7分",
     accessEn: "From Kamakura Station, Enoden train to Hase Station (~4 min), then ~7 min walk",
+    image: "/photos/sightseeing/kotokuin-daibutsu.jpg",
+    credit: {
+      author: "Alexandar Vujadinovic",
+      license: "CC BY-SA 4.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_Kamakura.jpg",
+    },
   },
   {
     name: "由比ヶ浜",
@@ -48,6 +69,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Kamakura's best-known beach - lively in summer, popular for a stroll year-round.",
     accessJa: "鎌倉駅から江ノ電で由比ヶ浜駅まで約3分",
     accessEn: "~3 min by Enoden train from Kamakura Station",
+    image: "/photos/sightseeing/yuigahama.jpg",
+    credit: {
+      author: "Klaasjeoranje",
+      license: "CC BY-SA 4.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Kamakura_Yuigahama_Beach_2024.jpg",
+    },
   },
   {
     name: "小町通り",
@@ -56,6 +83,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Kamakura's classic shopping street, lined with street food and souvenir shops.",
     accessJa: "鎌倉駅東口すぐ",
     accessEn: "Right by Kamakura Station's east exit",
+    image: "/photos/sightseeing/komachi-dori.jpg",
+    credit: {
+      author: "Urashimataro",
+      license: "Public domain",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Komachi_Dori-Kamakura.jpg",
+    },
   },
   // Fujisawa / Enoshima
   {
@@ -65,6 +98,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "One of Japan's three great Benzaiten shrines; the approach street has local shirasu (whitebait) food stalls.",
     accessJa: "大船駅から湘南モノレールで湘南江の島駅まで約14分、徒歩約16分",
     accessEn: "~14 min by Shonan Monorail from Ofuna to Shonan-Enoshima Station, then ~16 min walk",
+    image: "/photos/sightseeing/enoshima-shrine.jpg",
+    credit: {
+      author: "Daderot",
+      license: "CC0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Enoshima_Shrine_-_Enoshima,_Japan_-_DSC07632.jpg",
+    },
   },
   {
     name: "江の島シーキャンドル",
@@ -73,6 +112,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Enoshima's observation lighthouse - on a clear day you can see Mt. Fuji and Minato Mirai.",
     accessJa: "江の島内、江島神社から徒歩圏内",
     accessEn: "On Enoshima island, walking distance from Enoshima Shrine",
+    image: "/photos/sightseeing/enoshima-lighthouse.jpg",
+    credit: {
+      author: "DXR",
+      license: "CC BY-SA 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Enoshima_Lighthouse_130809_1.jpg",
+    },
   },
   // Yokohama
   {
@@ -82,6 +127,12 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     descEn: "Yokohama's waterfront district, home to the Red Brick Warehouse and Landmark Tower.",
     accessJa: "大船駅からJR東海道線で横浜駅まで約18分(乗り換えなし)、みなとみらい線へ乗り換え",
     accessEn: "~18 min direct by JR Tokaido Line from Ofuna to Yokohama Station, then transfer to the Minatomirai Line",
+    image: "/photos/sightseeing/yokohama-redbrick.jpg",
+    credit: {
+      author: "Kakidai",
+      license: "CC BY-SA 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Yokohama_Red_Brick_Warehouse_2012.JPG",
+    },
   },
 ];
 

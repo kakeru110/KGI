@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { SIGHTSEEING_SPOTS, sightseeingMapUrl, type SightseeingArea } from "@/lib/sightseeing";
@@ -25,20 +26,41 @@ export default async function SightseeingPage({
             <h2 className="text-xl font-semibold sm:text-2xl">{dict.sightseeing.areas[area]}</h2>
             <ul className="mt-4 grid gap-4 sm:grid-cols-2">
               {spots.map((spot) => (
-                <li key={spot.name} className="rounded-2xl border border-border p-5">
-                  <p className="font-medium">{spot.name}</p>
-                  <p className="mt-2 text-sm text-muted">{locale === "ja" ? spot.descJa : spot.descEn}</p>
-                  <p className="mt-3 text-sm">
-                    {dict.sightseeing.accessLabel}: {locale === "ja" ? spot.accessJa : spot.accessEn}
-                  </p>
-                  <a
-                    href={sightseeingMapUrl(spot)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
-                  >
-                    {dict.sightseeing.mapLinkLabel}
-                  </a>
+                <li key={spot.name} className="overflow-hidden rounded-2xl border border-border">
+                  <div className="relative aspect-[4/3]">
+                    <Image
+                      src={spot.image}
+                      alt={spot.name}
+                      fill
+                      sizes="(min-width: 640px) 400px, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <p className="font-medium">{spot.name}</p>
+                    <p className="mt-2 text-sm text-muted">{locale === "ja" ? spot.descJa : spot.descEn}</p>
+                    <p className="mt-3 text-sm">
+                      {dict.sightseeing.accessLabel}: {locale === "ja" ? spot.accessJa : spot.accessEn}
+                    </p>
+                    <div className="mt-3 flex items-center justify-between">
+                      <a
+                        href={sightseeingMapUrl(spot)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-accent hover:underline"
+                      >
+                        {dict.sightseeing.mapLinkLabel}
+                      </a>
+                      <a
+                        href={spot.credit.sourceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-muted hover:underline"
+                      >
+                        {spot.credit.author} / {spot.credit.license}
+                      </a>
+                    </div>
+                  </div>
                 </li>
               ))}
             </ul>
