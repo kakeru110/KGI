@@ -177,6 +177,14 @@ const ja: Dictionary = {
     note: "掲載しているレビューは実際の宿泊者によるものです。",
     viewAll: "すべてのレビューを見る",
   },
+  trackRecord: {
+    heading: "宿泊実績",
+    groupsLabel: "累計宿泊組数",
+    guestsLabel: "延べ宿泊人数",
+    avgGroupSizeLabel: "平均グループ人数",
+    childRateLabel: "お子様連れの割合",
+    countriesHeading: "ゲストの出身国・地域",
+  },
   footer: {
     address: "神奈川県横浜市栄区",
     poweredBy: "在庫・料金・ご予約情報はBeds24と連携しています。",

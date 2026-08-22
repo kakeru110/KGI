@@ -104,6 +104,14 @@ export type Dictionary = {
     note: string;
     viewAll: string;
   };
+  trackRecord: {
+    heading: string;
+    groupsLabel: string;
+    guestsLabel: string;
+    avgGroupSizeLabel: string;
+    childRateLabel: string;
+    countriesHeading: string;
+  };
   footer: {
     address: string;
     poweredBy: string;

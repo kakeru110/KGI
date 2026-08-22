@@ -2,6 +2,7 @@ import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getMonthAvailability } from "@/lib/beds24/availability";
 import { getReviews } from "@/lib/beds24/reviews";
+import { getPropertyStats } from "@/lib/beds24/stats";
 import { formatFromPrice } from "@/lib/i18n/format";
 import Hero from "@/components/Hero";
 import BookingWidget from "@/components/BookingWidget";
@@ -10,6 +11,7 @@ import PhotoGrid from "@/components/PhotoGrid";
 import FacilityIntro from "@/components/FacilityIntro";
 import AmenitiesList from "@/components/AmenitiesList";
 import ReviewsSection from "@/components/ReviewsSection";
+import TrackRecord from "@/components/TrackRecord";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 export default async function TopPage({
@@ -27,6 +29,7 @@ export default async function TopPage({
   const prices = days.filter((d) => d.status === "available" && d.price !== null).map((d) => d.price as number);
   const fromPrice = prices.length > 0 ? Math.min(...prices) : null;
   const reviews = await getReviews(locale, 6);
+  const stats = await getPropertyStats(locale);
 
   return (
     <>
@@ -41,6 +44,7 @@ export default async function TopPage({
         <PhotoGrid locale={locale} dict={dict} />
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
+        {stats && <TrackRecord locale={locale} dict={dict} stats={stats} />}
         <ReviewsSection locale={locale} dict={dict} reviews={reviews} showViewAll />
       </div>
 

@@ -178,6 +178,14 @@ const en: Dictionary = {
     note: "Reviews shown are from actual guests.",
     viewAll: "View all reviews",
   },
+  trackRecord: {
+    heading: "Our Track Record",
+    groupsLabel: "Groups hosted",
+    guestsLabel: "Guests hosted",
+    avgGroupSizeLabel: "Average group size",
+    childRateLabel: "Stays with children",
+    countriesHeading: "Guests have come from",
+  },
   footer: {
     address: "Sakae Ward, Yokohama, Kanagawa, Japan",
     poweredBy: "Availability, pricing, and bookings are powered by Beds24.",

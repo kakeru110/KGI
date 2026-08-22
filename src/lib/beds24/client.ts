@@ -20,7 +20,7 @@ export const USE_MOCK_DATA = !process.env.BEDS24_REFRESH_TOKEN;
 
 type Beds24RequestInit = {
   method?: "GET" | "POST" | "DELETE";
-  query?: Record<string, string | number | boolean | undefined>;
+  query?: Record<string, string | number | boolean | (string | number)[] | undefined>;
   body?: unknown;
   /**
    * Next.js fetch cache revalidation window in seconds. Omit (the default)
@@ -73,7 +73,12 @@ export async function beds24Fetch<T>(path: string, init: Beds24RequestInit = {})
 
   const url = new URL(`${BEDS24_API_BASE}${path}`);
   for (const [key, value] of Object.entries(init.query ?? {})) {
-    if (value !== undefined) url.searchParams.set(key, String(value));
+    if (value === undefined) continue;
+    if (Array.isArray(value)) {
+      for (const v of value) url.searchParams.append(key, String(v));
+    } else {
+      url.searchParams.set(key, String(value));
+    }
   }
 
   const response = await fetch(url, {

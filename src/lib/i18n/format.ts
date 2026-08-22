@@ -34,6 +34,10 @@ export function formatFromPrice(amount: number, locale: Locale): string {
   return locale === "ja" ? `${formatCurrency(amount)}〜` : `from ${formatCurrency(amount)}`;
 }
 
+export function formatGroupsCount(n: number, locale: Locale): string {
+  return locale === "ja" ? `${n.toLocaleString("ja-JP")}組` : `${n.toLocaleString("en-US")}`;
+}
+
 export function formatDateLabel(date: string, locale: Locale): string {
   const d = new Date(`${date}T00:00:00Z`);
   return d.toLocaleDateString(locale === "ja" ? "ja-JP" : "en-US", {
