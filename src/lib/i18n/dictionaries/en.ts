@@ -13,6 +13,7 @@ const en: Dictionary = {
     gallery: "Gallery",
     access: "Access",
     parking: "Parking",
+    sightseeing: "Sightseeing",
     faq: "FAQ",
     reviews: "Reviews",
     booking: "Check Availability",
@@ -139,6 +140,18 @@ const en: Dictionary = {
     mapLinkLabel: "View on map",
     disclaimer:
       "Rates and availability may change. Please check each parking operator's official site or app for the latest information before use.",
+  },
+  sightseeing: {
+    heading: "Nearby Sightseeing",
+    intro:
+      "Ofuna Station puts Kamakura, Fujisawa/Enoshima, and Yokohama all within reach. Travel times below are from Ofuna Station.",
+    accessLabel: "Access",
+    mapLinkLabel: "View on map",
+    areas: {
+      kamakura: "Kamakura",
+      fujisawaEnoshima: "Fujisawa / Enoshima",
+      yokohama: "Yokohama",
+    },
   },
   faq: {
     heading: "FAQ",

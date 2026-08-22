@@ -13,6 +13,7 @@ const ja: Dictionary = {
     gallery: "写真",
     access: "アクセス",
     parking: "駐車場",
+    sightseeing: "観光スポット",
     faq: "よくある質問",
     reviews: "ゲストの声",
     booking: "空室・料金を確認",
@@ -138,6 +139,17 @@ const ja: Dictionary = {
     mapLinkLabel: "地図で見る",
     disclaimer:
       "料金・空き状況は変動する場合があります。ご利用前に各駐車場の公式サイトやアプリで最新情報をご確認ください。",
+  },
+  sightseeing: {
+    heading: "周辺観光スポット",
+    intro: "大船駅を拠点に、鎌倉・藤沢江の島・横浜まで足を伸ばせます。所要時間は大船駅からの目安です。",
+    accessLabel: "アクセス",
+    mapLinkLabel: "地図で見る",
+    areas: {
+      kamakura: "鎌倉",
+      fujisawaEnoshima: "藤沢・江の島",
+      yokohama: "横浜",
+    },
   },
   faq: {
     heading: "よくある質問",

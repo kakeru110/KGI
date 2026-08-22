@@ -10,6 +10,7 @@ export type Dictionary = {
     gallery: string;
     access: string;
     parking: string;
+    sightseeing: string;
     faq: string;
     reviews: string;
     booking: string;
@@ -94,6 +95,17 @@ export type Dictionary = {
     priceLabel: string;
     mapLinkLabel: string;
     disclaimer: string;
+  };
+  sightseeing: {
+    heading: string;
+    intro: string;
+    accessLabel: string;
+    mapLinkLabel: string;
+    areas: {
+      kamakura: string;
+      fujisawaEnoshima: string;
+      yokohama: string;
+    };
   };
   faq: {
     heading: string;
