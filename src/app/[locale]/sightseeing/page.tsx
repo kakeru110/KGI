@@ -1,9 +1,22 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { buildAlternates } from "@/lib/seo";
 import { SIGHTSEEING_SPOTS, sightseeingMapUrl, type SightseeingArea } from "@/lib/sightseeing";
 
 const AREAS: SightseeingArea[] = ["kamakura", "fujisawaEnoshima", "yokohama"];
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return { ...dict.seo.sightseeing, alternates: buildAlternates(locale, "/sightseeing") };
+}
 
 export default async function SightseeingPage({
   params,

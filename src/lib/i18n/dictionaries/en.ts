@@ -7,6 +7,54 @@ const en: Dictionary = {
     description:
       "Your base for exploring Kamakura and Shonan. A private 58sqm stay for up to 6 guests, 7 minutes on foot from Ofuna Station. Book direct with Kamakura Gate Inn.",
   },
+  seo: {
+    rooms: {
+      title: "Rooms & Amenities | Kamakura Gate Inn",
+      description: "A 58sqm whole-house rental with a loft. See the bed layout, house rules, and room details.",
+    },
+    gallery: {
+      title: "Photo Gallery | Kamakura Gate Inn",
+      description: "Browse photos of the living room, bedroom, loft, and kitchen at Kamakura Gate Inn.",
+    },
+    access: {
+      title: "Access | Kamakura Gate Inn",
+      description:
+        "7 minutes on foot from JR Ofuna Station, 6 minutes by train to Kamakura Station - a convenient base for exploring Kamakura and Shonan.",
+    },
+    parking: {
+      title: "Parking | Kamakura Gate Inn",
+      description: "No dedicated parking on site. Find nearby paid parking lots within 500m of the property.",
+    },
+    sightseeing: {
+      title: "Nearby Sightseeing | Kamakura Gate Inn",
+      description:
+        "Explore Kamakura, Fujisawa/Enoshima, and Yokohama from Ofuna Station, with travel times to each spot.",
+    },
+    faq: {
+      title: "FAQ | Kamakura Gate Inn",
+      description: "Answers to common questions about check-in/out times, maximum occupancy, parking, and pets.",
+    },
+    reviews: {
+      title: "Guest Reviews | Kamakura Gate Inn",
+      description: "Read reviews and ratings from guests who have actually stayed at Kamakura Gate Inn.",
+    },
+    booking: {
+      title: "Check Availability & Rates | Kamakura Gate Inn",
+      description: "Check real-time availability and pricing for your travel dates and group size.",
+    },
+    policy: {
+      title: "Cancellation Policy | Kamakura Gate Inn",
+      description: "Please review our cancellation policy and payment details before booking.",
+    },
+    tokushoho: {
+      title: "Legal Disclosure | Kamakura Gate Inn",
+      description: "Business information and terms disclosed under Japan's Act on Specified Commercial Transactions.",
+    },
+    contact: {
+      title: "Contact Us | Kamakura Gate Inn",
+      description: "Questions or requests? Get in touch with Kamakura Gate Inn using the form on this page.",
+    },
+  },
   nav: {
     top: "Home",
     rooms: "The Place",

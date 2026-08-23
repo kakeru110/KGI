@@ -1,7 +1,20 @@
+import type { Metadata } from "next";
 import { Footprints, TrainFront } from "lucide-react";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { buildAlternates } from "@/lib/seo";
 import { PROPERTY_MAP_EMBED_SRC } from "@/lib/parking";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return { ...dict.seo.access, alternates: buildAlternates(locale, "/access") };
+}
 
 export default async function AccessPage({
   params,

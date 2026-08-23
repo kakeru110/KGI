@@ -1,8 +1,23 @@
+type SeoEntry = { title: string; description: string };
+
 export type Dictionary = {
   meta: {
     siteName: string;
     title: string;
     description: string;
+  };
+  seo: {
+    rooms: SeoEntry;
+    gallery: SeoEntry;
+    access: SeoEntry;
+    parking: SeoEntry;
+    sightseeing: SeoEntry;
+    faq: SeoEntry;
+    reviews: SeoEntry;
+    booking: SeoEntry;
+    policy: SeoEntry;
+    tokushoho: SeoEntry;
+    contact: SeoEntry;
   };
   nav: {
     top: string;

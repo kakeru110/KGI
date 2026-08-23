@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getOffer } from "@/lib/beds24/offers";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
 import GuestInfoForm from "@/components/GuestInfoForm";
+
+// Transactional step of the booking flow, not a page worth ranking on its
+// own - keep it out of search results.
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function GuestInfoPage({
   params,

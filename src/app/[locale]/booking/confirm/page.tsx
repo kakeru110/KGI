@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getStripeClient } from "@/lib/stripe/client";
 import { completeBookingFromSession } from "@/lib/checkout";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
+
+// Post-payment confirmation, keyed to a one-time Stripe session id - not a
+// page worth ranking on its own, and it could carry booking details.
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function BookingConfirmPage({
   params,

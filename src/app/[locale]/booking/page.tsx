@@ -1,10 +1,26 @@
+import type { Metadata } from "next";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { buildAlternates } from "@/lib/seo";
 import { getOffer } from "@/lib/beds24/offers";
 import { formatCurrency } from "@/lib/i18n/format";
 import BookingWidget from "@/components/BookingWidget";
 import PriceBreakdown from "@/components/PriceBreakdown";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  // Canonicalize away any checkin/checkout/guests query string - the page
+  // content varies by search, but there's nothing here worth ranking
+  // separately per date combination.
+  return { ...dict.seo.booking, alternates: buildAlternates(locale, "/booking") };
+}
 
 export default async function BookingPage({
   params,

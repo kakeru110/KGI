@@ -1,10 +1,23 @@
+import type { Metadata } from "next";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { buildAlternates } from "@/lib/seo";
 import { BUSINESS_INFO } from "@/lib/business-info";
 import { PROPERTY_CONFIG } from "@/lib/beds24/property-config";
 import { formatCurrency } from "@/lib/i18n/format";
 
 const MISSING = "(未設定)";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return { ...dict.seo.tokushoho, alternates: buildAlternates(locale, "/tokushoho") };
+}
 
 export default async function TokushohoPage({
   params,

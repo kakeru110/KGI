@@ -7,6 +7,54 @@ const ja: Dictionary = {
     description:
       "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のプライベートステイ、Kamakura Gate Innの公式予約サイトです。",
   },
+  seo: {
+    rooms: {
+      title: "お部屋・設備 | Kamakura Gate Inn",
+      description: "58㎡・1LDK＋ロフトの一棟貸し。ベッド構成や宿泊ルールなど、お部屋の詳細をご紹介します。",
+    },
+    gallery: {
+      title: "写真ギャラリー | Kamakura Gate Inn",
+      description:
+        "リビング・ベッドルーム・ロフト・キッチンなど、Kamakura Gate Innの室内写真をまとめてご覧いただけます。",
+    },
+    access: {
+      title: "アクセス | Kamakura Gate Inn",
+      description: "JR大船駅から徒歩約7分、鎌倉駅までは電車で約6分。鎌倉・湘南観光の拠点に便利な立地です。",
+    },
+    parking: {
+      title: "駐車場について | Kamakura Gate Inn",
+      description: "施設に専用駐車場はありません。施設から500m以内の周辺コインパーキング情報をご案内します。",
+    },
+    sightseeing: {
+      title: "周辺観光スポット | Kamakura Gate Inn",
+      description: "大船駅を拠点に鎌倉・藤沢江の島・横浜へ。周辺の観光スポットとアクセス時間をご紹介します。",
+    },
+    faq: {
+      title: "よくある質問 | Kamakura Gate Inn",
+      description:
+        "チェックイン・チェックアウトの時間、最大宿泊人数、駐車場、ペットの可否など、よくある質問にお答えします。",
+    },
+    reviews: {
+      title: "ゲストの声 | Kamakura Gate Inn",
+      description: "実際にご宿泊いただいたゲストからの口コミ・評価をご紹介します。",
+    },
+    booking: {
+      title: "空室・料金を確認 | Kamakura Gate Inn",
+      description: "ご希望の日程・人数で空室状況と料金をリアルタイムで確認できます。",
+    },
+    policy: {
+      title: "キャンセルポリシー | Kamakura Gate Inn",
+      description: "ご予約前に必ずご確認いただきたい、キャンセル規定とお支払いについてのご案内です。",
+    },
+    tokushoho: {
+      title: "特定商取引法に基づく表記 | Kamakura Gate Inn",
+      description: "特定商取引法に基づく事業者情報・お支払い方法・キャンセル規定などの表記です。",
+    },
+    contact: {
+      title: "お問い合わせ | Kamakura Gate Inn",
+      description: "ご質問やご要望など、Kamakura Gate Innへのお問い合わせはこちらのフォームからお願いいたします。",
+    },
+  },
   nav: {
     top: "トップ",
     rooms: "施設紹介",

@@ -1,8 +1,21 @@
+import type { Metadata } from "next";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { buildAlternates } from "@/lib/seo";
 import StatCards from "@/components/StatCards";
 import FacilityIntro from "@/components/FacilityIntro";
 import AmenitiesList from "@/components/AmenitiesList";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
+  const dict = getDictionary(locale);
+  return { ...dict.seo.rooms, alternates: buildAlternates(locale, "/rooms") };
+}
 
 export default async function RoomsPage({
   params,
