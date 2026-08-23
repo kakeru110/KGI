@@ -201,33 +201,38 @@ export default function BookingWidget({
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted">
-          <span className="font-medium text-foreground">
+        <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+          <span className="rounded-full bg-accent-soft px-2.5 py-1 font-medium text-accent">
             {formatRemainingThisMonth(remainingThisMonth, locale)}
           </span>
-          <span className="font-medium text-foreground">
+          <span className="rounded-full bg-accent-soft px-2.5 py-1 font-medium text-accent">
             {formatRemainingWeekend(remainingWeekend, locale)}
           </span>
-          <span className="ml-auto flex items-center gap-3">
+          <span className="ml-auto flex items-center gap-3 text-muted">
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-price-good" />
+              <span className="h-2.5 w-2.5 rounded-full bg-price-good" />
               {dict.availability.bestValue}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-border" />
+              <span className="h-2.5 w-2.5 rounded-full bg-border" />
               {dict.availability.legendFull}
             </span>
           </span>
         </div>
 
-        <div className="mt-4 grid grid-cols-7 gap-1 text-center text-xs text-muted">
+        <div className="mt-4 grid grid-cols-7 gap-1.5 text-center text-xs">
           {dict.availability.weekdays.map((w, i) => (
-            <div key={w} className={`py-1 font-medium ${i >= 5 ? "text-foreground/70" : ""}`}>
+            <div
+              key={w}
+              className={`border-b-2 py-1.5 font-semibold ${
+                i >= 5 ? "border-accent/40 text-accent" : "border-border text-muted"
+              }`}
+            >
               {w}
             </div>
           ))}
         </div>
-        <div className={`grid grid-cols-7 gap-1.5 ${loading ? "opacity-40" : ""}`}>
+        <div className={`mt-1.5 grid grid-cols-7 gap-1.5 ${loading ? "opacity-40" : ""}`}>
           {Array.from({ length: leadingBlanks }).map((_, i) => (
             <div key={`blank-${i}`} />
           ))}
@@ -250,22 +255,28 @@ export default function BookingWidget({
                 type="button"
                 disabled={isFull}
                 onClick={() => handleDayClick(day)}
-                className={`relative flex flex-col items-center gap-0.5 px-1 py-2.5 text-xs transition ${
-                  isBandMember ? "rounded-none" : "rounded-xl"
+                className={`relative flex flex-col items-center gap-1 border-2 px-1 py-3 text-xs transition ${
+                  isBandMember ? "rounded-none border-transparent" : "rounded-xl"
                 } ${isRangeStart ? "rounded-l-xl" : ""} ${isRangeEnd ? "rounded-r-xl" : ""} ${
                   isFull
-                    ? "cursor-not-allowed text-border line-through decoration-border"
+                    ? "cursor-not-allowed border-transparent text-border/70 line-through decoration-border"
                     : isSelected
-                      ? "bg-accent font-semibold text-accent-foreground shadow-sm"
+                      ? "border-transparent bg-accent font-semibold text-accent-foreground shadow-md shadow-accent/30"
                       : inRange
-                        ? "bg-accent-soft text-foreground"
-                        : `hover:bg-surface ${isWeekend ? "bg-surface/60" : ""}`
+                        ? "border-transparent bg-accent-soft text-foreground"
+                        : isBestValue
+                          ? "border-price-good bg-price-good-soft hover:brightness-95"
+                          : `border-transparent hover:border-border ${isWeekend ? "bg-surface" : ""}`
                 }`}
               >
                 {isBestValue && !isSelected && (
-                  <span className="absolute -top-1 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-price-good" />
+                  <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full bg-price-good px-1.5 py-0.5 text-[0.6rem] font-bold leading-none text-white">
+                    {dict.availability.bestValue}
+                  </span>
                 )}
-                <span className={isWeekend && !isSelected && !inRange ? "text-foreground/80" : ""}>
+                <span
+                  className={`text-sm ${isWeekend && !isSelected && !inRange && !isBestValue ? "text-foreground/80" : ""}`}
+                >
                   {Number(day.date.slice(-2))}
                 </span>
                 <span
@@ -273,10 +284,10 @@ export default function BookingWidget({
                     isFull
                       ? ""
                       : isSelected
-                        ? "font-medium"
+                        ? "font-semibold"
                         : isBestValue
-                          ? "font-semibold text-price-good"
-                          : "text-muted"
+                          ? "font-bold text-price-good"
+                          : "font-medium text-muted"
                   }`}
                 >
                   {isFull ? dict.availability.legendFull : day.price ? formatCurrency(day.price) : ""}
