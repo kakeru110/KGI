@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
+import * as Flags from "country-flag-icons/react/3x2";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { Review } from "@/lib/beds24/reviews";
@@ -73,13 +74,19 @@ export default function ReviewsSection({
         <p className="mt-4 text-sm text-muted">{dict.reviews.note}</p>
       ) : (
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {reviews.map((review, i) => (
-            <div key={i} className="rounded-2xl border border-border p-5">
-              <StarRating rating={review.rating} />
-              <p className="mt-2 text-sm text-muted">&ldquo;{review.text}&rdquo;</p>
-              <p className="mt-2 text-xs text-muted">{review.source}</p>
-            </div>
-          ))}
+          {reviews.map((review, i) => {
+            const Flag = review.countryCode ? Flags[review.countryCode as keyof typeof Flags] : undefined;
+            return (
+              <div key={i} className="rounded-2xl border border-border p-5">
+                <StarRating rating={review.rating} />
+                <p className="mt-2 text-sm text-muted">&ldquo;{review.text}&rdquo;</p>
+                <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+                  {Flag && <Flag className="h-3 w-auto rounded-[1px]" />}
+                  {review.source}
+                </p>
+              </div>
+            );
+          })}
         </div>
       )}
     </section>

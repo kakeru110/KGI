@@ -9,6 +9,8 @@ export type Review = {
   rating: number;
   text: string;
   source: "Airbnb" | "Booking.com";
+  /** ISO country code, only set when known with confidence - see getReviews. */
+  countryCode?: string;
 };
 
 export type ReviewsResult = {
@@ -18,14 +20,26 @@ export type ReviewsResult = {
   averageScore: number;
 };
 
+/** Review plus the channel booking reference used to look up a country for Airbnb reviews (which don't carry one themselves). Stripped before returning. */
+type InternalReview = Review & { apiReference?: string };
+
 type AirbnbReviewsResponse = {
-  data: { public_review?: string; overall_rating?: number; submitted?: boolean }[];
+  data: {
+    public_review?: string;
+    overall_rating?: number;
+    submitted?: boolean;
+    reservation_confirmation_code?: string;
+  }[];
 };
 type BookingReviewsResponse = {
   data: {
     content?: { positive?: string };
     scoring?: { review_score?: number };
+    reviewer?: { country_code?: string };
   }[];
+};
+type BookingsLookupResponse = {
+  data: { apiReference: string; country2?: string | null }[];
 };
 
 /**
@@ -56,12 +70,20 @@ export async function getReviews(locale: Locale, limit = 6): Promise<ReviewsResu
     }),
   ]);
 
-  const reviews: Review[] = [];
+  const reviews: InternalReview[] = [];
 
   if (airbnb.status === "fulfilled") {
     for (const r of airbnb.value.data) {
       if (r.submitted === false || !r.public_review || !r.overall_rating) continue;
-      reviews.push({ rating: r.overall_rating, text: r.public_review, source: "Airbnb" });
+      // Airbnb's review payload has no guest-location field at all - the
+      // confirmation code lets us look up the matching booking below,
+      // which sometimes (not always) has one.
+      reviews.push({
+        rating: r.overall_rating,
+        text: r.public_review,
+        source: "Airbnb",
+        apiReference: r.reservation_confirmation_code,
+      });
     }
   }
 
@@ -71,7 +93,14 @@ export async function getReviews(locale: Locale, limit = 6): Promise<ReviewsResu
       const score = r.scoring?.review_score;
       if (!text || score === undefined) continue;
       // Booking.com scores out of 10; normalize to the 0-5 scale used elsewhere.
-      reviews.push({ rating: score / 2, text, source: "Booking.com" });
+      // Unlike Airbnb, Booking.com's review payload already includes the
+      // guest's country directly, no booking lookup needed.
+      reviews.push({
+        rating: score / 2,
+        text,
+        source: "Booking.com",
+        countryCode: r.reviewer?.country_code?.toUpperCase(),
+      });
     }
   }
 
@@ -83,6 +112,29 @@ export async function getReviews(locale: Locale, limit = 6): Promise<ReviewsResu
 
   const limited = reviews.slice(0, limit);
 
+  // Resolve countries for the displayed Airbnb reviews by looking up their
+  // bookings' country2 - same field, and same "only when populated" rule,
+  // used for the aggregate country list in stats.ts. Only ~1 in 5 Airbnb
+  // bookings actually have it, so most Airbnb reviews still show no flag,
+  // but showing one when we do know it is still worth doing.
+  const lookupReferences = [
+    ...new Set(limited.map((r) => r.apiReference).filter((ref): ref is string => !!ref)),
+  ];
+  if (lookupReferences.length > 0) {
+    const bookingsLookup = await beds24Fetch<BookingsLookupResponse>("/bookings", {
+      query: { propertyId: PROPERTY_ID, apiReference: lookupReferences },
+      revalidateSeconds: 1800,
+    }).catch(() => null);
+    if (bookingsLookup) {
+      const countryByReference = new Map(
+        bookingsLookup.data.filter((b) => b.country2).map((b) => [b.apiReference, b.country2 as string])
+      );
+      for (const review of limited) {
+        if (review.apiReference) review.countryCode ??= countryByReference.get(review.apiReference);
+      }
+    }
+  }
+
   // Reviews arrive in whatever language the guest wrote them (Chinese,
   // English, Japanese, ...) - translate them all to the page's locale so
   // every visitor can read every review, regardless of source language.
@@ -91,7 +143,12 @@ export async function getReviews(locale: Locale, limit = 6): Promise<ReviewsResu
     locale
   );
   return {
-    reviews: limited.map((r, i) => ({ ...r, text: translatedTexts[i] })),
+    reviews: limited.map((r, i) => ({
+      rating: r.rating,
+      text: translatedTexts[i],
+      source: r.source,
+      countryCode: r.countryCode,
+    })),
     totalCount,
     averageScore,
   };
