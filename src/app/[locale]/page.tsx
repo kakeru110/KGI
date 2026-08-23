@@ -7,7 +7,7 @@ import { getMonthAvailability } from "@/lib/beds24/availability";
 import { getReviews } from "@/lib/beds24/reviews";
 import { getPropertyStats } from "@/lib/beds24/stats";
 import { PROPERTY_CONFIG } from "@/lib/beds24/property-config";
-import { PROPERTY_COORDS } from "@/lib/parking";
+import { PROPERTY_COORDS, PROPERTY_MAP_LINK } from "@/lib/parking";
 import { formatFromPrice } from "@/lib/i18n/format";
 import Hero from "@/components/Hero";
 import PhotoMosaic from "@/components/PhotoMosaic";
@@ -61,6 +61,9 @@ export default async function TopPage({
     description: dict.meta.description,
     url: `${SITE_URL}/${locale}`,
     image: `${SITE_URL}/photos/living-1.jpg`,
+    // Links this entity to the verified Google Business Profile listing
+    // (confirmed same place ID as the /parking page's map link).
+    sameAs: [PROPERTY_MAP_LINK],
     address: {
       "@type": "PostalAddress",
       addressLocality: "横浜市栄区",
