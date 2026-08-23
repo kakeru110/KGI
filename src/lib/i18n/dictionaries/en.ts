@@ -190,6 +190,10 @@ const en: Dictionary = {
     heading: "Guest Reviews",
     note: "Reviews shown are from actual guests.",
     viewAll: "View all reviews",
+    ratingWonderful: "Wonderful",
+    ratingVeryGood: "Very Good",
+    ratingGood: "Good",
+    ratingPleasant: "Pleasant",
   },
   trackRecord: {
     heading: "Our Track Record",

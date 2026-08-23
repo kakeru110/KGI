@@ -60,3 +60,20 @@ function formatDateWithWeekday(date: string, locale: Locale): string {
 export function formatDateRangeLabel(checkIn: string, checkOut: string, locale: Locale): string {
   return `${formatDateWithWeekday(checkIn, locale)} → ${formatDateWithWeekday(checkOut, locale)}`;
 }
+
+export function formatReviewCount(n: number, locale: Locale): string {
+  return locale === "ja"
+    ? `クチコミ${n.toLocaleString("ja-JP")}件`
+    : `${n.toLocaleString("en-US")} review${n === 1 ? "" : "s"}`;
+}
+
+/** Booking.com-style rating bucket, picked from the dictionary by the caller. */
+export type RatingLabelKey = "wonderful" | "veryGood" | "good" | "pleasant" | null;
+
+export function getRatingLabelKey(scoreOutOf10: number): RatingLabelKey {
+  if (scoreOutOf10 >= 9) return "wonderful";
+  if (scoreOutOf10 >= 8) return "veryGood";
+  if (scoreOutOf10 >= 7) return "good";
+  if (scoreOutOf10 >= 6) return "pleasant";
+  return null;
+}

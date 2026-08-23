@@ -115,6 +115,10 @@ export type Dictionary = {
     heading: string;
     note: string;
     viewAll: string;
+    ratingWonderful: string;
+    ratingVeryGood: string;
+    ratingGood: string;
+    ratingPleasant: string;
   };
   trackRecord: {
     heading: string;

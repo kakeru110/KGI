@@ -11,6 +11,13 @@ export type Review = {
   source: "Airbnb" | "Booking.com";
 };
 
+export type ReviewsResult = {
+  reviews: Review[];
+  totalCount: number;
+  /** Average of all reviews (not just the returned/limited ones), 0-10 scale, Booking.com-style. */
+  averageScore: number;
+};
+
 type AirbnbReviewsResponse = {
   data: { public_review?: string; overall_rating?: number; submitted?: boolean }[];
 };
@@ -29,8 +36,8 @@ type BookingReviewsResponse = {
  * these calls 401 and are swallowed below, so the site just shows no
  * reviews rather than erroring.
  */
-export async function getReviews(locale: Locale, limit = 6): Promise<Review[]> {
-  if (USE_MOCK_DATA) return [];
+export async function getReviews(locale: Locale, limit = 6): Promise<ReviewsResult> {
+  if (USE_MOCK_DATA) return { reviews: [], totalCount: 0, averageScore: 0 };
 
   // Reviews change slowly and aren't money-sensitive, so cache like the
   // availability calendar rather than forcing every page load to hit
@@ -68,6 +75,12 @@ export async function getReviews(locale: Locale, limit = 6): Promise<Review[]> {
     }
   }
 
+  const totalCount = reviews.length;
+  const averageScore =
+    totalCount > 0
+      ? Math.round((reviews.reduce((sum, r) => sum + r.rating, 0) / totalCount) * 2 * 10) / 10
+      : 0;
+
   const limited = reviews.slice(0, limit);
 
   // Reviews arrive in whatever language the guest wrote them (Chinese,
@@ -77,5 +90,9 @@ export async function getReviews(locale: Locale, limit = 6): Promise<Review[]> {
     limited.map((r) => r.text),
     locale
   );
-  return limited.map((r, i) => ({ ...r, text: translatedTexts[i] }));
+  return {
+    reviews: limited.map((r, i) => ({ ...r, text: translatedTexts[i] })),
+    totalCount,
+    averageScore,
+  };
 }

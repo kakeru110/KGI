@@ -188,6 +188,10 @@ const ja: Dictionary = {
     heading: "ゲストの声",
     note: "掲載しているレビューは実際の宿泊者によるものです。",
     viewAll: "すべてのレビューを見る",
+    ratingWonderful: "とても素晴らしい",
+    ratingVeryGood: "素晴らしい",
+    ratingGood: "良い",
+    ratingPleasant: "普通",
   },
   trackRecord: {
     heading: "宿泊実績",

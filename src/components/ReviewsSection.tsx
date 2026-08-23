@@ -2,18 +2,33 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { Review } from "@/lib/beds24/reviews";
+import { formatReviewCount, getRatingLabelKey } from "@/lib/i18n/format";
 
 export default function ReviewsSection({
   locale,
   dict,
   reviews,
+  totalCount = reviews.length,
+  averageScore,
   showViewAll = false,
 }: {
   locale: Locale;
   dict: Dictionary;
   reviews: Review[];
+  totalCount?: number;
+  averageScore?: number;
   showViewAll?: boolean;
 }) {
+  const ratingLabelKey = averageScore !== undefined ? getRatingLabelKey(averageScore) : null;
+  const ratingLabel = ratingLabelKey
+    ? {
+        wonderful: dict.reviews.ratingWonderful,
+        veryGood: dict.reviews.ratingVeryGood,
+        good: dict.reviews.ratingGood,
+        pleasant: dict.reviews.ratingPleasant,
+      }[ratingLabelKey]
+    : null;
+
   return (
     <section>
       <div className="flex items-center justify-between">
@@ -24,6 +39,17 @@ export default function ReviewsSection({
           </Link>
         )}
       </div>
+      {averageScore !== undefined && averageScore > 0 && (
+        <div className="mt-4 flex items-center gap-4">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-accent text-xl font-bold text-white">
+            {averageScore.toFixed(1)}
+          </div>
+          <div>
+            {ratingLabel && <p className="font-semibold">{ratingLabel}</p>}
+            <p className="text-sm text-muted">{formatReviewCount(totalCount, locale)}</p>
+          </div>
+        </div>
+      )}
       {reviews.length === 0 ? (
         <p className="mt-4 text-sm text-muted">{dict.reviews.note}</p>
       ) : (

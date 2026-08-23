@@ -28,7 +28,7 @@ export default async function TopPage({
   const days = await getMonthAvailability(month);
   const prices = days.filter((d) => d.status === "available" && d.price !== null).map((d) => d.price as number);
   const fromPrice = prices.length > 0 ? Math.min(...prices) : null;
-  const reviews = await getReviews(locale, 6);
+  const { reviews, totalCount, averageScore } = await getReviews(locale, 6);
   const stats = await getPropertyStats(locale);
 
   return (
@@ -48,7 +48,14 @@ export default async function TopPage({
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
         {stats && <TrackRecord locale={locale} dict={dict} stats={stats} />}
-        <ReviewsSection locale={locale} dict={dict} reviews={reviews} showViewAll />
+        <ReviewsSection
+          locale={locale}
+          dict={dict}
+          reviews={reviews}
+          totalCount={totalCount}
+          averageScore={averageScore}
+          showViewAll
+        />
       </div>
 
       {fromPrice !== null && (
