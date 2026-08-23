@@ -50,13 +50,13 @@ export async function generateMetadata({
       title: dict.meta.title,
       description: dict.meta.description,
       locale: locale === "ja" ? "ja_JP" : "en_US",
-      images: ["/photos/living-1.jpg"],
+      images: ["/photos/living-2.jpg"],
     },
     twitter: {
       card: "summary_large_image",
       title: dict.meta.title,
       description: dict.meta.description,
-      images: ["/photos/living-1.jpg"],
+      images: ["/photos/living-2.jpg"],
     },
     robots: { index: true, follow: true },
   };

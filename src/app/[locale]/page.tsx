@@ -60,7 +60,7 @@ export default async function TopPage({
     name: dict.meta.siteName,
     description: dict.meta.description,
     url: `${SITE_URL}/${locale}`,
-    image: `${SITE_URL}/photos/living-1.jpg`,
+    image: `${SITE_URL}/photos/living-2.jpg`,
     // Links this entity to the verified Google Business Profile listing
     // (confirmed same place ID as the /parking page's map link).
     sameAs: [PROPERTY_MAP_LINK],
