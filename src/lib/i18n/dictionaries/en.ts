@@ -280,9 +280,8 @@ const en: Dictionary = {
     intro: "Please review this before booking.",
     cancellationHeading: "Cancellation Terms",
     cancellationRules: [
-      "7+ days before check-in: full refund",
-      "2-6 days before check-in: 50% of the booking total",
-      "Within 1 day of check-in, or no-show: 100% of the booking total",
+      "Until 15:00 the day before check-in: full refund",
+      "After 15:00 the day before check-in, on the day of check-in, or no-show: non-refundable",
     ],
     paymentHeading: "Payment",
     paymentBody: "Full payment is charged by credit card at the time of booking.",
