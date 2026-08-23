@@ -3,7 +3,7 @@ import { BedDouble, CalendarDays, Sparkles, UsersRound } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { OfferResult } from "@/lib/beds24/types";
-import { formatCurrency, formatDateRangeLabel, formatGuestsCount, formatNights } from "@/lib/i18n/format";
+import { formatCurrency, formatDateRangeLabel, formatGuestsCount, formatMinStayNotice, formatNights } from "@/lib/i18n/format";
 
 export default function PriceBreakdown({
   offer,
@@ -17,7 +17,9 @@ export default function PriceBreakdown({
   if (!offer.available) {
     return (
       <div className="rounded-3xl border border-border bg-surface p-6 text-center">
-        <p className="font-medium">{dict.results.unavailable}</p>
+        <p className="font-medium">
+          {offer.reason === "min-stay" ? formatMinStayNotice(offer.minNights, locale) : dict.results.unavailable}
+        </p>
       </div>
     );
   }

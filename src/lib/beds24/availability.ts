@@ -34,7 +34,7 @@ function mockDayAvailability(date: string): DayAvailability {
   const jitter = (hash % 5) * 400 - 800;
   const price = status === "available" ? BASE_RATE_BY_WEEKDAY[weekday] + jitter : null;
 
-  return { date, status, price };
+  return { date, status, price, minStay: 1 };
 }
 
 function daysInMonth(yearMonth: string): string[] {
@@ -55,7 +55,7 @@ function addDays(date: string, delta: number): string {
 
 type CalendarResponse = {
   data: {
-    calendar: { from: string; to: string; numAvail: number; price1: number }[];
+    calendar: { from: string; to: string; numAvail: number; price1: number; minStay: number }[];
   }[];
 };
 
@@ -64,10 +64,24 @@ type CalendarResponse = {
  * Beds24 collapses consecutive identical days into one {from, to} range,
  * so we expand each range back into individual DayAvailability entries.
  * price1 is the base rate for up to PROPERTY_CONFIG.baseOccupancy guests.
+ *
+ * minStay matters even though every day shown here can look "available":
+ * numAvail>0 only means a unit is free that night, not that a stay starting
+ * there satisfies the minimum-nights rule - confirmed against real data,
+ * a 1-night stay can come back with no bookable offer even on days the
+ * calendar marks available. Callers must check minStay against the
+ * requested number of nights themselves (see offers.ts).
  */
 async function fetchCalendarRange(startDate: string, endDate: string): Promise<DayAvailability[]> {
   const response = await beds24Fetch<CalendarResponse>("/inventory/rooms/calendar", {
-    query: { propertyId: PROPERTY_ID, startDate, endDate, includePrices: true, includeNumAvail: true },
+    query: {
+      propertyId: PROPERTY_ID,
+      startDate,
+      endDate,
+      includePrices: true,
+      includeNumAvail: true,
+      includeMinStay: true,
+    },
     // Spec section 25: the calendar view can tolerate ~60s staleness.
     revalidateSeconds: 60,
   });
@@ -79,6 +93,7 @@ async function fetchCalendarRange(startDate: string, endDate: string): Promise<D
         date,
         status: range.numAvail > 0 ? "available" : "full",
         price: range.numAvail > 0 ? range.price1 : null,
+        minStay: range.minStay,
       });
     }
   }

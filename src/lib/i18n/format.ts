@@ -77,3 +77,13 @@ export function getRatingLabelKey(scoreOutOf10: number): RatingLabelKey {
   if (scoreOutOf10 >= 6) return "pleasant";
   return null;
 }
+
+export function formatMinStayNotice(minNights: number, locale: Locale): string {
+  return locale === "ja"
+    ? `この日程は最低${minNights}泊からのご予約となります。チェックアウト日を変更してお試しください。`
+    : `This stay requires a minimum of ${minNights} night${minNights === 1 ? "" : "s"}. Please choose a later checkout date.`;
+}
+
+export function formatMinStayHint(minNights: number, locale: Locale): string {
+  return locale === "ja" ? `この日は最低${minNights}泊からご予約いただけます。` : `A minimum of ${minNights} nights applies to this date.`;
+}

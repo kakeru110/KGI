@@ -6,6 +6,8 @@ export type DayAvailability = {
   status: DayStatus;
   /** Base nightly price in JPY for up to the base occupancy, null when not available */
   price: number | null;
+  /** Minimum consecutive nights required for a stay starting on this date */
+  minStay: number;
 };
 
 export type GuestCounts = {
@@ -31,7 +33,8 @@ export type OfferBreakdown = {
 
 export type OfferResult =
   | ({ available: true } & OfferBreakdown)
-  | { available: false; reason: "unavailable" | "invalid-dates" | "over-capacity" };
+  | { available: false; reason: "unavailable" | "invalid-dates" | "over-capacity" }
+  | { available: false; reason: "min-stay"; minNights: number };
 
 export type GuestDetails = {
   firstName: string;

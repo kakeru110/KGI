@@ -49,6 +49,22 @@ export async function getOffer(params: {
     return { available: false, reason: "over-capacity" };
   }
 
+  // The calendar can mark every night in range "available" while the stay
+  // as a whole still isn't bookable - numAvail>0 only means a unit is free
+  // that night, not that it satisfies the minimum-stay rule (confirmed
+  // against real data: a 1-night stay 404s on /inventory/rooms/offers even
+  // when both nights show available on the calendar). Check minStay against
+  // the requested nights before ever calling the offers endpoint, so we can
+  // give a precise reason instead of a generic "unavailable".
+  const days = await getRangeAvailability(checkIn, checkOut);
+  if (days.some((day) => day.status !== "available")) {
+    return { available: false, reason: "unavailable" };
+  }
+  const minStay = days[0]?.minStay ?? 1;
+  if (nights < minStay) {
+    return { available: false, reason: "min-stay", minNights: minStay };
+  }
+
   if (!USE_MOCK_DATA) {
     const baseGuests = Math.min(totalGuests, PROPERTY_CONFIG.baseOccupancy);
     const roomFee = await fetchOfferPrice(checkIn, checkOut, baseGuests);
@@ -78,11 +94,6 @@ export async function getOffer(params: {
       perPerson: Math.round(total / totalGuests),
       currency: PROPERTY_CONFIG.currency,
     };
-  }
-
-  const days = await getRangeAvailability(checkIn, checkOut);
-  if (days.some((day) => day.status !== "available" || day.price === null)) {
-    return { available: false, reason: "unavailable" };
   }
 
   const roomFee = days.reduce((sum, day) => sum + (day.price ?? 0), 0);

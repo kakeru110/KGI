@@ -7,6 +7,7 @@ import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { DayAvailability } from "@/lib/beds24/types";
 import {
   formatCurrency,
+  formatMinStayHint,
   formatRemainingThisMonth,
   formatRemainingWeekend,
 } from "@/lib/i18n/format";
@@ -21,6 +22,12 @@ function shiftMonth(yearMonth: string, delta: number): string {
   const [year, month] = yearMonth.split("-").map(Number);
   const d = new Date(Date.UTC(year, month - 1 + delta, 1));
   return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`;
+}
+
+function addDays(date: string, delta: number): string {
+  const d = new Date(`${date}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + delta);
+  return d.toISOString().slice(0, 10);
 }
 
 export default function BookingWidget({
@@ -82,12 +89,19 @@ export default function BookingWidget({
     return prices.length > 0 ? Math.min(...prices) : null;
   }, [days]);
 
+  // A day showing "available" only means a unit is free that night - it
+  // doesn't mean a stay starting there satisfies the property's minimum-stay
+  // rule. Track the checked-in day's minStay so we can stop guests from
+  // picking a too-short checkout that Beds24 would reject at booking time.
+  const checkInMinStay = days.find((d) => d.date === checkIn)?.minStay ?? 1;
+  const minCheckoutDate = checkIn ? addDays(checkIn, checkInMinStay) : null;
+
   function handleDayClick(day: DayAvailability) {
     if (day.status !== "available") return;
     if (!checkIn || (checkIn && checkOut) || day.date <= checkIn) {
       setCheckIn(day.date);
       setCheckOut("");
-    } else {
+    } else if (minCheckoutDate === null || day.date >= minCheckoutDate) {
       setCheckOut(day.date);
     }
   }
@@ -127,10 +141,13 @@ export default function BookingWidget({
             type="date"
             required
             value={checkOut}
-            min={checkIn || new Date().toISOString().slice(0, 10)}
+            min={minCheckoutDate || checkIn || new Date().toISOString().slice(0, 10)}
             onChange={(e) => setCheckOut(e.target.value)}
             className="rounded-lg border border-border px-3 py-2"
           />
+          {checkIn && checkInMinStay > 1 && (
+            <span className="text-xs text-muted">{formatMinStayHint(checkInMinStay, locale)}</span>
+          )}
         </label>
         <div className="flex gap-3 sm:col-span-1">
           <label className="flex flex-1 flex-col gap-1 text-sm">
@@ -246,6 +263,13 @@ export default function BookingWidget({
             const isBandMember = inRange || isRangeStart || isRangeEnd;
             const isBestValue =
               !isFull && day.price !== null && minAvailablePrice !== null && day.price === minAvailablePrice;
+            const isBelowMinStay =
+              !isFull &&
+              Boolean(checkIn) &&
+              !checkOut &&
+              minCheckoutDate !== null &&
+              day.date > checkIn &&
+              day.date < minCheckoutDate;
             const weekday = (leadingBlanks + i) % 7;
             const isWeekend = weekday >= 5;
 
@@ -253,20 +277,22 @@ export default function BookingWidget({
               <button
                 key={day.date}
                 type="button"
-                disabled={isFull}
+                disabled={isFull || isBelowMinStay}
                 onClick={() => handleDayClick(day)}
                 className={`relative flex flex-col items-center gap-1 border-2 px-1 py-3 text-xs transition ${
                   isBandMember ? "rounded-none border-transparent" : "rounded-xl"
                 } ${isRangeStart ? "rounded-l-xl" : ""} ${isRangeEnd ? "rounded-r-xl" : ""} ${
                   isFull
                     ? "cursor-not-allowed border-transparent bg-rose-50/70 text-rose-300 line-through decoration-rose-300"
-                    : isSelected
-                      ? "border-transparent bg-accent font-semibold text-accent-foreground shadow-md shadow-accent/30"
-                      : inRange
-                        ? "border-transparent bg-accent-soft text-foreground"
-                        : isBestValue
-                          ? "border-price-good bg-price-good-soft hover:brightness-95"
-                          : `border-transparent hover:border-border ${isWeekend ? "bg-surface" : ""}`
+                    : isBelowMinStay
+                      ? "cursor-not-allowed border-transparent text-muted/50"
+                      : isSelected
+                        ? "border-transparent bg-accent font-semibold text-accent-foreground shadow-md shadow-accent/30"
+                        : inRange
+                          ? "border-transparent bg-accent-soft text-foreground"
+                          : isBestValue
+                            ? "border-price-good bg-price-good-soft hover:brightness-95"
+                            : `border-transparent hover:border-border ${isWeekend ? "bg-surface" : ""}`
                 }`}
               >
                 {isBestValue && !isSelected && (
