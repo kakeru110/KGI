@@ -91,6 +91,21 @@ page still creates bookings on its own), but the webhook is the more
 reliable path and should be configured before relying on this for real
 payments.
 
+## Contact form
+
+`/[locale]/contact` sends inquiries by email via `src/lib/email/client.ts`,
+using the property owner's own Gmail account over SMTP (an app password,
+not a third-party email API) so it works without owning a custom domain.
+
+- `POST /api/contact` — validates the form, then emails
+  `BUSINESS_INFO.email` (`src/lib/business-info.ts`) with the guest's
+  message; `replyTo` is set to the guest's address so replying goes
+  straight to them.
+
+Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` in `.env.local` — see
+`env.example` for how to generate an app password. Without both set, the
+form shows an error instead of silently failing.
+
 ## Booking flow
 
 ```
@@ -116,7 +131,8 @@ Guest picks dates/guests
 - `/tokushoho`: legal disclosure page (Japan's Act on Specified
   Commercial Transactions) — **the business details in
   `src/lib/business-info.ts` are still empty placeholders**, see below.
-- `/rooms`, `/gallery`, `/access`, `/faq`.
+- `/rooms`, `/gallery`, `/access`, `/faq`, `/contact` (emails inquiries
+  to the property owner, see above).
 - Japanese (`/ja`) and English (`/en`) locales.
 - Mobile-first, with a sticky bottom CTA bar.
 

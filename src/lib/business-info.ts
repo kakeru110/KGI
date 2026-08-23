@@ -16,5 +16,5 @@ export const BUSINESS_INFO = {
   representativeName: "瀬野尾翔",
   address: "東京都港区高輪4丁目21-29",
   phone: "",
-  email: "",
+  email: "cryptomanagegodo@gmail.com",
 };

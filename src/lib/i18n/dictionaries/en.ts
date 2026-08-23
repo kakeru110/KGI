@@ -20,6 +20,7 @@ const en: Dictionary = {
     checkAvailability: "Check Availability",
     policy: "Cancellation Policy",
     tokushoho: "Legal Disclosure",
+    contact: "Contact",
   },
   hero: {
     title: "Kamakura Gate Inn",
@@ -270,6 +271,17 @@ const en: Dictionary = {
     notPaidHeading: "We couldn't confirm your payment",
     notPaidBody: "Please try the booking process again.",
     backToTop: "Back to home",
+  },
+  contact: {
+    heading: "Contact Us",
+    intro: "If you have any questions or requests, please feel free to reach out using the form below.",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    submit: "Send",
+    submitting: "Sending…",
+    success: "Your message has been sent. Thank you for reaching out.",
+    errorGeneric: "Something went wrong. Please try again in a moment.",
   },
   language: {
     ja: "日本語",

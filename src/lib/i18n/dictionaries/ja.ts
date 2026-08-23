@@ -20,6 +20,7 @@ const ja: Dictionary = {
     checkAvailability: "空室・料金を確認",
     policy: "キャンセルポリシー",
     tokushoho: "特定商取引法に基づく表記",
+    contact: "お問い合わせ",
   },
   hero: {
     title: "Kamakura Gate Inn",
@@ -268,6 +269,17 @@ const ja: Dictionary = {
     notPaidHeading: "決済が確認できませんでした",
     notPaidBody: "お手数ですが、もう一度予約手続きをお試しください。",
     backToTop: "トップページへ戻る",
+  },
+  contact: {
+    heading: "お問い合わせ",
+    intro: "ご質問やご要望がございましたら、下記フォームよりお気軽にお問い合わせください。",
+    name: "お名前",
+    email: "メールアドレス",
+    message: "お問い合わせ内容",
+    submit: "送信する",
+    submitting: "送信中…",
+    success: "お問い合わせを送信しました。ご連絡ありがとうございます。",
+    errorGeneric: "送信に失敗しました。時間をおいて再度お試しください。",
   },
   language: {
     ja: "日本語",

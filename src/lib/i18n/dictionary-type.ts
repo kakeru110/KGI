@@ -17,6 +17,7 @@ export type Dictionary = {
     checkAvailability: string;
     policy: string;
     tokushoho: string;
+    contact: string;
   };
   hero: {
     title: string;
@@ -191,6 +192,17 @@ export type Dictionary = {
     notPaidHeading: string;
     notPaidBody: string;
     backToTop: string;
+  };
+  contact: {
+    heading: string;
+    intro: string;
+    name: string;
+    email: string;
+    message: string;
+    submit: string;
+    submitting: string;
+    success: string;
+    errorGeneric: string;
   };
   language: {
     ja: string;
