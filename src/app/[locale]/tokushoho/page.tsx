@@ -29,7 +29,10 @@ export default async function TokushohoPage({
     { label: dict.tokushoho.labels.price, value: dict.tokushoho.priceNote },
     {
       label: dict.tokushoho.labels.additionalFees,
-      value: `${dict.results.cleaningFee}: ${formatCurrency(PROPERTY_CONFIG.cleaningFee)}`,
+      value:
+        PROPERTY_CONFIG.cleaningFee > 0
+          ? `${dict.results.cleaningFee}: ${formatCurrency(PROPERTY_CONFIG.cleaningFee)}`
+          : dict.tokushoho.noAdditionalFees,
     },
     { label: dict.tokushoho.labels.paymentMethods, value: dict.tokushoho.paymentMethodsValue },
     { label: dict.tokushoho.labels.paymentTiming, value: dict.policy.paymentBody },

@@ -256,6 +256,7 @@ const ja: Dictionary = {
     },
     priceNote: "日程・人数により変動します。予約画面にてご確認いただけます。",
     paymentMethodsValue: "クレジットカード（Visa / Mastercard / American Express / JCB）",
+    noAdditionalFees: "なし",
     disclosureOnRequest: "ご請求があれば遅滞なく開示いたします。",
     phoneNotAvailable: "メールにてお問い合わせください。",
   },

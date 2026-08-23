@@ -29,7 +29,9 @@ export default function PriceBreakdown({
     ...(offer.extraGuestFee > 0
       ? [{ label: dict.results.extraGuestFee, value: offer.extraGuestFee, Icon: UsersRound }]
       : []),
-    { label: dict.results.cleaningFee, value: offer.cleaningFee, Icon: Sparkles },
+    ...(offer.cleaningFee > 0
+      ? [{ label: dict.results.cleaningFee, value: offer.cleaningFee, Icon: Sparkles }]
+      : []),
   ];
 
   return (

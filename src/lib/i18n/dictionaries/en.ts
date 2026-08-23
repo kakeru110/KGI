@@ -258,6 +258,7 @@ const en: Dictionary = {
     },
     priceNote: "Varies by dates and number of guests - shown on the booking page.",
     paymentMethodsValue: "Credit card (Visa / Mastercard / American Express / JCB)",
+    noAdditionalFees: "None",
     disclosureOnRequest: "Disclosed without delay upon request.",
     phoneNotAvailable: "Please contact us by email.",
   },

@@ -96,11 +96,19 @@ export default function BookingWidget({
   const checkInMinStay = days.find((d) => d.date === checkIn)?.minStay ?? 1;
   const minCheckoutDate = checkIn ? addDays(checkIn, checkInMinStay) : null;
 
+  /** Default checkout: the earliest date that satisfies checkIn's minStay, if it's actually bookable. */
+  function autoCheckout(checkInDate: string): string {
+    const minStay = days.find((d) => d.date === checkInDate)?.minStay ?? 1;
+    const nextDate = addDays(checkInDate, minStay);
+    const nextDay = days.find((d) => d.date === nextDate);
+    return nextDay?.status === "available" ? nextDate : "";
+  }
+
   function handleDayClick(day: DayAvailability) {
     if (day.status !== "available") return;
     if (!checkIn || (checkIn && checkOut) || day.date <= checkIn) {
       setCheckIn(day.date);
-      setCheckOut("");
+      setCheckOut(autoCheckout(day.date));
     } else if (minCheckoutDate === null || day.date >= minCheckoutDate) {
       setCheckOut(day.date);
     }
@@ -131,7 +139,10 @@ export default function BookingWidget({
             required
             value={checkIn}
             min={new Date().toISOString().slice(0, 10)}
-            onChange={(e) => setCheckIn(e.target.value)}
+            onChange={(e) => {
+              setCheckIn(e.target.value);
+              setCheckOut(autoCheckout(e.target.value));
+            }}
             className="rounded-lg border border-border px-3 py-2"
           />
         </label>

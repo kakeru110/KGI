@@ -13,6 +13,8 @@ export const PROPERTY_CONFIG = {
   maxGuests: 6,
   baseOccupancy: 3,
   extraGuestFeePerNight: 3000,
-  cleaningFee: 7200,
+  // Airbnb doesn't charge guests a separate cleaning fee for this listing,
+  // so direct bookings match that rather than adding one on top.
+  cleaningFee: 0,
   currency: "JPY" as const,
 };

@@ -179,6 +179,7 @@ export type Dictionary = {
     };
     priceNote: string;
     paymentMethodsValue: string;
+    noAdditionalFees: string;
     disclosureOnRequest: string;
     phoneNotAvailable: string;
   };
