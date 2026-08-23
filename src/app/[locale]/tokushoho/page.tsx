@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
@@ -28,18 +30,23 @@ export default async function TokushohoPage({
   const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale;
   const dict = getDictionary(locale);
 
-  const rows: { label: string; value: string }[] = [
+  const contactFormLink = (
+    <Link href={`/${locale}/contact`} className="text-accent underline">
+      {dict.tokushoho.contactViaForm}
+    </Link>
+  );
+
+  const rows: { label: string; value: ReactNode }[] = [
     { label: dict.tokushoho.labels.operatorName, value: BUSINESS_INFO.operatorName || MISSING },
     { label: dict.tokushoho.labels.representativeName, value: BUSINESS_INFO.representativeName || MISSING },
     { label: dict.tokushoho.labels.businessPermitNumber, value: BUSINESS_INFO.businessPermitNumber || MISSING },
     // Address/phone are disclosed on request rather than shown directly -
-    // see the comment in business-info.ts for why.
+    // see the comment in business-info.ts for why. Phone and email both
+    // direct to the contact form instead of showing a number/address
+    // directly, per the site owner's preference.
     { label: dict.tokushoho.labels.address, value: dict.tokushoho.disclosureOnRequest },
-    {
-      label: dict.tokushoho.labels.phone,
-      value: BUSINESS_INFO.phone || dict.tokushoho.phoneNotAvailable,
-    },
-    { label: dict.tokushoho.labels.email, value: BUSINESS_INFO.email || MISSING },
+    { label: dict.tokushoho.labels.phone, value: contactFormLink },
+    { label: dict.tokushoho.labels.email, value: contactFormLink },
     { label: dict.tokushoho.labels.price, value: dict.tokushoho.priceNote },
     {
       label: dict.tokushoho.labels.additionalFees,

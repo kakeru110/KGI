@@ -350,7 +350,7 @@ const en: Dictionary = {
     paymentMethodsValue: "Credit card (Visa / Mastercard / American Express / JCB)",
     noAdditionalFees: "None",
     disclosureOnRequest: "Disclosed without delay upon request.",
-    phoneNotAvailable: "Please contact us by email.",
+    contactViaForm: "Please contact us using our inquiry form",
   },
   confirm: {
     verifying: "Confirming your payment…",

@@ -208,7 +208,7 @@ export type Dictionary = {
     paymentMethodsValue: string;
     noAdditionalFees: string;
     disclosureOnRequest: string;
-    phoneNotAvailable: string;
+    contactViaForm: string;
   };
   confirm: {
     verifying: string;

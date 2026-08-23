@@ -346,7 +346,7 @@ const ja: Dictionary = {
     paymentMethodsValue: "クレジットカード（Visa / Mastercard / American Express / JCB）",
     noAdditionalFees: "なし",
     disclosureOnRequest: "ご請求があれば遅滞なく開示いたします。",
-    phoneNotAvailable: "メールにてお問い合わせください。",
+    contactViaForm: "お問い合わせフォームよりご連絡ください",
   },
   confirm: {
     verifying: "決済を確認しています…",
