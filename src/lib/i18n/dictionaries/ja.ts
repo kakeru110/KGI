@@ -293,6 +293,7 @@ const ja: Dictionary = {
     labels: {
       operatorName: "事業者名",
       representativeName: "運営責任者",
+      businessPermitNumber: "営業許可番号",
       address: "所在地",
       phone: "電話番号",
       email: "メールアドレス",

@@ -17,4 +17,5 @@ export const BUSINESS_INFO = {
   address: "東京都港区高輪4丁目21-29",
   phone: "",
   email: "cryptomanagegodo@gmail.com",
+  businessPermitNumber: "M140059694",
 };

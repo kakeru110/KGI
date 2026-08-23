@@ -31,6 +31,7 @@ export default async function TokushohoPage({
   const rows: { label: string; value: string }[] = [
     { label: dict.tokushoho.labels.operatorName, value: BUSINESS_INFO.operatorName || MISSING },
     { label: dict.tokushoho.labels.representativeName, value: BUSINESS_INFO.representativeName || MISSING },
+    { label: dict.tokushoho.labels.businessPermitNumber, value: BUSINESS_INFO.businessPermitNumber || MISSING },
     // Address/phone are disclosed on request rather than shown directly -
     // see the comment in business-info.ts for why.
     { label: dict.tokushoho.labels.address, value: dict.tokushoho.disclosureOnRequest },

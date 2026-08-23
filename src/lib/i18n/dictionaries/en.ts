@@ -295,6 +295,7 @@ const en: Dictionary = {
     labels: {
       operatorName: "Operator name",
       representativeName: "Representative",
+      businessPermitNumber: "Business Permit Number",
       address: "Address",
       phone: "Phone number",
       email: "Email address",

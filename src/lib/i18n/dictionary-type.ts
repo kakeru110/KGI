@@ -183,6 +183,7 @@ export type Dictionary = {
     labels: {
       operatorName: string;
       representativeName: string;
+      businessPermitNumber: string;
       address: string;
       phone: string;
       email: string;
