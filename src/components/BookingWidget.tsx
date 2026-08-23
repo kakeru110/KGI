@@ -241,6 +241,10 @@ export default function BookingWidget({
           </span>
           <span className="ml-auto flex items-center gap-3 text-muted">
             <span className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full border border-price-good/50 bg-price-good-soft" />
+              {dict.availability.legendAvailable}
+            </span>
+            <span className="flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-price-good" />
               {dict.availability.bestValue}
             </span>
@@ -267,7 +271,7 @@ export default function BookingWidget({
           {Array.from({ length: leadingBlanks }).map((_, i) => (
             <div key={`blank-${i}`} />
           ))}
-          {days.map((day, i) => {
+          {days.map((day) => {
             const isFull = day.status !== "available";
             const hasRange = Boolean(checkIn && checkOut);
             const isSelected = day.date === checkIn || day.date === checkOut;
@@ -284,8 +288,6 @@ export default function BookingWidget({
               minCheckoutDate !== null &&
               day.date > checkIn &&
               day.date < minCheckoutDate;
-            const weekday = (leadingBlanks + i) % 7;
-            const isWeekend = weekday >= 5;
 
             return (
               <button
@@ -297,16 +299,16 @@ export default function BookingWidget({
                   isBandMember ? "rounded-none border-transparent" : "rounded-xl"
                 } ${isRangeStart ? "rounded-l-xl" : ""} ${isRangeEnd ? "rounded-r-xl" : ""} ${
                   isFull
-                    ? "cursor-not-allowed border-transparent bg-rose-50/70 text-rose-300 line-through decoration-rose-300"
+                    ? "cursor-not-allowed border-rose-100 bg-rose-50 text-rose-400 line-through decoration-rose-300"
                     : isBelowMinStay
-                      ? "cursor-not-allowed border-transparent text-muted/50"
+                      ? "cursor-not-allowed border-transparent bg-surface text-muted/50"
                       : isSelected
                         ? "border-transparent bg-accent font-semibold text-accent-foreground shadow-md shadow-accent/30"
                         : inRange
                           ? "border-transparent bg-accent-soft text-foreground"
                           : isBestValue
                             ? "border-price-good bg-price-good-soft hover:brightness-95"
-                            : `border-transparent hover:border-border ${isWeekend ? "bg-surface" : ""}`
+                            : "border-price-good/25 bg-price-good-soft/40 hover:border-price-good/60 hover:bg-price-good-soft"
                 }`}
               >
                 {isBestValue && !isSelected && (
@@ -314,20 +316,16 @@ export default function BookingWidget({
                     {dict.availability.bestValue}
                   </span>
                 )}
+                <span className="text-base font-medium">{Number(day.date.slice(-2))}</span>
                 <span
-                  className={`text-sm ${isWeekend && !isSelected && !inRange && !isBestValue ? "text-foreground/80" : ""}`}
-                >
-                  {Number(day.date.slice(-2))}
-                </span>
-                <span
-                  className={`text-[0.7rem] tabular-nums ${
+                  className={`text-xs tabular-nums ${
                     isFull
-                      ? ""
+                      ? "font-medium"
                       : isSelected
                         ? "font-semibold"
                         : isBestValue
                           ? "font-bold text-price-good"
-                          : "font-medium text-muted"
+                          : "font-semibold text-price-good"
                   }`}
                 >
                   {isFull ? dict.availability.legendFull : day.price ? formatCurrency(day.price) : ""}
