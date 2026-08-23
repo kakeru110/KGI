@@ -23,10 +23,7 @@ export default function Footer({ locale, dict }: { locale: Locale; dict: Diction
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-start md:justify-between">
         <div className="flex items-center gap-3">
           <Image src="/logo.png" alt="" width={40} height={40} className="h-10 w-10" />
-          <div>
-            <p className="text-base font-semibold">{dict.meta.siteName}</p>
-            <p className="mt-1 text-sm text-muted">{dict.footer.address}</p>
-          </div>
+          <p className="text-base font-semibold">{dict.meta.siteName}</p>
         </div>
         <nav className="flex flex-wrap gap-4 text-sm text-muted">
           {links.map((link) => (

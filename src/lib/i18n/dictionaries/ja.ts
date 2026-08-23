@@ -268,7 +268,6 @@ const ja: Dictionary = {
     countriesHeading: "ゲストの出身国・地域",
   },
   footer: {
-    address: "神奈川県横浜市栄区",
     poweredBy: "在庫・料金・ご予約情報はBeds24と連携しています。",
   },
   stickyCta: {

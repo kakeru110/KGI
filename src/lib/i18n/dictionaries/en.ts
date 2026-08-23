@@ -271,7 +271,6 @@ const en: Dictionary = {
     countriesHeading: "Guests have come from",
   },
   footer: {
-    address: "Sakae Ward, Yokohama, Kanagawa, Japan",
     poweredBy: "Availability, pricing, and bookings are powered by Beds24.",
   },
   stickyCta: {

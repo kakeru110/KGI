@@ -147,7 +147,6 @@ export type Dictionary = {
     countriesHeading: string;
   };
   footer: {
-    address: string;
     poweredBy: string;
   };
   stickyCta: {

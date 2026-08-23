@@ -109,7 +109,7 @@ export default async function TopPage({
         <PhotoMosaic locale={locale} dict={dict} />
       </div>
 
-      <div id="booking" className="relative z-10 mx-auto -mt-10 max-w-6xl px-4 sm:-mt-16 sm:px-6">
+      <div id="booking" className="relative z-10 mx-auto mt-6 max-w-6xl px-4 sm:-mt-16 sm:px-6">
         <BookingWidget locale={locale} dict={dict} />
       </div>
 
