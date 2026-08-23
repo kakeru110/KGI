@@ -239,6 +239,18 @@ const en: Dictionary = {
         q: "Can we stay with children?",
         a: "Yes, children are welcome.",
       },
+      {
+        q: "Can I take out the trash?",
+        a: "Trash is sorted into \"burnable,\" \"plastic,\" and \"cans/bottles/PET bottles.\" Detailed sorting instructions are provided after check-in.",
+      },
+      {
+        q: "Is there a convenience store nearby?",
+        a: "Yamazaki Shop is a 1-minute walk away (closed Sundays), and 7-Eleven is a 2-minute walk away (open daily).",
+      },
+      {
+        q: "Are there restaurants or a supermarket nearby?",
+        a: "Within a 5-6 minute walk you'll find McDonald's, CoCo Ichibanya, Starbucks, and Yakiniku DOURAKU, plus FamilyMart, Lawson, and the LIFE supermarket.",
+      },
     ],
   },
   reviews: {
