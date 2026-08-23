@@ -30,7 +30,7 @@ const ja: Dictionary = {
     size: { label: "広さ", value: "58㎡" },
     guests: { label: "最大", value: "6名" },
     stationOfuna: { label: "大船駅", value: "徒歩7分" },
-    stationKamakura: { label: "鎌倉駅", value: "約6分" },
+    stationKamakura: { label: "鎌倉駅", value: "電車で約6分" },
     wifi: { label: "Wi-Fi", value: "約820Mbps" },
   },
   searchForm: {
@@ -127,7 +127,6 @@ const ja: Dictionary = {
   access: {
     heading: "アクセス",
     lead: "JR大船駅から徒歩約7分。鎌倉駅までは電車で約6分と、鎌倉・湘南観光の拠点に最適な立地です。",
-    fromStation: "大船駅 徒歩約7分",
     note: "詳しいアクセス方法はご予約後にご案内します。",
   },
   parking: {

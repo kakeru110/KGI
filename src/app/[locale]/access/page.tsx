@@ -1,3 +1,4 @@
+import { Footprints, TrainFront } from "lucide-react";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { PROPERTY_MAP_EMBED_SRC } from "@/lib/parking";
@@ -27,13 +28,19 @@ export default async function AccessPage({
           />
         </div>
         <div className="flex flex-col justify-center gap-4">
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-2xl font-semibold">{dict.statCards.stationOfuna.value}</p>
-            <p className="text-sm text-muted">{dict.access.fromStation}</p>
+          <div className="flex items-center gap-4 rounded-2xl border border-border p-5">
+            <Footprints className="h-6 w-6 shrink-0 text-accent" strokeWidth={1.5} />
+            <div>
+              <p className="text-2xl font-semibold">{dict.statCards.stationOfuna.value}</p>
+              <p className="text-sm text-muted">{dict.statCards.stationOfuna.label}</p>
+            </div>
           </div>
-          <div className="rounded-2xl border border-border p-5">
-            <p className="text-2xl font-semibold">{dict.statCards.stationKamakura.value}</p>
-            <p className="text-sm text-muted">{dict.statCards.stationKamakura.label}</p>
+          <div className="flex items-center gap-4 rounded-2xl border border-border p-5">
+            <TrainFront className="h-6 w-6 shrink-0 text-accent" strokeWidth={1.5} />
+            <div>
+              <p className="text-2xl font-semibold">{dict.statCards.stationKamakura.value}</p>
+              <p className="text-sm text-muted">{dict.statCards.stationKamakura.label}</p>
+            </div>
           </div>
         </div>
       </div>

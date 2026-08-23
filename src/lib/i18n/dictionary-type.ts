@@ -85,7 +85,6 @@ export type Dictionary = {
   access: {
     heading: string;
     lead: string;
-    fromStation: string;
     note: string;
   };
   parking: {

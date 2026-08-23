@@ -30,7 +30,7 @@ const en: Dictionary = {
     size: { label: "Size", value: "58 sqm" },
     guests: { label: "Sleeps up to", value: "6 guests" },
     stationOfuna: { label: "Ofuna Station", value: "7 min walk" },
-    stationKamakura: { label: "Kamakura Station", value: "~6 min" },
+    stationKamakura: { label: "Kamakura Station", value: "~6 min by train" },
     wifi: { label: "Wi-Fi", value: "~820 Mbps" },
   },
   searchForm: {
@@ -128,7 +128,6 @@ const en: Dictionary = {
   access: {
     heading: "Access",
     lead: "A 7-minute walk from JR Ofuna Station. Kamakura Station is about 6 minutes by train, making this an ideal base for sightseeing in Kamakura and Shonan.",
-    fromStation: "7-minute walk from Ofuna Station",
     note: "Detailed directions will be sent after booking.",
   },
   parking: {
