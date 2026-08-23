@@ -18,6 +18,7 @@ export type Dictionary = {
     policy: SeoEntry;
     tokushoho: SeoEntry;
     contact: SeoEntry;
+    privacy: SeoEntry;
   };
   nav: {
     top: string;
@@ -33,6 +34,7 @@ export type Dictionary = {
     policy: string;
     tokushoho: string;
     contact: string;
+    privacy: string;
   };
   hero: {
     title: string;
@@ -176,6 +178,14 @@ export type Dictionary = {
     paymentBody: string;
     contactHeading: string;
     contactBody: string;
+  };
+  privacy: {
+    heading: string;
+    intro: string;
+    sections: { heading: string; body: string }[];
+    contactHeading: string;
+    revisionHeading: string;
+    revisionBody: string;
   };
   tokushoho: {
     heading: string;

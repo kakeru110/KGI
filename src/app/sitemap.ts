@@ -19,6 +19,7 @@ const PATHS = [
   "/policy",
   "/tokushoho",
   "/contact",
+  "/privacy",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

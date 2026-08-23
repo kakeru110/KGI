@@ -54,6 +54,11 @@ const en: Dictionary = {
       title: "Contact Us | Kamakura Gate Inn",
       description: "Questions or requests? Get in touch with Kamakura Gate Inn using the form on this page.",
     },
+    privacy: {
+      title: "Privacy Policy | Kamakura Gate Inn",
+      description:
+        "Our privacy policy: what personal information we collect, how it's shared with third parties, and how to request disclosure or deletion.",
+    },
   },
   nav: {
     top: "Home",
@@ -69,6 +74,7 @@ const en: Dictionary = {
     policy: "Cancellation Policy",
     tokushoho: "Legal Disclosure",
     contact: "Contact",
+    privacy: "Privacy Policy",
   },
   hero: {
     title: "Kamakura Gate Inn",
@@ -287,6 +293,41 @@ const en: Dictionary = {
     paymentBody: "Full payment is charged by credit card at the time of booking.",
     contactHeading: "Contact",
     contactBody: "For cancellations or changes, please use the contact details in your confirmation email.",
+  },
+  privacy: {
+    heading: "Privacy Policy",
+    intro:
+      "Kamakura Gate Inn (operated by Crypto Manage LLC, \"we\"/\"us\") sets out this Privacy Policy to properly handle guests' personal information.",
+    sections: [
+      {
+        heading: "Information We Collect",
+        body: "When you make a booking or contact us, we ask for your name, email address, and phone number. Credit card information is collected and handled directly by our payment processor (Stripe) and is never stored on our own servers.",
+      },
+      {
+        heading: "Purpose of Use",
+        body: "We use the personal information we collect solely to manage and confirm bookings, process payments, respond to inquiries, and otherwise provide a smooth stay.",
+      },
+      {
+        heading: "Third-Party Disclosure / Outsourcing",
+        body: "We share personal information, to the extent necessary, with Beds24 for booking and inventory management, Stripe for payment processing, and FormSubmit for relaying contact form messages. We do not disclose personal information to any other third party except as required by law.",
+      },
+      {
+        heading: "Cookies and Analytics",
+        body: "This site does not currently use analytics tools such as Google Analytics. If we introduce one in the future, we will update this page accordingly.",
+      },
+      {
+        heading: "Security Measures",
+        body: "We take necessary and appropriate measures to prevent the leakage, loss, or damage of personal information and to otherwise manage it securely.",
+      },
+      {
+        heading: "Requests for Disclosure, Correction, or Deletion",
+        body: "If you wish to request disclosure, correction, or deletion of your personal information, please contact us using the details below. We will respond after verifying your identity, in accordance with applicable law.",
+      },
+    ],
+    contactHeading: "Contact",
+    revisionHeading: "Revisions",
+    revisionBody:
+      "This policy may be revised without prior notice. Any revised policy takes effect once posted on this page. (Last updated: August 23, 2026)",
   },
   tokushoho: {
     heading: "Legal Disclosure (Act on Specified Commercial Transactions)",
