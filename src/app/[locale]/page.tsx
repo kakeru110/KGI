@@ -5,9 +5,9 @@ import { getReviews } from "@/lib/beds24/reviews";
 import { getPropertyStats } from "@/lib/beds24/stats";
 import { formatFromPrice } from "@/lib/i18n/format";
 import Hero from "@/components/Hero";
+import PhotoMosaic from "@/components/PhotoMosaic";
 import BookingWidget from "@/components/BookingWidget";
 import StatCards from "@/components/StatCards";
-import PhotoGrid from "@/components/PhotoGrid";
 import FacilityIntro from "@/components/FacilityIntro";
 import AmenitiesList from "@/components/AmenitiesList";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -35,13 +35,16 @@ export default async function TopPage({
     <>
       <Hero dict={dict} />
 
+      <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-6">
+        <PhotoMosaic locale={locale} dict={dict} />
+      </div>
+
       <div id="booking" className="relative z-10 mx-auto -mt-10 max-w-6xl px-4 sm:-mt-16 sm:px-6">
         <BookingWidget locale={locale} dict={dict} />
       </div>
 
       <div className="mx-auto max-w-6xl space-y-16 px-4 py-16 sm:space-y-20 sm:px-6 sm:py-20">
         <StatCards dict={dict} />
-        <PhotoGrid locale={locale} dict={dict} />
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
         {stats && <TrackRecord locale={locale} dict={dict} stats={stats} />}

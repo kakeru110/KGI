@@ -214,7 +214,7 @@ export default function BookingWidget({
               {dict.availability.bestValue}
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-border" />
+              <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
               {dict.availability.legendFull}
             </span>
           </span>
@@ -259,7 +259,7 @@ export default function BookingWidget({
                   isBandMember ? "rounded-none border-transparent" : "rounded-xl"
                 } ${isRangeStart ? "rounded-l-xl" : ""} ${isRangeEnd ? "rounded-r-xl" : ""} ${
                   isFull
-                    ? "cursor-not-allowed border-transparent text-border/70 line-through decoration-border"
+                    ? "cursor-not-allowed border-transparent bg-rose-50/70 text-rose-300 line-through decoration-rose-300"
                     : isSelected
                       ? "border-transparent bg-accent font-semibold text-accent-foreground shadow-md shadow-accent/30"
                       : inRange
