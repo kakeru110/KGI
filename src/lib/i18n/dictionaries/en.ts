@@ -313,7 +313,7 @@ const en: Dictionary = {
       },
       {
         heading: "Cookies and Analytics",
-        body: "This site does not currently use analytics tools such as Google Analytics. If we introduce one in the future, we will update this page accordingly.",
+        body: "This site uses Google Analytics to help improve our service, which uses cookies to collect visit data. This data does not identify you personally and is handled in accordance with Google's own privacy policy. You can opt out of this collection by disabling cookies in your browser settings.",
       },
       {
         heading: "Security Measures",
