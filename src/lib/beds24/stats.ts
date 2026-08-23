@@ -3,13 +3,15 @@ import { beds24Fetch, USE_MOCK_DATA } from "./client";
 import { PROPERTY_ID } from "./property-config";
 import type { Locale } from "../i18n/config";
 
+export type CountryStat = { code: string; name: string };
+
 export type PropertyStats = {
   totalGroups: number;
   totalGuests: number;
   avgGroupSize: number;
   childRatePercent: number;
-  /** Localized country names, guests-from-most-first, deduped. */
-  countries: string[];
+  /** ISO code + localized name, guests-from-most-first, deduped. */
+  countries: CountryStat[];
 };
 
 type BookingRecord = {
@@ -80,7 +82,7 @@ export async function getPropertyStats(locale: Locale): Promise<PropertyStats | 
   const regionNames = new Intl.DisplayNames([locale === "ja" ? "ja" : "en"], { type: "region" });
   const countries = [...countryCounts.entries()]
     .sort((a, b) => b[1] - a[1])
-    .map(([code]) => regionNames.of(code) ?? code);
+    .map(([code]) => ({ code, name: regionNames.of(code) ?? code }));
 
   const totalGuests = totalAdults + totalChildren;
 
