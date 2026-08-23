@@ -309,7 +309,7 @@ const en: Dictionary = {
       },
       {
         heading: "Third-Party Disclosure / Outsourcing",
-        body: "We share personal information, to the extent necessary, with Beds24 for booking and inventory management, Stripe for payment processing, and FormSubmit for relaying contact form messages. We do not disclose personal information to any other third party except as required by law.",
+        body: "We share personal information, to the extent necessary, with Beds24 for booking and inventory management, Stripe for payment processing, FormSubmit for relaying contact form messages, and Good Neighbors Inc. (株式会社グッドネイバーズ) for sending check-in instructions (such as door lock codes). We do not disclose personal information to any other third party except as required by law.",
       },
       {
         heading: "Cookies and Analytics",
