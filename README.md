@@ -93,18 +93,16 @@ payments.
 
 ## Contact form
 
-`/[locale]/contact` sends inquiries by email via `src/lib/email/client.ts`,
-using the property owner's own Gmail account over SMTP (an app password,
-not a third-party email API) so it works without owning a custom domain.
+`/[locale]/contact` (`src/components/ContactForm.tsx`) posts straight to
+[FormSubmit](https://formsubmit.co)'s AJAX endpoint from the browser -
+`https://formsubmit.co/ajax/{BUSINESS_INFO.email}` - which relays the
+message to `BUSINESS_INFO.email` (`src/lib/business-info.ts`) by email. No
+API route, backend code, or env vars of our own are needed; `_replyto` is
+set to the guest's address so replying goes straight to them.
 
-- `POST /api/contact` — validates the form, then emails
-  `BUSINESS_INFO.email` (`src/lib/business-info.ts`) with the guest's
-  message; `replyTo` is set to the guest's address so replying goes
-  straight to them.
-
-Set `GMAIL_USER` and `GMAIL_APP_PASSWORD` in `.env.local` — see
-`env.example` for how to generate an app password. Without both set, the
-form shows an error instead of silently failing.
+**One-time setup**: FormSubmit emails the recipient an "activate this
+form" confirmation link the first time a submission comes in for a given
+address - inquiries won't actually arrive until that link is clicked.
 
 ## Booking flow
 

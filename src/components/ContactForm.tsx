@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
+import { BUSINESS_INFO } from "@/lib/business-info";
 
 export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [name, setName] = useState("");
@@ -13,13 +14,30 @@ export default function ContactForm({ dict }: { dict: Dictionary }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (company) {
+      // Honeypot tripped - pretend success so bots don't learn to skip the field.
+      setStatus("success");
+      return;
+    }
     setSubmitting(true);
     setStatus("idle");
     try {
-      const res = await fetch("/api/contact", {
+      // FormSubmit relays this straight to BUSINESS_INFO.email - no backend
+      // of our own needed. The recipient has to click the one-time
+      // "activate this form" link FormSubmit emails on the very first
+      // submission before delivery actually starts working.
+      const res = await fetch(`https://formsubmit.co/ajax/${BUSINESS_INFO.email}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, company }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `【お問い合わせ】${name}様より`,
+          _replyto: email,
+          _captcha: "false",
+          _template: "table",
+        }),
       });
       if (!res.ok) {
         setStatus("error");
