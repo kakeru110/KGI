@@ -32,11 +32,6 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "大船駅西口から徒歩5〜10分",
     accessEn: "5–10 min walk from Ofuna Station (west exit)",
     image: "/photos/sightseeing/ofuna-kannon.jpg",
-    credit: {
-      author: "Urashimataro",
-      license: "Public domain",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Ofuna-Kannon.jpg",
-    },
   },
   {
     name: "鶴岡八幡宮",
@@ -55,11 +50,6 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "鎌倉駅から江ノ電で長谷駅(約4分)、徒歩約7分",
     accessEn: "From Kamakura Station, Enoden train to Hase Station (~4 min), then ~7 min walk",
     image: "/photos/sightseeing/kotokuin-daibutsu.jpg",
-    credit: {
-      author: "Alexandar Vujadinovic",
-      license: "CC BY-SA 4.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Great_Buddha_of_Kamakura.jpg",
-    },
   },
   {
     name: "由比ヶ浜",
@@ -69,11 +59,6 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "鎌倉駅から江ノ電で由比ヶ浜駅まで約3分",
     accessEn: "~3 min by Enoden train from Kamakura Station",
     image: "/photos/sightseeing/yuigahama.jpg",
-    credit: {
-      author: "Klaasjeoranje",
-      license: "CC BY-SA 4.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Kamakura_Yuigahama_Beach_2024.jpg",
-    },
   },
   {
     name: "小町通り",
@@ -122,11 +107,15 @@ export const SIGHTSEEING_SPOTS: SightseeingSpot[] = [
     accessJa: "大船駅からJR東海道線で横浜駅まで約18分(乗り換えなし)、みなとみらい線へ乗り換え",
     accessEn: "~18 min direct by JR Tokaido Line from Ofuna to Yokohama Station, then transfer to the Minatomirai Line",
     image: "/photos/sightseeing/yokohama-redbrick.jpg",
-    credit: {
-      author: "Kakidai",
-      license: "CC BY-SA 3.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Yokohama_Red_Brick_Warehouse_2012.JPG",
-    },
+  },
+  {
+    name: "江ノ電",
+    area: "fujisawaEnoshima",
+    descJa: "海沿いを走るローカル線。腰越の併用軌道など、車窓風景が人気です。",
+    descEn: "A scenic local railway that runs along the coast - the street-level crossing at Koshigoe is a favorite photo spot.",
+    accessJa: "鎌倉駅・藤沢駅から乗車可能",
+    accessEn: "Board from Kamakura Station or Fujisawa Station",
+    image: "/photos/sightseeing/enoshima-train.jpg",
   },
 ];
 

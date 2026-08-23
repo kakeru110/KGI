@@ -25,6 +25,8 @@ export const photos: Photo[] = [
   { id: "bathroom-2", category: "bathroom", src: "/photos/bathroom-2.jpg" },
   { id: "bathroom-3", category: "bathroom", src: "/photos/bathroom-3.jpg" },
   { id: "exterior-2", category: "exterior", src: "/photos/exterior-2.jpg" },
+  { id: "living-3", category: "living", src: "/photos/living-3.jpg" },
+  { id: "kitchen-3", category: "kitchen", src: "/photos/kitchen-3.jpg" },
 ];
 
 export function getTopPhotos(count = 5): Photo[] {
