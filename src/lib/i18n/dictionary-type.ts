@@ -137,6 +137,7 @@ export type Dictionary = {
     ratingVeryGood: string;
     ratingGood: string;
     ratingPleasant: string;
+    outOf10: string;
   };
   trackRecord: {
     heading: string;

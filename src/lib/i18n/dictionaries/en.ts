@@ -261,6 +261,7 @@ const en: Dictionary = {
     ratingVeryGood: "Very Good",
     ratingGood: "Good",
     ratingPleasant: "Pleasant",
+    outOf10: "out of 10",
   },
   trackRecord: {
     heading: "Our Track Record",

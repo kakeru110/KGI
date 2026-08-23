@@ -258,6 +258,7 @@ const ja: Dictionary = {
     ratingVeryGood: "素晴らしい",
     ratingGood: "良い",
     ratingPleasant: "普通",
+    outOf10: "10点満点中",
   },
   trackRecord: {
     heading: "宿泊実績",
