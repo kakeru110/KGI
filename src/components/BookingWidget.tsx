@@ -96,12 +96,15 @@ export default function BookingWidget({
   const checkInMinStay = days.find((d) => d.date === checkIn)?.minStay ?? 1;
   const minCheckoutDate = checkIn ? addDays(checkIn, checkInMinStay) : null;
 
-  /** Default checkout: the earliest date that satisfies checkIn's minStay, if it's actually bookable. */
+  /**
+   * Default checkout: the earliest date that satisfies checkIn's minStay.
+   * Pre-filled even when that date turns out to be full - a checkout date
+   * has to be chosen either way, so this just saves a click in the common
+   * case and still leaves it editable when it's not what the guest wants.
+   */
   function autoCheckout(checkInDate: string): string {
     const minStay = days.find((d) => d.date === checkInDate)?.minStay ?? 1;
-    const nextDate = addDays(checkInDate, minStay);
-    const nextDay = days.find((d) => d.date === nextDate);
-    return nextDay?.status === "available" ? nextDate : "";
+    return addDays(checkInDate, minStay);
   }
 
   function handleDayClick(day: DayAvailability) {
