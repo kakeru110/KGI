@@ -1,7 +1,8 @@
+import * as Flags from "country-flag-icons/react/3x2";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { PropertyStats } from "@/lib/beds24/stats";
-import { countryFlagEmoji, formatGroupsCount, formatGuestsCount } from "@/lib/i18n/format";
+import { formatGroupsCount, formatGuestsCount } from "@/lib/i18n/format";
 
 export default function TrackRecord({
   locale,
@@ -34,17 +35,18 @@ export default function TrackRecord({
         <div className="mt-6">
           <p className="text-sm font-medium text-muted">{dict.trackRecord.countriesHeading}</p>
           <ul className="mt-3 flex flex-wrap gap-2">
-            {stats.countries.map((country) => (
-              <li
-                key={country.code}
-                className="flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-sm"
-              >
-                <span className="text-base leading-none" aria-hidden>
-                  {countryFlagEmoji(country.code)}
-                </span>
-                <span>{country.name}</span>
-              </li>
-            ))}
+            {stats.countries.map((country) => {
+              const Flag = Flags[country.code as keyof typeof Flags];
+              return (
+                <li
+                  key={country.code}
+                  className="flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-sm"
+                >
+                  {Flag && <Flag title={country.name} className="h-3.5 w-auto rounded-[2px]" />}
+                  <span>{country.name}</span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

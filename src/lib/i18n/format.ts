@@ -60,10 +60,3 @@ function formatDateWithWeekday(date: string, locale: Locale): string {
 export function formatDateRangeLabel(checkIn: string, checkOut: string, locale: Locale): string {
   return `${formatDateWithWeekday(checkIn, locale)} → ${formatDateWithWeekday(checkOut, locale)}`;
 }
-
-/** ISO 3166-1 alpha-2 code -> flag emoji, via Unicode regional indicator symbols. */
-export function countryFlagEmoji(code: string): string {
-  return [...code.toUpperCase()]
-    .map((char) => String.fromCodePoint(0x1f1e6 + char.charCodeAt(0) - 65))
-    .join("");
-}
