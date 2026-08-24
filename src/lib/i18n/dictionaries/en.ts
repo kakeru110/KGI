@@ -251,6 +251,50 @@ const en: Dictionary = {
         q: "Are there restaurants or a supermarket nearby?",
         a: "Within a 5-6 minute walk you'll find McDonald's, CoCo Ichibanya, Starbucks, and Yakiniku DOURAKU, plus FamilyMart, Lawson, and the LIFE supermarket.",
       },
+      {
+        q: "Is smoking allowed?",
+        a: "The property is non-smoking throughout.",
+      },
+      {
+        q: "Is Wi-Fi available?",
+        a: "Yes, free high-speed Wi-Fi (about 820 Mbps) is available.",
+      },
+      {
+        q: "Can we use the kitchen freely?",
+        a: "Yes, the kitchen is available for you to use freely.",
+      },
+      {
+        q: "Is it a whole-house rental? Will we share the property with other guests?",
+        a: "Yes, this is a whole-house rental. Only your booked group will be staying there during your visit.",
+      },
+      {
+        q: "Are towels and toiletries provided?",
+        a: "Bath towels, face towels, and toothbrushes are provided for each guest. Hand soap, body soap, shampoo, and conditioner are also supplied.",
+      },
+      {
+        q: "Are parties or loud noise allowed?",
+        a: "This is a whole-house rental in a residential neighborhood, so we ask guests to refrain from parties, loud voices, or loud music that could disturb neighbors.",
+      },
+      {
+        q: "Can we use a BBQ or fireworks outside?",
+        a: "Outdoor space is limited, so we ask guests not to use BBQs or fireworks anywhere on the property.",
+      },
+      {
+        q: "Is early check-in or late check-out available?",
+        a: "In most cases this isn't possible, since other bookings are usually scheduled right before and after. If you'd like to request it, please contact us using our inquiry form.",
+      },
+      {
+        q: "Is there a hospital or pharmacy nearby?",
+        a: "Ofuna Station has general hospitals such as Ofuna Chuo Hospital, as well as clinics and pharmacies.",
+      },
+      {
+        q: "Is bicycle rental available?",
+        a: "There are no bicycles at the property, but rental bicycles are available at Ofuna Station.",
+      },
+      {
+        q: "Can I cancel my reservation?",
+        a: "Cancellations up to 15:00 the day before check-in are fully refunded; cancellations after that, on the day of check-in, or no-shows are non-refundable. See our Cancellation Policy page for details.",
+      },
     ],
   },
   reviews: {
