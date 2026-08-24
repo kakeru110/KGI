@@ -5,7 +5,7 @@ import "../globals.css";
 import { locales, isLocale, defaultLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_X_HANDLE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -44,19 +44,21 @@ export async function generateMetadata({
     // object (buildAlternates(locale, path)) - this default covers the
     // top page, since a layout can't see which child page is rendering.
     alternates: buildAlternates(locale, ""),
+    // No `images` on either of these: opengraph-image.tsx and
+    // twitter-image.tsx generate the share card, and file-based metadata
+    // takes priority over anything set here anyway.
     openGraph: {
       type: "website",
       siteName: dict.meta.siteName,
       title: dict.meta.title,
       description: dict.meta.description,
       locale: locale === "ja" ? "ja_JP" : "en_US",
-      images: ["/photos/living-2.jpg"],
     },
     twitter: {
       card: "summary_large_image",
       title: dict.meta.title,
       description: dict.meta.description,
-      images: ["/photos/living-2.jpg"],
+      ...(SITE_X_HANDLE ? { site: SITE_X_HANDLE, creator: SITE_X_HANDLE } : {}),
     },
     robots: { index: true, follow: true },
   };

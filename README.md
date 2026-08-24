@@ -104,6 +104,65 @@ set to the guest's address so replying goes straight to them.
 form" confirmation link the first time a submission comes in for a given
 address - inquiries won't actually arrive until that link is clicked.
 
+## Analytics, SEO and share cards
+
+### GA4 conversion tracking
+
+GA4 itself is loaded in `src/app/[locale]/layout.tsx` whenever
+`NEXT_PUBLIC_GA_ID` is set. On top of pageviews, the booking funnel sends
+three GA4 ecommerce events (`src/lib/analytics.ts` builds them,
+`src/components/AnalyticsEvent.tsx` fires them from the browser):
+
+- `view_item` on `/booking`, once a real bookable price is shown
+- `begin_checkout` on `/booking/guest-info`
+- `purchase` on `/booking/confirm`, with the Beds24 booking id as
+  `transaction_id` and the paid total as `value`
+
+Without these, GA4 can show that people arrive but not which channel
+actually produces bookings - which is the only number worth optimising.
+
+**One-time setup in GA4**: Admin > Events > mark `purchase` (and usually
+`begin_checkout`) as key events. The custom parameters the events carry
+(`check_in`, `check_out`, `nights`, `guests`) are collected either way,
+but only appear in reports once registered under Admin > Custom
+definitions.
+
+Campaign links should carry UTM parameters so the events attribute
+somewhere useful, e.g.
+`https://<domain>/ja?utm_source=twitter&utm_medium=social&utm_campaign=launch`.
+
+### Structured data
+
+- Top page: `VacationRental` with address, geo, amenities, price range and
+  (when reviews exist) `aggregateRating`, linked to the Google Business
+  Profile via `sameAs`.
+- `/faq`: `FAQPage`, built from the same dictionary entries the page
+  renders (`src/lib/structured-data.ts`).
+- `/reviews`: the property's `aggregateRating`, carrying the same `@id` as
+  the top page's entity so both describe one property. Deliberately no
+  per-review `Review` markup: Beds24's Airbnb/Booking.com review payloads
+  carry no reviewer name, and schema.org `Review` requires an `author`.
+
+### Social share cards
+
+`src/app/[locale]/opengraph-image.tsx` and `twitter-image.tsx` generate a
+1200x630 card per locale at build time (`src/lib/og-image.tsx` holds the
+actual layout): the hero photo, darkened on the left, with the property
+name, a one-line tagline (`dict.meta.ogTagline`) and the domain. The
+background is `public/og/background.jpg`, pre-cropped to 1200x630 so the
+renderer doesn't decode the 4.6MB original once per image.
+
+Japanese text needs real font data - the renderer has no system fonts - so
+the card fetches a per-string Shippori Mincho subset from Google Fonts at
+build time. The app already fetches from `fonts.googleapis.com` at build
+time via `next/font`, so this adds no new failure mode. Note that not
+every glyph exists in that face (`㎡` doesn't, for one) - check a rebuilt
+card after editing `ogTagline`.
+
+**Set `SITE_X_HANDLE` in `src/lib/site.ts`** to the property's X account
+(e.g. `"@kamakuragateinn"`) so shared links are attributed to it via
+`twitter:site`/`twitter:creator`. While it's empty those tags are omitted.
+
 ## Booking flow
 
 ```
@@ -132,6 +191,8 @@ Guest picks dates/guests
 - `/rooms`, `/gallery`, `/access`, `/faq`, `/contact` (emails inquiries
   to the property owner, see above).
 - Japanese (`/ja`) and English (`/en`) locales.
+- GA4 booking-funnel events, FAQ/property structured data, and
+  generated per-locale social share cards (see above).
 - Mobile-first, with a sticky bottom CTA bar.
 
 Photos are placeholder gradient tiles (see `src/lib/photos.ts`) — swap
@@ -148,6 +209,10 @@ in real photography before launch.
   placeholder default (free cancellation 7+ days out, 50% at 2-6 days,
   100% inside 1 day / no-show), not a business decision this code can
   make on its own.
+- **Set `SITE_X_HANDLE`** (`src/lib/site.ts`) to the property's X
+  account, so shared links carry `twitter:site`/`twitter:creator`.
+- **Mark `purchase` as a key event in GA4** (Admin > Events) - the
+  event is sent, but GA4 won't treat it as a conversion until told to.
 - **Register the Stripe webhook**: Stripe dashboard → Developers →
   Webhooks → add endpoint `https://<your-domain>/api/webhooks/stripe`
   for the `checkout.session.completed` event, then put its signing

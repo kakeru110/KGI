@@ -6,6 +6,10 @@ const ja: Dictionary = {
     title: "Kamakura Gate Inn | 大船駅徒歩7分・最大6名の一棟貸し",
     description:
       "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のプライベートステイ、Kamakura Gate Innの公式予約サイトです。",
+    ogBadge: "公式予約サイト",
+    // "㎡" is absent from Shippori Mincho, the serif this line is drawn
+    // in on the share card, so spell the unit out instead of shipping tofu.
+    ogTagline: "大船駅 徒歩7分 · 最大6名 · 58平米の一棟貸し",
   },
   seo: {
     rooms: {
