@@ -84,6 +84,12 @@ export function formatMinStayNotice(minNights: number, locale: Locale): string {
     : `This stay requires a minimum of ${minNights} night${minNights === 1 ? "" : "s"}. Please choose a later checkout date.`;
 }
 
+export function formatRecentBookingPace(count: number, days: number, locale: Locale): string {
+  return locale === "ja"
+    ? `直近${days}日間で${count.toLocaleString("ja-JP")}件のご予約をいただきました`
+    : `${count.toLocaleString("en-US")} booking${count === 1 ? "" : "s"} made in the last ${days} days`;
+}
+
 export function formatMinStayHint(minNights: number, locale: Locale): string {
   return locale === "ja" ? `この日は最低${minNights}泊からご予約いただけます。` : `A minimum of ${minNights} nights applies to this date.`;
 }

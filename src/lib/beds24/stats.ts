@@ -94,3 +94,63 @@ export async function getPropertyStats(locale: Locale): Promise<PropertyStats | 
     countries,
   };
 }
+
+export type RecentBookingPace = {
+  count: number;
+  days: number;
+};
+
+type PaceRecord = {
+  bookingTime?: string | null;
+};
+
+type PaceResponse = {
+  data: PaceRecord[];
+  pages?: { nextPageExists?: boolean };
+};
+
+/**
+ * Counts still-upcoming bookings that were made within the last `days`
+ * days - a demand-momentum signal ("X new bookings in the last 30 days")
+ * distinct from getPropertyStats' historical hosted-guest totals above.
+ *
+ * `bookingTime` is the Beds24 V2 booking-creation timestamp; like
+ * country2 above, its reliability hasn't been confirmed against real
+ * data yet (USE_MOCK_DATA is on in this repo) - confirm the field name
+ * once real credentials exist. Bookings without it are simply excluded,
+ * and if none have it at all this returns null so the UI can skip the
+ * badge rather than show a misleadingly low count.
+ */
+export async function getRecentBookingPace(days = 30): Promise<RecentBookingPace | null> {
+  if (USE_MOCK_DATA) return null;
+
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const horizonStr = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+
+  const bookings: PaceRecord[] = [];
+  let page = 1;
+
+  while (page <= 20) {
+    const response = await beds24Fetch<PaceResponse>("/bookings", {
+      query: {
+        propertyId: PROPERTY_ID,
+        arrivalFrom: todayStr,
+        arrivalTo: horizonStr,
+        status: ["confirmed", "new", "request"],
+        page,
+      },
+      revalidateSeconds: 1800,
+    });
+    bookings.push(...response.data);
+    if (!response.pages?.nextPageExists) break;
+    page++;
+  }
+
+  const withBookingTime = bookings.filter((b) => b.bookingTime);
+  if (withBookingTime.length === 0) return null;
+
+  const count = withBookingTime.filter((b) => new Date(b.bookingTime as string) >= cutoff).length;
+  return { count, days };
+}

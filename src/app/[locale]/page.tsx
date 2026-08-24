@@ -5,7 +5,7 @@ import { buildAlternates } from "@/lib/seo";
 import { SITE_URL } from "@/lib/site";
 import { getMonthAvailability } from "@/lib/beds24/availability";
 import { getReviews } from "@/lib/beds24/reviews";
-import { getPropertyStats } from "@/lib/beds24/stats";
+import { getPropertyStats, getRecentBookingPace } from "@/lib/beds24/stats";
 import { PROPERTY_CONFIG } from "@/lib/beds24/property-config";
 import { PROPERTY_COORDS, PROPERTY_MAP_LINK } from "@/lib/parking";
 import { formatFromPrice } from "@/lib/i18n/format";
@@ -49,6 +49,7 @@ export default async function TopPage({
   const toPrice = prices.length > 0 ? Math.max(...prices) : null;
   const { reviews, totalCount, averageScore } = await getReviews(locale, 6);
   const stats = await getPropertyStats(locale);
+  const recentPace = await getRecentBookingPace();
 
   // VacationRental structured data for rich results / local search - uses
   // the same GPS coordinates already shown publicly on /access and
@@ -117,7 +118,7 @@ export default async function TopPage({
         <StatCards dict={dict} />
         <FacilityIntro dict={dict} />
         <AmenitiesList dict={dict} />
-        {stats && <TrackRecord locale={locale} dict={dict} stats={stats} />}
+        {stats && <TrackRecord locale={locale} dict={dict} stats={stats} recentPace={recentPace} />}
         <ReviewsSection
           locale={locale}
           dict={dict}

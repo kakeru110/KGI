@@ -1,17 +1,19 @@
 import * as Flags from "country-flag-icons/react/3x2";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
-import type { PropertyStats } from "@/lib/beds24/stats";
-import { formatGroupsCount, formatGuestsCount } from "@/lib/i18n/format";
+import type { PropertyStats, RecentBookingPace } from "@/lib/beds24/stats";
+import { formatGroupsCount, formatGuestsCount, formatRecentBookingPace } from "@/lib/i18n/format";
 
 export default function TrackRecord({
   locale,
   dict,
   stats,
+  recentPace,
 }: {
   locale: Locale;
   dict: Dictionary;
   stats: PropertyStats;
+  recentPace?: RecentBookingPace | null;
 }) {
   const cards = [
     { label: dict.trackRecord.groupsLabel, value: formatGroupsCount(stats.totalGroups, locale) },
@@ -23,6 +25,11 @@ export default function TrackRecord({
   return (
     <section>
       <h2 className="text-2xl font-semibold sm:text-3xl">{dict.trackRecord.heading}</h2>
+      {recentPace && recentPace.count > 0 && (
+        <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent">
+          {formatRecentBookingPace(recentPace.count, recentPace.days, locale)}
+        </p>
+      )}
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {cards.map((card) => (
           <div key={card.label} className="rounded-2xl border border-border bg-surface px-4 py-5 text-center">
