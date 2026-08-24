@@ -4,6 +4,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
 import { getOffer } from "@/lib/beds24/offers";
 import { formatCurrency } from "@/lib/i18n/format";
+import { viewItemEvent } from "@/lib/analytics";
+import AnalyticsEvent from "@/components/AnalyticsEvent";
 import BookingWidget from "@/components/BookingWidget";
 import PriceBreakdown from "@/components/PriceBreakdown";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
@@ -60,6 +62,9 @@ export default async function BookingPage({
       {!hasQuery && <p className="text-sm text-muted">{dict.results.selectDates}</p>}
 
       {offer && <PriceBreakdown offer={offer} locale={locale} dict={dict} />}
+
+      {/* Top of the booking funnel: a real, bookable price was shown. */}
+      {offer?.available && <AnalyticsEvent event={viewItemEvent(offer)} />}
 
       {offer?.available && (
         <StickyMobileCTA

@@ -4,6 +4,8 @@ import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getOffer } from "@/lib/beds24/offers";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
+import { beginCheckoutEvent } from "@/lib/analytics";
+import AnalyticsEvent from "@/components/AnalyticsEvent";
 import GuestInfoForm from "@/components/GuestInfoForm";
 
 // Transactional step of the booking flow, not a page worth ranking on its
@@ -38,6 +40,10 @@ export default async function GuestInfoPage({
 
   return (
     <div className="mx-auto max-w-2xl space-y-8 px-4 py-10 sm:px-6 sm:py-14">
+      {/* Reaching this form is the start of checkout - everything before
+          it is still browsing dates. */}
+      <AnalyticsEvent event={beginCheckoutEvent(offer)} />
+
       <div className="rounded-2xl border border-border bg-surface p-5">
         <p className="font-medium">{formatDateRange(offer.checkIn, offer.checkOut)}</p>
         <p className="text-sm text-muted">
