@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
+import { buildFaqJsonLd } from "@/lib/structured-data";
+import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/FaqAccordion";
 
 export async function generateMetadata({
@@ -26,6 +28,7 @@ export default async function FaqPage({
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+      <JsonLd data={buildFaqJsonLd(dict)} />
       <FaqAccordion dict={dict} />
     </div>
   );
