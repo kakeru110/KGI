@@ -221,7 +221,7 @@ const en: Dictionary = {
       },
       {
         q: "What is the maximum number of guests?",
-        a: "Up to 6 guests. The base rate covers up to 3 guests; an extra fee per person applies from the 4th guest onward.",
+        a: "Up to 6 guests. There is no extra fee based on the number of guests.",
       },
       {
         q: "Can I store my luggage?",
@@ -237,7 +237,7 @@ const en: Dictionary = {
       },
       {
         q: "Can we stay with children?",
-        a: "Yes, children are welcome.",
+        a: "Yes, children are welcome. Children's tableware is also available.",
       },
       {
         q: "Can I take out the trash?",
@@ -253,7 +253,7 @@ const en: Dictionary = {
       },
       {
         q: "Is smoking allowed?",
-        a: "The property is non-smoking throughout.",
+        a: "The property is non-smoking throughout. To avoid disturbing neighbors, smoking on the veranda or in front of the entrance is also not allowed.",
       },
       {
         q: "Is Wi-Fi available?",
@@ -261,7 +261,7 @@ const en: Dictionary = {
       },
       {
         q: "Can we use the kitchen freely?",
-        a: "Yes, the kitchen is available for you to use freely.",
+        a: "Yes, the kitchen is available for you to use freely. It includes cooking utensils such as a frying pan, kitchen knife, and cutting board, plus a microwave and refrigerator.",
       },
       {
         q: "Is it a whole-house rental? Will we share the property with other guests?",
@@ -277,7 +277,7 @@ const en: Dictionary = {
       },
       {
         q: "Can we use a BBQ or fireworks outside?",
-        a: "Outdoor space is limited, so we ask guests not to use BBQs or fireworks anywhere on the property.",
+        a: "BBQs and fireworks are not allowed anywhere on the property, including the veranda and the area in front of the entrance.",
       },
       {
         q: "Is early check-in or late check-out available?",
