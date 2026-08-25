@@ -15,6 +15,11 @@ npm run dev
 Visit `http://localhost:3000` — it redirects to `/ja` or `/en` based on
 the browser's `Accept-Language` header.
 
+The production site is https://kamakuragateinn.com - `SITE_URL`
+(`src/lib/site.ts`) defaults to it, so canonical/hreflang/sitemap URLs are
+right even if `NEXT_PUBLIC_SITE_URL` is never set. Override that env var
+only for a deployment that should describe itself instead.
+
 Copy `env.example` to `.env.local` and fill in real credentials to use
 live data (see below). Without them, the site runs on deterministic
 dummy availability/pricing data, and the booking flow won't be able to
