@@ -6,11 +6,11 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://newfive.vercel.app";
 
 /**
- * The property's X (Twitter) account, including the leading "@" - e.g.
- * "@kamakuragateinn". Sets twitter:site/creator, which is what attributes
- * a shared link's card to the account instead of leaving it anonymous.
- *
- * Empty means no account is configured, and the tags are left out
- * entirely rather than emitted blank.
+ * The property's X (Twitter) account. The handle sets
+ * twitter:site/creator, which attributes a shared link's card to the
+ * account instead of leaving it anonymous; the profile URL goes in the
+ * property's structured-data `sameAs`, which is how a search engine knows
+ * the account and the property are the same business.
  */
-export const SITE_X_HANDLE = "";
+export const SITE_X_HANDLE = "@kamakuragateinn";
+export const SITE_X_URL = "https://x.com/kamakuragateinn";

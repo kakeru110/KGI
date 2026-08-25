@@ -3,7 +3,7 @@ import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
 import { propertyEntityId } from "@/lib/structured-data";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_X_URL } from "@/lib/site";
 import { getMonthAvailability } from "@/lib/beds24/availability";
 import { getReviews } from "@/lib/beds24/reviews";
 import { getPropertyStats } from "@/lib/beds24/stats";
@@ -66,9 +66,10 @@ export default async function TopPage({
     description: dict.meta.description,
     url: `${SITE_URL}/${locale}`,
     image: `${SITE_URL}/photos/living-2.jpg`,
-    // Links this entity to the verified Google Business Profile listing
-    // (confirmed same place ID as the /parking page's map link).
-    sameAs: [PROPERTY_MAP_LINK],
+    // The other places this same business is publicly identifiable: the
+    // verified Google Business Profile listing (confirmed same place ID as
+    // the /parking page's map link) and the property's X account.
+    sameAs: [PROPERTY_MAP_LINK, SITE_X_URL],
     address: {
       "@type": "PostalAddress",
       addressLocality: "横浜市栄区",
