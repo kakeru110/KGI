@@ -159,9 +159,11 @@ time via `next/font`, so this adds no new failure mode. Note that not
 every glyph exists in that face (`㎡` doesn't, for one) - check a rebuilt
 card after editing `ogTagline`.
 
-**Set `SITE_X_HANDLE` in `src/lib/site.ts`** to the property's X account
-(e.g. `"@kamakuragateinn"`) so shared links are attributed to it via
-`twitter:site`/`twitter:creator`. While it's empty those tags are omitted.
+`SITE_X_HANDLE`/`SITE_X_URL` in `src/lib/site.ts` hold the property's X
+account (`@kamakuragateinn`): the handle sets
+`twitter:site`/`twitter:creator` so a shared card is attributed to the
+account, and the profile URL is listed in the top page's structured-data
+`sameAs` alongside the Google Business Profile.
 
 ## Booking flow
 
@@ -209,8 +211,6 @@ in real photography before launch.
   placeholder default (free cancellation 7+ days out, 50% at 2-6 days,
   100% inside 1 day / no-show), not a business decision this code can
   make on its own.
-- **Set `SITE_X_HANDLE`** (`src/lib/site.ts`) to the property's X
-  account, so shared links carry `twitter:site`/`twitter:creator`.
 - **Mark `purchase` as a key event in GA4** (Admin > Events) - the
   event is sent, but GA4 won't treat it as a conversion until told to.
 - **Register the Stripe webhook**: Stripe dashboard → Developers →
