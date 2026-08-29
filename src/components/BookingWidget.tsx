@@ -30,6 +30,22 @@ function addDays(date: string, delta: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+/**
+ * Every calendar date in a month (unlike `days` from the API, which for the
+ * current month only covers today onward - Beds24 doesn't return inventory
+ * for dates that have already passed). Used to keep the grid at a full,
+ * consistent size instead of shrinking to a few cells near month-end.
+ */
+function daysInMonth(yearMonth: string): string[] {
+  const [year, month] = yearMonth.split("-").map(Number);
+  const count = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return Array.from({ length: count }, (_, i) => {
+    const day = String(i + 1).padStart(2, "0");
+    const monthStr = String(month).padStart(2, "0");
+    return `${year}-${monthStr}-${day}`;
+  });
+}
+
 export default function BookingWidget({
   locale,
   dict,
@@ -131,6 +147,8 @@ export default function BookingWidget({
   const totalGuests = adults + children;
   const firstOfMonth = new Date(`${month}-01T00:00:00Z`);
   const leadingBlanks = (firstOfMonth.getUTCDay() + 6) % 7;
+  const dayByDate = useMemo(() => new Map(days.map((d) => [d.date, d])), [days]);
+  const monthDates = useMemo(() => daysInMonth(month), [month]);
 
   return (
     <div className="rounded-3xl border border-border bg-background p-4 shadow-sm shadow-black/5 sm:p-6">
@@ -271,7 +289,18 @@ export default function BookingWidget({
           {Array.from({ length: leadingBlanks }).map((_, i) => (
             <div key={`blank-${i}`} />
           ))}
-          {days.map((day) => {
+          {monthDates.map((date) => {
+            const day = dayByDate.get(date);
+            if (!day) {
+              // Already-passed date with no inventory data from Beds24 -
+              // shown as an inert placeholder so the grid keeps its full,
+              // consistent size instead of shrinking near month-end.
+              return (
+                <div key={date} className="flex flex-col items-center gap-1 px-1 py-3 text-xs text-muted/30">
+                  <span className="text-base font-medium">{Number(date.slice(-2))}</span>
+                </div>
+              );
+            }
             const isFull = day.status !== "available";
             const hasRange = Boolean(checkIn && checkOut);
             const isSelected = day.date === checkIn || day.date === checkOut;

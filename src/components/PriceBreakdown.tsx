@@ -59,23 +59,21 @@ export default function PriceBreakdown({
           ))}
         </dl>
 
-        <div className="mt-5 flex items-baseline justify-between rounded-2xl bg-surface px-4 py-3">
+        <div className="mt-5 flex items-baseline justify-between rounded-2xl bg-accent-soft px-4 py-4">
           <span className="font-semibold">{dict.results.total}</span>
           <span className="text-right">
-            <span className="text-xl font-bold tabular-nums">{formatCurrency(offer.total)}</span>
+            <span className="text-2xl font-bold tabular-nums text-accent sm:text-3xl">
+              {formatCurrency(offer.total)}
+            </span>
             <span className="ml-1.5 text-xs text-muted">
               ({dict.results.perNight} {formatCurrency(offer.perNight)})
             </span>
           </span>
         </div>
 
-        <div className="mt-6 rounded-2xl bg-gradient-to-br from-accent-soft to-accent-soft/40 p-5 text-center">
-          <p className="text-sm text-muted">{dict.results.perPerson}</p>
-          <p className="text-4xl font-bold tabular-nums text-accent sm:text-5xl">
-            {formatCurrency(offer.perPerson)}
-          </p>
-          <p className="mt-2 text-xs text-muted">{dict.results.perPersonNote}</p>
-        </div>
+        <p className="mt-3 text-center text-xs text-muted">
+          {dict.results.perPerson} {formatCurrency(offer.perPerson)} · {dict.results.perPersonNote}
+        </p>
 
         <Link
           href={`/${locale}/booking/guest-info?checkin=${offer.checkIn}&checkout=${offer.checkOut}&adults=${offer.adults}&children=${offer.children}`}
