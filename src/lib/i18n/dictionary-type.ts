@@ -5,6 +5,10 @@ export type Dictionary = {
     siteName: string;
     title: string;
     description: string;
+    /** Short label on the generated social-share image (opengraph-image.tsx). */
+    ogBadge: string;
+    /** One line of selling points under the name on that image - keep it short enough to fit. */
+    ogTagline: string;
   };
   seo: {
     rooms: SeoEntry;

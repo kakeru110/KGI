@@ -6,6 +6,8 @@ const en: Dictionary = {
     title: "Kamakura Gate Inn | 7-min walk from Ofuna Station, sleeps 6",
     description:
       "Your base for exploring Kamakura and Shonan. A private 58sqm stay for up to 6 guests, 7 minutes on foot from Ofuna Station. Book direct with Kamakura Gate Inn.",
+    ogBadge: "Official booking site",
+    ogTagline: "Ofuna Station 7 min · Sleeps 6 · Entire home",
   },
   seo: {
     rooms: {

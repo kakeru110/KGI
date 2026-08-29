@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
-import { SITE_URL } from "@/lib/site";
+import { propertyEntityId } from "@/lib/structured-data";
+import { SITE_URL, SITE_X_URL } from "@/lib/site";
 import { getMonthAvailability } from "@/lib/beds24/availability";
 import { getReviews } from "@/lib/beds24/reviews";
 import { getPropertyStats } from "@/lib/beds24/stats";
 import { PROPERTY_CONFIG } from "@/lib/beds24/property-config";
 import { PROPERTY_COORDS, PROPERTY_MAP_LINK } from "@/lib/parking";
 import { formatFromPrice } from "@/lib/i18n/format";
+import JsonLd from "@/components/JsonLd";
 import Hero from "@/components/Hero";
 import PhotoMosaic from "@/components/PhotoMosaic";
 import BookingWidget from "@/components/BookingWidget";
@@ -57,13 +59,17 @@ export default async function TopPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "VacationRental",
+    // Shared with /reviews, so the rating repeated there is understood
+    // as the same property rather than a second one.
+    "@id": propertyEntityId(locale),
     name: dict.meta.siteName,
     description: dict.meta.description,
     url: `${SITE_URL}/${locale}`,
     image: `${SITE_URL}/photos/living-2.jpg`,
-    // Links this entity to the verified Google Business Profile listing
-    // (confirmed same place ID as the /parking page's map link).
-    sameAs: [PROPERTY_MAP_LINK],
+    // The other places this same business is publicly identifiable: the
+    // verified Google Business Profile listing (confirmed same place ID as
+    // the /parking page's map link) and the property's X account.
+    sameAs: [PROPERTY_MAP_LINK, SITE_X_URL],
     address: {
       "@type": "PostalAddress",
       addressLocality: "横浜市栄区",
@@ -102,7 +108,7 @@ export default async function TopPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <Hero dict={dict} />
 
       <div className="mx-auto mt-6 max-w-6xl px-4 sm:px-6">

@@ -5,6 +5,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getStripeClient } from "@/lib/stripe/client";
 import { completeBookingFromSession } from "@/lib/checkout";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
+import { purchaseEvent } from "@/lib/analytics";
+import AnalyticsEvent from "@/components/AnalyticsEvent";
 
 // Post-payment confirmation, keyed to a one-time Stripe session id - not a
 // page worth ranking on its own, and it could carry booking details.
@@ -43,6 +45,10 @@ export default async function BookingConfirmPage({
 
   return (
     <div className="mx-auto max-w-xl space-y-6 px-4 py-16 text-center sm:px-6">
+      {/* Payment succeeded and the Beds24 booking exists - the one event
+          that gives every other number on the site a value. */}
+      <AnalyticsEvent event={purchaseEvent(booking)} />
+
       <h1 className="text-2xl font-semibold sm:text-3xl">{dict.confirm.successHeading}</h1>
       <p className="text-muted">{dict.confirm.successBody}</p>
 
