@@ -71,10 +71,6 @@ export default function PriceBreakdown({
           </span>
         </div>
 
-        <p className="mt-3 text-center text-xs text-muted">
-          {dict.results.perPerson} {formatCurrency(offer.perPerson)} · {dict.results.perPersonNote}
-        </p>
-
         <Link
           href={`/${locale}/booking/guest-info?checkin=${offer.checkIn}&checkout=${offer.checkOut}&adults=${offer.adults}&children=${offer.children}`}
           className="mt-6 block rounded-full bg-accent px-4 py-3.5 text-center font-medium text-accent-foreground shadow-sm shadow-accent/30 transition hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md"

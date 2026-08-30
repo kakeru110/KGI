@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { DayAvailability } from "@/lib/beds24/types";
@@ -133,8 +134,7 @@ export default function BookingWidget({
     }
   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  function goToBooking() {
     const params = new URLSearchParams({
       checkin: checkIn,
       checkout: checkOut,
@@ -142,6 +142,11 @@ export default function BookingWidget({
       children: String(children),
     });
     router.push(`/${locale}/booking?${params.toString()}`);
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    goToBooking();
   }
 
   const totalGuests = adults + children;
@@ -228,24 +233,24 @@ export default function BookingWidget({
             <h3 className="font-semibold">{dict.availability.heading}</h3>
             <p className="text-sm text-muted">{dict.availability.subheading}</p>
           </div>
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setMonth((m) => shiftMonth(m, -1))}
               disabled={isPastMonth}
               aria-label={dict.availability.prevMonth}
-              className="rounded-full border border-border px-3 py-1 disabled:opacity-30"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition hover:bg-surface disabled:opacity-30"
             >
-              ‹
+              <ChevronLeft className="h-5 w-5" strokeWidth={2} />
             </button>
-            <span className="min-w-[6ch] text-center font-medium">{month}</span>
+            <span className="min-w-[7ch] text-center text-base font-semibold">{month}</span>
             <button
               type="button"
               onClick={() => setMonth((m) => shiftMonth(m, 1))}
               aria-label={dict.availability.nextMonth}
-              className="rounded-full border border-border px-3 py-1"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-foreground transition hover:bg-surface"
             >
-              ›
+              <ChevronRight className="h-5 w-5" strokeWidth={2} />
             </button>
           </div>
         </div>
@@ -363,6 +368,16 @@ export default function BookingWidget({
             );
           })}
         </div>
+
+        {checkIn && checkOut && (
+          <button
+            type="button"
+            onClick={goToBooking}
+            className="mt-5 block w-full rounded-full bg-accent px-4 py-3.5 text-center font-medium text-accent-foreground shadow-sm shadow-accent/30 transition hover:-translate-y-0.5 hover:opacity-90 hover:shadow-md"
+          >
+            {dict.searchForm.submit}
+          </button>
+        )}
       </div>
     </div>
   );
