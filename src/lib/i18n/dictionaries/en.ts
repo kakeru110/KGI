@@ -97,7 +97,7 @@ const en: Dictionary = {
     guests: "Guests",
     adults: "Adults",
     children: "Children",
-    submit: "Check Availability",
+    submit: "Review Booking Details",
   },
   availability: {
     heading: "Availability Calendar",

@@ -98,7 +98,7 @@ const ja: Dictionary = {
     guests: "人数",
     adults: "大人",
     children: "子供",
-    submit: "空室・料金を確認",
+    submit: "予約内容を確認",
   },
   availability: {
     heading: "空室カレンダー",
