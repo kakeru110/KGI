@@ -364,11 +364,11 @@ const en: Dictionary = {
     sections: [
       {
         heading: "Information We Collect",
-        body: "When you make a booking or contact us, we ask for your name, email address, and phone number. Credit card information is collected and handled directly by our payment processor (Stripe) and is never stored on our own servers.",
+        body: "When you make a booking or contact us, we ask for your name, email address, and phone number. Credit card information is collected and handled directly by our payment processor (Stripe) and is never stored on our own servers. After booking, Japan's Hotel Business Act and Minpaku Act also require us to collect your address and occupation (and, for guests with no address in Japan, nationality and passport number).",
       },
       {
         heading: "Purpose of Use",
-        body: "We use the personal information we collect solely to manage and confirm bookings, process payments, respond to inquiries, and otherwise provide a smooth stay.",
+        body: "We use the personal information we collect solely to manage and confirm bookings, process payments, respond to inquiries, maintain the guest register required under the Hotel Business Act / Minpaku Act, and otherwise provide a smooth stay.",
       },
       {
         heading: "Third-Party Disclosure / Outsourcing",
@@ -390,7 +390,7 @@ const en: Dictionary = {
     contactHeading: "Contact",
     revisionHeading: "Revisions",
     revisionBody:
-      "This policy may be revised without prior notice. Any revised policy takes effect once posted on this page. (Last updated: August 23, 2026)",
+      "This policy may be revised without prior notice. Any revised policy takes effect once posted on this page. (Last updated: August 30, 2026)",
   },
   tokushoho: {
     heading: "Legal Disclosure (Act on Specified Commercial Transactions)",
@@ -426,6 +426,19 @@ const en: Dictionary = {
     notPaidContactPrefix: "If this keeps happening, please ",
     notPaidContactSuffix: ".",
     backToTop: "Back to home",
+  },
+  guestRegistration: {
+    heading: "Guest Registration",
+    intro: "Japanese law (the Hotel Business Act / Minpaku Act) requires us to record certain information about each guest.",
+    addressLabel: "Address",
+    occupationLabel: "Occupation",
+    hasJapanAddressLabel: "I have an address in Japan",
+    nationalityLabel: "Nationality",
+    passportNumberLabel: "Passport number",
+    submit: "Submit",
+    submitting: "Submitting…",
+    success: "Thank you, your information has been recorded.",
+    errorGeneric: "Something went wrong. Please try again later.",
   },
   contact: {
     heading: "Contact Us",

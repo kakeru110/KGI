@@ -7,6 +7,7 @@ import { completeBookingFromSession } from "@/lib/checkout";
 import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from "@/lib/i18n/format";
 import { purchaseEvent } from "@/lib/analytics";
 import AnalyticsEvent from "@/components/AnalyticsEvent";
+import GuestRegistrationForm from "@/components/GuestRegistrationForm";
 
 // Post-payment confirmation, keyed to a one-time Stripe session id - not a
 // page worth ranking on its own, and it could carry booking details.
@@ -79,6 +80,8 @@ export default async function BookingConfirmPage({
           <p className="mt-2 font-semibold">{formatCurrency(booking.total)}</p>
         </div>
       </div>
+
+      <GuestRegistrationForm bookingId={booking.bookingId} dict={dict} />
 
       <Link href={`/${locale}`} className="inline-block text-accent hover:underline">
         {dict.confirm.backToTop}

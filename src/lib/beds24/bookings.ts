@@ -119,3 +119,50 @@ export async function createBooking(params: {
     currency: "JPY",
   };
 }
+
+export type GuestRegistrationDetails = {
+  address: string;
+  occupation: string;
+  hasJapanAddress: boolean;
+  /** Required by 旅館業法/住宅宿泊事業法 only for guests with no Japanese address. */
+  nationality?: string;
+  passportNumber?: string;
+};
+
+type BookingNotesResponse = { data: { id: number; notes: string }[] };
+
+/**
+ * Records the guest-register details Japanese law requires (name/address/
+ * occupation for every guest, plus nationality + passport number for guests
+ * with no Japanese address) onto the existing Beds24 booking. Appended to
+ * the `notes` field alongside the Stripe session note from createBooking,
+ * rather than a separate database - the property owner manages everything
+ * from the Beds24 dashboard they already use day to day.
+ */
+export async function recordGuestRegistration(
+  bookingId: number,
+  details: GuestRegistrationDetails
+): Promise<void> {
+  const existing = await beds24Fetch<BookingNotesResponse>("/bookings", {
+    query: { id: bookingId },
+  });
+
+  const registerLines = [
+    "[宿泊者名簿] 職業: " + details.occupation,
+    details.hasJapanAddress
+      ? null
+      : `国籍: ${details.nationality || "(未入力)"} / 旅券番号: ${details.passportNumber || "(未入力)"}`,
+  ].filter((line): line is string => line !== null);
+
+  const notes = [existing.data[0]?.notes, ...registerLines].filter(Boolean).join("\n");
+
+  const response = await beds24Fetch<BookingsPostResponse>("/bookings", {
+    method: "POST",
+    body: [{ id: bookingId, address: details.address, notes }],
+  });
+
+  const result = response[0];
+  if (!result?.success) {
+    throw new Error(`Beds24 guest registration update failed: ${JSON.stringify(result?.errors)}`);
+  }
+}

@@ -231,6 +231,19 @@ export type Dictionary = {
     notPaidContactSuffix: string;
     backToTop: string;
   };
+  guestRegistration: {
+    heading: string;
+    intro: string;
+    addressLabel: string;
+    occupationLabel: string;
+    hasJapanAddressLabel: string;
+    nationalityLabel: string;
+    passportNumberLabel: string;
+    submit: string;
+    submitting: string;
+    success: string;
+    errorGeneric: string;
+  };
   contact: {
     heading: string;
     intro: string;
