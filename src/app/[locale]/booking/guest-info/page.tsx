@@ -7,6 +7,7 @@ import { formatCurrency, formatDateRange, formatGuestsCount, formatNights } from
 import { beginCheckoutEvent } from "@/lib/analytics";
 import AnalyticsEvent from "@/components/AnalyticsEvent";
 import GuestInfoForm from "@/components/GuestInfoForm";
+import BookingSteps from "@/components/BookingSteps";
 
 // Transactional step of the booking flow, not a page worth ranking on its
 // own - keep it out of search results.
@@ -43,6 +44,8 @@ export default async function GuestInfoPage({
       {/* Reaching this form is the start of checkout - everything before
           it is still browsing dates. */}
       <AnalyticsEvent event={beginCheckoutEvent(offer)} />
+
+      <BookingSteps current={2} labels={dict.guestInfo.steps} />
 
       <div className="rounded-2xl border border-border bg-surface p-5">
         <p className="font-medium">{formatDateRange(offer.checkIn, offer.checkOut)}</p>

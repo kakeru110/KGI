@@ -159,6 +159,7 @@ export type Dictionary = {
     bookNow: string;
   };
   guestInfo: {
+    steps: string[];
     heading: string;
     firstName: string;
     lastName: string;
@@ -167,6 +168,10 @@ export type Dictionary = {
     agreePrefix: string;
     agreeLinkText: string;
     agreeSuffix: string;
+    privacyPrefix: string;
+    privacyLinkText: string;
+    privacySuffix: string;
+    securePaymentNote: string;
     submit: string;
     submitting: string;
     errorGeneric: string;
@@ -218,9 +223,12 @@ export type Dictionary = {
     verifying: string;
     successHeading: string;
     successBody: string;
+    checkinInfoNote: string;
     bookingIdLabel: string;
     notPaidHeading: string;
     notPaidBody: string;
+    notPaidContactPrefix: string;
+    notPaidContactSuffix: string;
     backToTop: string;
   };
   contact: {

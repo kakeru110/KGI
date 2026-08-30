@@ -9,6 +9,7 @@ import AnalyticsEvent from "@/components/AnalyticsEvent";
 import BookingWidget from "@/components/BookingWidget";
 import PriceBreakdown from "@/components/PriceBreakdown";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import BookingSteps from "@/components/BookingSteps";
 
 export async function generateMetadata({
   params,
@@ -48,7 +49,10 @@ export default async function BookingPage({
 
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 pb-28 sm:px-6 sm:py-14 md:pb-14">
-      <h1 className="text-2xl font-semibold sm:text-3xl">{dict.searchForm.heading}</h1>
+      <div className="space-y-3">
+        <BookingSteps current={1} labels={dict.guestInfo.steps} />
+        <h1 className="text-2xl font-semibold sm:text-3xl">{dict.searchForm.heading}</h1>
+      </div>
 
       <BookingWidget
         locale={locale}

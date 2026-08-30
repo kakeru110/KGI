@@ -30,6 +30,13 @@ export default async function BookingConfirmPage({
     <div className="mx-auto max-w-xl space-y-4 px-4 py-16 text-center sm:px-6">
       <h1 className="text-2xl font-semibold">{dict.confirm.notPaidHeading}</h1>
       <p className="text-muted">{dict.confirm.notPaidBody}</p>
+      <p className="text-sm text-muted">
+        {dict.confirm.notPaidContactPrefix}
+        <Link href={`/${locale}/contact`} className="text-accent underline">
+          {dict.nav.contact}
+        </Link>
+        {dict.confirm.notPaidContactSuffix}
+      </p>
       <Link href={`/${locale}`} className="inline-block text-accent hover:underline">
         {dict.confirm.backToTop}
       </Link>
@@ -51,6 +58,7 @@ export default async function BookingConfirmPage({
 
       <h1 className="text-2xl font-semibold sm:text-3xl">{dict.confirm.successHeading}</h1>
       <p className="text-muted">{dict.confirm.successBody}</p>
+      <p className="text-sm text-muted">{dict.confirm.checkinInfoNote}</p>
 
       <div className="rounded-2xl border border-border bg-surface p-6 text-left">
         <p className="text-sm text-muted">{dict.confirm.bookingIdLabel}</p>
