@@ -72,6 +72,8 @@ export type Dictionary = {
     weekdays: string[];
   };
   results: {
+    confirmHeading: string;
+    changeDates: string;
     roomFee: string;
     extraGuestFee: string;
     cleaningFee: string;

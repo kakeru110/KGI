@@ -112,6 +112,8 @@ const ja: Dictionary = {
     weekdays: ["月", "火", "水", "木", "金", "土", "日"],
   },
   results: {
+    confirmHeading: "ご予約内容の確認",
+    changeDates: "日程を変更する",
     roomFee: "宿泊料金",
     extraGuestFee: "人数追加料金",
     cleaningFee: "清掃料金",

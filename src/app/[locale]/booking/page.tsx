@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
@@ -47,25 +48,46 @@ export default async function BookingPage({
     ? await getOffer({ checkIn: checkIn!, checkOut: checkOut!, guests: { adults, children } })
     : null;
 
+  // Once a bookable offer is confirmed, drop the calendar/search form - the
+  // guest has already decided on dates, and re-showing the full picker here
+  // just repeats what the previous step did. Change of mind is one link away.
+  const isConfirming = Boolean(offer?.available);
+
   return (
     <div className="mx-auto max-w-6xl space-y-10 px-4 py-10 pb-28 sm:px-6 sm:py-14 md:pb-14">
       <div className="space-y-3">
         <BookingSteps current={1} labels={dict.guestInfo.steps} />
-        <h1 className="text-2xl font-semibold sm:text-3xl">{dict.searchForm.heading}</h1>
+        <h1 className="text-2xl font-semibold sm:text-3xl">
+          {isConfirming ? dict.results.confirmHeading : dict.searchForm.heading}
+        </h1>
       </div>
 
-      <BookingWidget
-        locale={locale}
-        dict={dict}
-        initialCheckIn={checkIn}
-        initialCheckOut={checkOut}
-        initialAdults={adults || 2}
-        initialChildren={children}
-      />
+      {isConfirming ? (
+        <div className="mx-auto max-w-xl space-y-4">
+          <PriceBreakdown offer={offer!} locale={locale} dict={dict} />
+          <Link
+            href={`/${locale}/booking?adults=${adults}&children=${children}`}
+            className="block text-center text-sm text-accent hover:underline"
+          >
+            {dict.results.changeDates}
+          </Link>
+        </div>
+      ) : (
+        <>
+          <BookingWidget
+            locale={locale}
+            dict={dict}
+            initialCheckIn={checkIn}
+            initialCheckOut={checkOut}
+            initialAdults={adults || 2}
+            initialChildren={children}
+          />
 
-      {!hasQuery && <p className="text-sm text-muted">{dict.results.selectDates}</p>}
+          {!hasQuery && <p className="text-sm text-muted">{dict.results.selectDates}</p>}
 
-      {offer && <PriceBreakdown offer={offer} locale={locale} dict={dict} />}
+          {offer && <PriceBreakdown offer={offer} locale={locale} dict={dict} />}
+        </>
+      )}
 
       {/* Top of the booking funnel: a real, bookable price was shown. */}
       {offer?.available && <AnalyticsEvent event={viewItemEvent(offer)} />}

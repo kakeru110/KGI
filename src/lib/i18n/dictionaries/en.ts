@@ -112,6 +112,8 @@ const en: Dictionary = {
     weekdays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
   },
   results: {
+    confirmHeading: "Confirm Your Booking",
+    changeDates: "Change dates",
     roomFee: "Room fee",
     extraGuestFee: "Extra guest fee",
     cleaningFee: "Cleaning fee",
