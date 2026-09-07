@@ -43,6 +43,7 @@ export type Dictionary = {
   hero: {
     title: string;
     subtitle: string;
+    noFeesBadge: string;
   };
   statCards: {
     size: { label: string; value: string };
@@ -74,6 +75,7 @@ export type Dictionary = {
   results: {
     confirmHeading: string;
     changeDates: string;
+    noFeesNote: string;
     roomFee: string;
     extraGuestFee: string;
     cleaningFee: string;

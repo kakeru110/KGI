@@ -82,6 +82,7 @@ const en: Dictionary = {
     title: "Kamakura Gate Inn",
     subtitle:
       "Your base for exploring Kamakura and Shonan. A private 58sqm Japandi-style stay for up to 6 guests, 7 minutes on foot from Ofuna Station.",
+    noFeesBadge: "No service fees when you book direct",
   },
   statCards: {
     size: { label: "Size", value: "58 sqm" },
@@ -114,6 +115,7 @@ const en: Dictionary = {
   results: {
     confirmHeading: "Confirm Your Booking",
     changeDates: "Change dates",
+    noFeesNote: "Booking direct means no added service fees.",
     roomFee: "Room fee",
     extraGuestFee: "Extra guest fee",
     cleaningFee: "Cleaning fee",

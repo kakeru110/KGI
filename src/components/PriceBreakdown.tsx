@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BedDouble, CalendarDays, Sparkles, UsersRound } from "lucide-react";
+import { BedDouble, CalendarDays, Sparkles, Tag, UsersRound } from "lucide-react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 import type { OfferResult } from "@/lib/beds24/types";
@@ -70,6 +70,11 @@ export default function PriceBreakdown({
             </span>
           </span>
         </div>
+
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+          <Tag className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} />
+          {dict.results.noFeesNote}
+        </p>
 
         <Link
           href={`/${locale}/booking/guest-info?checkin=${offer.checkIn}&checkout=${offer.checkOut}&adults=${offer.adults}&children=${offer.children}`}

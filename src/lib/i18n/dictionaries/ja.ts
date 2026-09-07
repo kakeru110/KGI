@@ -83,6 +83,7 @@ const ja: Dictionary = {
     title: "Kamakura Gate Inn",
     subtitle:
       "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のJapandiなプライベートステイ。",
+    noFeesBadge: "直接予約はサービス手数料0円",
   },
   statCards: {
     size: { label: "広さ", value: "58㎡" },
@@ -114,6 +115,7 @@ const ja: Dictionary = {
   results: {
     confirmHeading: "ご予約内容の確認",
     changeDates: "日程を変更する",
+    noFeesNote: "直接予約のため、サービス手数料は一切かかりません。",
     roomFee: "宿泊料金",
     extraGuestFee: "人数追加料金",
     cleaningFee: "清掃料金",
