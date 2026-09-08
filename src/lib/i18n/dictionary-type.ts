@@ -18,6 +18,7 @@ export type Dictionary = {
     sightseeing: SeoEntry;
     faq: SeoEntry;
     reviews: SeoEntry;
+    guestbook: SeoEntry;
     booking: SeoEntry;
     policy: SeoEntry;
     tokushoho: SeoEntry;
@@ -33,6 +34,7 @@ export type Dictionary = {
     sightseeing: string;
     faq: string;
     reviews: string;
+    guestbook: string;
     booking: string;
     checkAvailability: string;
     policy: string;

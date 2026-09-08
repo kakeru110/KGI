@@ -15,6 +15,7 @@ const PATHS = [
   "/sightseeing",
   "/faq",
   "/reviews",
+  "/guestbook",
   "/booking",
   "/policy",
   "/tokushoho",

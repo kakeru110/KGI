@@ -40,6 +40,10 @@ const en: Dictionary = {
       title: "Guest Reviews | Kamakura Gate Inn",
       description: "Read reviews and ratings from guests who have actually stayed at Kamakura Gate Inn.",
     },
+    guestbook: {
+      title: "Guest Notebook | Kamakura Gate Inn",
+      description: "Memories guests have left behind in the notebook we keep in the room.",
+    },
     booking: {
       title: "Check Availability & Rates | Kamakura Gate Inn",
       description: "Check real-time availability and pricing for your travel dates and group size.",
@@ -71,6 +75,7 @@ const en: Dictionary = {
     sightseeing: "Sightseeing",
     faq: "FAQ",
     reviews: "Reviews",
+    guestbook: "Guest Notebook",
     booking: "Check Availability",
     checkAvailability: "Check Availability",
     policy: "Cancellation Policy",
@@ -324,15 +329,15 @@ const en: Dictionary = {
   guestNotebook: {
     heading: "From Our Guest Notebook",
     intro:
-      "Guests often leave their own notes in the notebook we keep in the room. With their permission, we share a few here, summarized and anonymized.",
+      "Guests often leave their own notes in the notebook we keep in the room. We share a few here, summarized and anonymized.",
     entries: [
       {
         season: "July 2026",
-        text: "Guests wrote about spending six hours swimming at nearby Zushi Beach and coming home with a great tan - a jellyfish sting included, but still the best day of their trip.",
+        text: "We swam for six hours at nearby Zushi Beach and came home with a great tan. Got stung by a jellyfish, but that was part of the best day ever!",
       },
       {
         season: "July 2026",
-        text: "In lively handwriting, one of the children in the group wrote about two days full of trips to the beach, big meals, and lots of laughter.",
+        text: "We went to the beach, ate so much, and laughed so much these two days. Had the best time!",
       },
     ],
   },
