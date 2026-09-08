@@ -339,6 +339,22 @@ const en: Dictionary = {
         season: "July 2026",
         text: "We went to the beach, ate so much, and laughed so much these two days. Had the best time!",
       },
+      {
+        season: "May 2026",
+        text: "A chilly, rainy stay in Kamakura, but the warm hospitality made it wonderful all the same. Can't wait to come back.",
+      },
+      {
+        season: "June 2026",
+        text: "Thank you so much!!!",
+      },
+      {
+        season: "April 2026",
+        text: "Our whole group stayed the night before a wedding. The kids even left a few doodles behind - a night we'll never forget.",
+      },
+      {
+        season: "April 2026",
+        text: "This is our favorite place to stay. See you again!",
+      },
     ],
   },
   footer: {
