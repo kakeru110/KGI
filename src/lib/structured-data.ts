@@ -1,6 +1,7 @@
 import type { Locale } from "./i18n/config";
 import type { Dictionary } from "./i18n/dictionary-type";
 import { SITE_URL } from "./site";
+import type { BlogPost } from "./blog/posts";
 
 /**
  * Stable @id for the property itself, so the full VacationRental markup on
@@ -62,6 +63,25 @@ export function buildReviewsJsonLd(
       // Booking.com's 10-point scale, matching the score the page shows.
       bestRating: 10,
       reviewCount: totalCount,
+    },
+  };
+}
+
+/** BlogPosting markup for a /blog/[slug] post, linking it back to the property entity. */
+export function buildBlogPostingJsonLd(locale: Locale, dict: Dictionary, post: BlogPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: locale === "ja" ? post.titleJa : post.titleEn,
+    description: locale === "ja" ? post.excerptJa : post.excerptEn,
+    image: `${SITE_URL}${post.heroImage}`,
+    datePublished: post.publishedDate,
+    url: `${SITE_URL}/${locale}/blog/${post.slug}`,
+    inLanguage: locale,
+    publisher: {
+      "@type": "Organization",
+      name: dict.meta.siteName,
+      "@id": propertyEntityId(locale),
     },
   };
 }

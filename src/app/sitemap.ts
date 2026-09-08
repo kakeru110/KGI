@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n/config";
 import { SITE_URL } from "@/lib/site";
+import { BLOG_POSTS } from "@/lib/blog/posts";
 
 // Every public, indexable page (locale-less paths) - keep in sync with the
 // generateMetadata() calls in src/app/[locale]/**/page.tsx. Transactional
@@ -16,6 +17,8 @@ const PATHS = [
   "/faq",
   "/reviews",
   "/guestbook",
+  "/blog",
+  ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
   "/booking",
   "/policy",
   "/tokushoho",

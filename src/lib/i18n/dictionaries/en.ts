@@ -44,6 +44,10 @@ const en: Dictionary = {
       title: "Guest Notebook | Kamakura Gate Inn",
       description: "Memories guests have left behind in the notebook we keep in the room.",
     },
+    blog: {
+      title: "Blog | Kamakura Gate Inn",
+      description: "Sightseeing tips for Ofuna and Kamakura, plus what makes staying in a whole house special.",
+    },
     booking: {
       title: "Check Availability & Rates | Kamakura Gate Inn",
       description: "Check real-time availability and pricing for your travel dates and group size.",
@@ -76,6 +80,7 @@ const en: Dictionary = {
     faq: "FAQ",
     reviews: "Reviews",
     guestbook: "Guest Notebook",
+    blog: "Blog",
     booking: "Check Availability",
     checkAvailability: "Check Availability",
     policy: "Cancellation Policy",
@@ -389,6 +394,12 @@ const en: Dictionary = {
         text: "The view from the room was lovely, and the TV was nice and big - we all enjoyed playing games together. We'd love to come back as a group again.",
       },
     ],
+  },
+  blog: {
+    heading: "Blog",
+    intro: "Sightseeing tips for Ofuna and Kamakura, plus what makes staying in a whole house special.",
+    readMore: "Read more",
+    backToList: "Back to blog",
   },
   footer: {
     poweredBy: "Availability, pricing, and bookings are powered by Beds24.",

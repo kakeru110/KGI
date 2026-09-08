@@ -46,6 +46,10 @@ const ja: Dictionary = {
       title: "ゲストノート | Kamakura Gate Inn",
       description: "お部屋のフリーノートに残された、ゲストの皆さまの思い出をご紹介します。",
     },
+    blog: {
+      title: "ブログ | Kamakura Gate Inn",
+      description: "大船・鎌倉の観光情報や、一棟貸しならではの楽しみ方をご紹介するブログです。",
+    },
     booking: {
       title: "空室・料金を確認 | Kamakura Gate Inn",
       description: "ご希望の日程・人数で空室状況と料金をリアルタイムで確認できます。",
@@ -77,6 +81,7 @@ const ja: Dictionary = {
     faq: "よくある質問",
     reviews: "ゲストの声",
     guestbook: "ゲストノート",
+    blog: "ブログ",
     booking: "空室・料金を確認",
     checkAvailability: "空室・料金を確認",
     policy: "キャンセルポリシー",
@@ -388,6 +393,12 @@ const ja: Dictionary = {
         text: "お部屋からの眺めがとても素敵でした。テレビも大きくて、みんなでゲームも楽しめました！またみんなで来たいです。",
       },
     ],
+  },
+  blog: {
+    heading: "ブログ",
+    intro: "大船・鎌倉の観光情報や、一棟貸しならではの楽しみ方をご紹介します。",
+    readMore: "続きを読む",
+    backToList: "ブログ一覧に戻る",
   },
   footer: {
     poweredBy: "在庫・料金・ご予約情報はBeds24と連携しています。",

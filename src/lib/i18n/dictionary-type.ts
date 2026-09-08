@@ -19,6 +19,7 @@ export type Dictionary = {
     faq: SeoEntry;
     reviews: SeoEntry;
     guestbook: SeoEntry;
+    blog: SeoEntry;
     booking: SeoEntry;
     policy: SeoEntry;
     tokushoho: SeoEntry;
@@ -35,6 +36,7 @@ export type Dictionary = {
     faq: string;
     reviews: string;
     guestbook: string;
+    blog: string;
     booking: string;
     checkAvailability: string;
     policy: string;
@@ -162,6 +164,12 @@ export type Dictionary = {
     intro: string;
     viewAll: string;
     entries: { season: string; text: string }[];
+  };
+  blog: {
+    heading: string;
+    intro: string;
+    readMore: string;
+    backToList: string;
   };
   footer: {
     poweredBy: string;
