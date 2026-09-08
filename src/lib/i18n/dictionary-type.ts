@@ -160,6 +160,7 @@ export type Dictionary = {
   guestNotebook: {
     heading: string;
     intro: string;
+    viewAll: string;
     entries: { season: string; text: string }[];
   };
   footer: {

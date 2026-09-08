@@ -26,7 +26,7 @@ export default async function GuestbookPage({
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-      <GuestNotebook dict={dict} />
+      <GuestNotebook locale={locale} dict={dict} />
     </div>
   );
 }

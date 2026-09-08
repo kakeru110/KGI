@@ -50,7 +50,7 @@ export default async function TopPage({
   const prices = days.filter((d) => d.status === "available" && d.price !== null).map((d) => d.price as number);
   const fromPrice = prices.length > 0 ? Math.min(...prices) : null;
   const toPrice = prices.length > 0 ? Math.max(...prices) : null;
-  const { reviews, totalCount, averageScore } = await getReviews(locale, 6);
+  const { reviews, totalCount, averageScore } = await getReviews(locale, 2);
   const stats = await getPropertyStats(locale);
 
   // VacationRental structured data for rich results / local search - uses
@@ -133,7 +133,7 @@ export default async function TopPage({
           averageScore={averageScore}
           showViewAll
         />
-        <GuestNotebook dict={dict} />
+        <GuestNotebook locale={locale} dict={dict} limit={2} showViewAll />
       </div>
 
       {fromPrice !== null && (

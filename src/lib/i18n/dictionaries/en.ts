@@ -330,6 +330,7 @@ const en: Dictionary = {
     heading: "From Our Guest Notebook",
     intro:
       "Guests often leave their own notes in the notebook we keep in the room. We share a few here, summarized and anonymized.",
+    viewAll: "View all notebook entries",
     entries: [
       {
         season: "July 2026",
@@ -340,12 +341,12 @@ const en: Dictionary = {
         text: "We went to the beach, ate so much, and laughed so much these two days. Had the best time!",
       },
       {
-        season: "May 2026",
-        text: "A chilly, rainy stay in Kamakura, but the warm hospitality made it wonderful all the same. Can't wait to come back.",
-      },
-      {
         season: "June 2026",
         text: "Thank you so much!!!",
+      },
+      {
+        season: "May 2026",
+        text: "A chilly, rainy stay in Kamakura, but the warm hospitality made it wonderful all the same. Can't wait to come back.",
       },
       {
         season: "April 2026",

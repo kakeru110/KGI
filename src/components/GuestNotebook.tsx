@@ -1,3 +1,5 @@
+import Link from "next/link";
+import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionary-type";
 
 /**
@@ -5,13 +7,35 @@ import type { Dictionary } from "@/lib/i18n/dictionary-type";
  * summarized/paraphrased rather than quoted verbatim, and with nothing
  * identifying, since publishing a guest's own words (even anonymized)
  * needs their permission under copyright, not just privacy law.
+ *
+ * `dict.guestNotebook.entries` is kept newest-first, so `limit` (used on
+ * the top page) always shows the latest entries; the /guestbook page omits
+ * `limit` to show all of them.
  */
-export default function GuestNotebook({ dict }: { dict: Dictionary }) {
-  const { heading, intro, entries } = dict.guestNotebook;
+export default function GuestNotebook({
+  locale,
+  dict,
+  limit,
+  showViewAll = false,
+}: {
+  locale: Locale;
+  dict: Dictionary;
+  limit?: number;
+  showViewAll?: boolean;
+}) {
+  const { heading, intro, viewAll, entries: allEntries } = dict.guestNotebook;
+  const entries = limit !== undefined ? allEntries.slice(0, limit) : allEntries;
 
   return (
     <section>
-      <h2 className="text-2xl font-semibold sm:text-3xl">{heading}</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-semibold sm:text-3xl">{heading}</h2>
+        {showViewAll && (
+          <Link href={`/${locale}/guestbook`} className="text-sm font-medium text-accent hover:underline">
+            {viewAll}
+          </Link>
+        )}
+      </div>
       <p className="mt-2 max-w-2xl text-sm text-muted">{intro}</p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
