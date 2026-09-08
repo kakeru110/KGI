@@ -89,7 +89,12 @@ export async function beds24Fetch<T>(path: string, init: Beds24RequestInit = {})
       token: accessToken,
     },
     body: init.body ? JSON.stringify(init.body) : undefined,
-    cache: init.revalidateSeconds === undefined ? "no-store" : undefined,
+    // This Next.js version defaults fetch to "no persistent cache" -
+    // `next.revalidate` alone does nothing without `cache: "force-cache"`
+    // explicitly opting in, unlike older Next.js where revalidate alone
+    // was enough. Without this, every "cached" call here was silently
+    // hitting Beds24 on every single request.
+    cache: init.revalidateSeconds === undefined ? "no-store" : "force-cache",
     next: init.revalidateSeconds === undefined ? undefined : { revalidate: init.revalidateSeconds },
   });
 

@@ -33,8 +33,12 @@ export async function translateTexts(texts: string[], locale: Locale): Promise<s
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ text: texts, target_lang: localeToDeepLTarget(locale) }),
-      // Matches the review fetch cache window - translations are stable
-      // for a given text, so no need to re-translate every request.
+      // This Next.js version defaults fetch to "no persistent cache" for
+      // POST requests unless `cache: "force-cache"` is set explicitly -
+      // `next.revalidate` alone was silently a no-op, so every page view
+      // was re-translating (and re-billing) the same review text against
+      // the DeepL quota instead of reusing the cached result.
+      cache: "force-cache",
       next: { revalidate: 1800 },
     });
     if (!res.ok) return texts;
