@@ -155,6 +155,11 @@ export type Dictionary = {
     childRateLabel: string;
     countriesHeading: string;
   };
+  guestNotebook: {
+    heading: string;
+    intro: string;
+    entries: { season: string; text: string }[];
+  };
   footer: {
     poweredBy: string;
   };

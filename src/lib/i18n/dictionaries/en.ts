@@ -321,6 +321,21 @@ const en: Dictionary = {
     childRateLabel: "Stays with children",
     countriesHeading: "Guests have come from",
   },
+  guestNotebook: {
+    heading: "From Our Guest Notebook",
+    intro:
+      "Guests often leave their own notes in the notebook we keep in the room. With their permission, we share a few here, summarized and anonymized.",
+    entries: [
+      {
+        season: "July 2026",
+        text: "Guests wrote about spending six hours swimming at nearby Zushi Beach and coming home with a great tan - a jellyfish sting included, but still the best day of their trip.",
+      },
+      {
+        season: "July 2026",
+        text: "In lively handwriting, one of the children in the group wrote about two days full of trips to the beach, big meals, and lots of laughter.",
+      },
+    ],
+  },
   footer: {
     poweredBy: "Availability, pricing, and bookings are powered by Beds24.",
   },

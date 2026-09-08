@@ -24,6 +24,7 @@
   --color-price-good-soft: #e6f2ea;
   --font-sans: var(--font-noto-sans-jp);
   --font-serif: var(--font-shippori-mincho);
+  --font-handwriting: var(--font-yomogi);
 }
 
 body {

@@ -19,6 +19,7 @@ import FacilityIntro from "@/components/FacilityIntro";
 import AmenitiesList from "@/components/AmenitiesList";
 import ReviewsSection from "@/components/ReviewsSection";
 import TrackRecord from "@/components/TrackRecord";
+import GuestNotebook from "@/components/GuestNotebook";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 export async function generateMetadata({
@@ -132,6 +133,7 @@ export default async function TopPage({
           averageScore={averageScore}
           showViewAll
         />
+        <GuestNotebook dict={dict} />
       </div>
 
       {fromPrice !== null && (
