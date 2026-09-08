@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildAlternates } from "@/lib/seo";
@@ -43,7 +44,9 @@ export default async function PrivacyPage({
         <p className="mt-2 text-sm text-muted">
           {BUSINESS_INFO.operatorName}
           <br />
-          {BUSINESS_INFO.email}
+          <Link href={`/${locale}/contact`} className="text-accent underline">
+            {dict.tokushoho.contactViaForm}
+          </Link>
         </p>
       </section>
 
