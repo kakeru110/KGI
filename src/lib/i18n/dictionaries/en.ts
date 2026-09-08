@@ -380,6 +380,14 @@ const en: Dictionary = {
         season: "March 2026",
         text: "We came from far away and couldn't stop smiling the whole stay!",
       },
+      {
+        season: "March 2026",
+        text: "It was such a happy day. We'll definitely all come back again.",
+      },
+      {
+        season: "March 2026",
+        text: "The view from the room was lovely, and the TV was nice and big - we all enjoyed playing games together. We'd love to come back as a group again.",
+      },
     ],
   },
   footer: {
