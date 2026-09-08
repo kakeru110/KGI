@@ -356,6 +356,30 @@ const en: Dictionary = {
         season: "April 2026",
         text: "This is our favorite place to stay. See you again!",
       },
+      {
+        season: "April 2026",
+        text: "We celebrated a birthday together and had such a fun stay. Happy birthday!",
+      },
+      {
+        season: "April 2026",
+        text: "We got to spend some quiet, special time together, just the two of us.",
+      },
+      {
+        season: "March 2026",
+        text: "Thank you for having us today! We'll be back to stay again soon.",
+      },
+      {
+        season: "March 2026",
+        text: "We spent an amazing day exploring Yokohama, Kamakura, and Hakone. The night ropeway in Yokohama was absolutely beautiful - a view we won't forget.",
+      },
+      {
+        season: "March 2026",
+        text: "I couldn't believe a place this stylish wasn't a hotel - it made me wish my own home looked like this. The aroma candle in the room helped me unwind completely.",
+      },
+      {
+        season: "March 2026",
+        text: "We came from far away and couldn't stop smiling the whole stay!",
+      },
     ],
   },
   footer: {
