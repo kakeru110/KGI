@@ -292,6 +292,10 @@ const en: Dictionary = {
         a: "This is a whole-house rental in a residential neighborhood, so we ask guests to refrain from parties, loud voices, or loud music that could disturb neighbors.",
       },
       {
+        q: "Is there a noise sensor in the room?",
+        a: "Yes, to help prevent noise complaints from neighbors, we have a noise sensor installed in the room. It does not record conversations or audio - it only measures the room's sound volume level. If loud sound continues for a certain period of time, our management is notified. Please be mindful of volume - loud voices, TV, and music - especially after 10pm.",
+      },
+      {
         q: "Can we use a BBQ or fireworks outside?",
         a: "BBQs and fireworks are not allowed anywhere on the property, including the veranda and the area in front of the entrance.",
       },
@@ -391,7 +395,7 @@ const en: Dictionary = {
       },
       {
         season: "March 2026",
-        text: "The view from the room was lovely, and the TV was nice and big - we all enjoyed playing games together. We'd love to come back as a group again.",
+        text: "The ocean painting in the room was lovely, and the TV was nice and big - we all enjoyed playing games together. We'd love to come back as a group again.",
       },
     ],
   },
