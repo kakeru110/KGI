@@ -74,7 +74,7 @@ export function buildBlogPostingJsonLd(locale: Locale, dict: Dictionary, post: B
     "@type": "BlogPosting",
     headline: locale === "ja" ? post.titleJa : post.titleEn,
     description: locale === "ja" ? post.excerptJa : post.excerptEn,
-    image: `${SITE_URL}${post.heroImage}`,
+    ...(post.heroImage ? { image: `${SITE_URL}${post.heroImage}` } : {}),
     datePublished: post.publishedDate,
     url: `${SITE_URL}/${locale}/blog/${post.slug}`,
     inLanguage: locale,

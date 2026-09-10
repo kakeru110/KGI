@@ -39,15 +39,21 @@ export default async function BlogIndexPage({
             href={`/${locale}/blog/${post.slug}`}
             className="group overflow-hidden rounded-2xl border border-border"
           >
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={post.heroImage}
-                alt={locale === "ja" ? post.titleJa : post.titleEn}
-                fill
-                sizes="(min-width: 640px) 480px, 100vw"
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
+            {post.heroImage ? (
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={post.heroImage}
+                  alt={locale === "ja" ? post.titleJa : post.titleEn}
+                  fill
+                  sizes="(min-width: 640px) 480px, 100vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            ) : (
+              <div className="flex aspect-[4/3] items-center justify-center bg-surface">
+                <Image src="/logo.png" alt="" width={56} height={56} className="h-14 w-14 opacity-40" />
+              </div>
+            )}
             <div className="p-5">
               <p className="text-xs text-muted">{formatDateLabel(post.publishedDate, locale)}</p>
               <p className="mt-1 font-medium leading-snug">{locale === "ja" ? post.titleJa : post.titleEn}</p>

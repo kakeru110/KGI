@@ -30,7 +30,7 @@ export async function generateMetadata({
     title: `${locale === "ja" ? post.titleJa : post.titleEn} | Kamakura Gate Inn`,
     description: locale === "ja" ? post.excerptJa : post.excerptEn,
     alternates: buildAlternates(locale, `/blog/${slug}`),
-    openGraph: { images: [`${SITE_URL}${post.heroImage}`] },
+    ...(post.heroImage ? { openGraph: { images: [`${SITE_URL}${post.heroImage}`] } } : {}),
   };
 }
 
@@ -64,16 +64,18 @@ export default async function BlogPostPage({
       </h1>
       <p className="mt-2 text-sm text-muted">{formatDateLabel(post.publishedDate, locale)}</p>
 
-      <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl">
-        <Image
-          src={post.heroImage}
-          alt={locale === "ja" ? post.titleJa : post.titleEn}
-          fill
-          sizes="(min-width: 768px) 768px, 100vw"
-          className="object-cover"
-          priority
-        />
-      </div>
+      {post.heroImage && (
+        <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl">
+          <Image
+            src={post.heroImage}
+            alt={locale === "ja" ? post.titleJa : post.titleEn}
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
 
       <div className="mt-8 space-y-8">
         {post.sections.map((section, i) => (
