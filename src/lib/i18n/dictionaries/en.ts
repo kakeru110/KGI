@@ -296,6 +296,10 @@ const en: Dictionary = {
         a: "Yes, to help prevent noise complaints from neighbors, we have a noise sensor installed in the room. It does not record conversations or audio - it only measures the room's sound volume level. If loud sound continues for a certain period of time, our management is notified. Please be mindful of volume - loud voices, TV, and music - especially after 10pm.",
       },
       {
+        q: "Are there security cameras inside the room?",
+        a: "No, there are no security cameras installed indoors, in order to protect our guests' privacy.",
+      },
+      {
         q: "Can we use a BBQ or fireworks outside?",
         a: "BBQs and fireworks are not allowed anywhere on the property, including the veranda and the area in front of the entrance.",
       },
