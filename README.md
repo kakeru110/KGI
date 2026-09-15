@@ -96,6 +96,19 @@ page still creates bookings on its own), but the webhook is the more
 reliable path and should be configured before relying on this for real
 payments.
 
+## Owner booking notification
+
+`src/lib/email.ts` emails the owner via [Resend](https://resend.com)'s
+HTTP API whenever a new direct booking is created (`src/lib/checkout.ts`
+calls it right after `createBooking()` returns `isNew: true` — so it
+fires once per booking even though both the webhook and the confirm-page
+fallback can call `completeBookingFromSession()` for the same session).
+Set `RESEND_API_KEY` and `BOOKING_NOTIFICATION_EMAIL` in `.env.local` —
+see `env.example` for how to get a key and why the `from` address needs
+the `kamakuragateinn.com` domain verified in the Resend dashboard first.
+Without these set, booking creation still works; the notification email
+is just silently skipped.
+
 ## Contact form
 
 `/[locale]/contact` (`src/components/ContactForm.tsx`) posts straight to

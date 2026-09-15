@@ -82,6 +82,7 @@ export async function createBooking(params: {
       guests: params.guests.adults + params.guests.children,
       total: params.total,
       currency: "JPY",
+      isNew: false,
     };
   }
 
@@ -117,6 +118,7 @@ export async function createBooking(params: {
     guests: params.guests.adults + params.guests.children,
     total: params.total,
     currency: "JPY",
+    isNew: true,
   };
 }
 

@@ -50,4 +50,6 @@ export type CreatedBooking = {
   guests: number;
   total: number;
   currency: "JPY";
+  /** False when this call returned an already-existing booking via the email+arrival de-dupe, rather than creating a new one. */
+  isNew: boolean;
 };
