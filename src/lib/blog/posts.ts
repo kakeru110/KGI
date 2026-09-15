@@ -36,6 +36,58 @@ export type BlogPost = {
  */
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "access-guide-kamakura-enoshima",
+    publishedDate: "2026-09-15",
+    titleJa: "大船駅から鎌倉・江ノ島へのアクセス完全ガイド",
+    titleEn: "Complete Access Guide: Ofuna to Kamakura and Enoshima",
+    excerptJa:
+      "大船駅を拠点に、鎌倉・江ノ島へどう向かうかをまとめました。JR・湘南モノレール・江ノ電、それぞれの所要時間とルートをご紹介します。",
+    excerptEn:
+      "How to get from Ofuna Station to Kamakura and Enoshima, using JR, the Shonan Monorail, and the Enoden line - with travel times for each route.",
+    heroImage: "/photos/blog/enoden-kamakurakoko.jpg",
+    galleryImages: [
+      {
+        src: "/photos/blog/shonan-monorail.jpg",
+        altJa: "湘南モノレール(大船〜江の島)",
+        altEn: "The Shonan Monorail (Ofuna to Enoshima)",
+      },
+    ],
+    sections: [
+      {
+        headingJa: "大船駅から鎌倉駅へ(JR)",
+        headingEn: "Ofuna to Kamakura Station (JR)",
+        bodyJa:
+          "大船駅から鎌倉駅へは、JR横須賀線・湘南新宿ラインで乗り換えなし約6分。鎌倉の中心部(鶴岡八幡宮や小町通りなど)へ向かう際は、まずこのルートが一番シンプルです。",
+        bodyEn:
+          "From Ofuna Station, it's about a 6-minute ride to Kamakura Station on the JR Yokosuka or Shonan-Shinjuku Line, no transfer needed. This is the simplest route if you're headed to central Kamakura - Tsurugaoka Hachimangu, Komachi-dori, and the like.",
+      },
+      {
+        headingJa: "大船駅から江ノ島方面へ(湘南モノレール)",
+        headingEn: "Ofuna to Enoshima (Shonan Monorail)",
+        bodyJa:
+          "大船駅から江ノ島方面へは、懸垂式(ぶら下がり式)の湘南モノレールが便利です。終点の湘南江の島駅まで約14分。車体がレールから吊り下がった状態で走る珍しい乗り物なので、乗車自体が観光の一部になります。",
+        bodyEn:
+          "For Enoshima, the Shonan Monorail is the way to go - a suspended monorail that hangs from the rail above, about a 14-minute ride to the last stop, Shonan-Enoshima Station. It's an unusual way to travel, so the ride itself is part of the sightseeing.",
+      },
+      {
+        headingJa: "鎌倉駅から江ノ島へ(江ノ電)",
+        headingEn: "Kamakura to Enoshima (Enoden)",
+        bodyJa:
+          "鎌倉駅から江ノ島駅へは、海沿いを走るローカル線・江ノ電で約25分(運賃は大人260円、12分間隔で運行)。由比ヶ浜や長谷など、鎌倉の海側の観光スポットにもこの路線でアクセスできます。途中の鎌倉高校前駅は、青い海を背景にした踏切の風景で知られ、アニメ「スラムダンク」の聖地として国内外から多くの観光客が訪れます(撮影時は交通ルールにご注意ください)。",
+        bodyEn:
+          "From Kamakura Station to Enoshima Station, the Enoden - a scenic local line that runs along the coast - takes about 25 minutes (adult fare ¥260, trains every 12 minutes). It also serves Kamakura's beach-side spots like Yuigahama and Hase along the way. Kamakura-Koko-mae Station, partway along the line, is known for its railway crossing with the ocean as a backdrop - a famous spot from the anime Slam Dunk that draws visitors from Japan and abroad (please follow traffic rules if you stop to take photos).",
+      },
+      {
+        headingJa: "おすすめの周り方",
+        headingEn: "A Good Way to Combine Both",
+        bodyJa:
+          "大船から湘南モノレールで江ノ島へ向かい、江ノ島を観光した後は江ノ電で鎌倉へ、最後にJRで大船へ戻る、というルートなら同じ道を引き返さずに一周できます。当宿は大船駅から徒歩7分なので、このルートの起点・終点としても便利です。",
+        bodyEn:
+          "A good loop: take the Shonan Monorail from Ofuna to Enoshima, explore Enoshima, ride the Enoden to Kamakura, then take JR back to Ofuna - no backtracking needed. Since our property is a 7-minute walk from Ofuna Station, it makes a convenient start and end point for this route.",
+      },
+    ],
+  },
+  {
     slug: "kannon-ofuna",
     publishedDate: "2026-09-10",
     titleJa: "大船の食堂「かんのん」",
