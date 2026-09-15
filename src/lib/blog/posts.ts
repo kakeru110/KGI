@@ -36,6 +36,58 @@ export type BlogPost = {
  */
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "kitakamakura-autumn-leaves-guide",
+    publishedDate: "2026-09-15",
+    titleJa: "北鎌倉の紅葉ガイド — 見頃と明月院「悟りの窓」",
+    titleEn: "Kitakamakura Autumn Leaves Guide: Meigetsu-in's Window of Enlightenment",
+    excerptJa:
+      "鎌倉の紅葉は例年11月下旬〜12月上旬が見頃。北鎌倉を代表する紅葉スポット、明月院の「悟りの窓」を中心にご紹介します。",
+    excerptEn:
+      "Kamakura's autumn colors typically peak from late November to early December. A guide centered on Kitakamakura's signature spot - Meigetsu-in's \"Window of Enlightenment.\"",
+    heroImage: "/photos/blog/meigetsuin-madoka.jpg",
+    galleryImages: [
+      {
+        src: "/photos/blog/kitakamakura-autumn-courtyard.jpg",
+        altJa: "北鎌倉エリアの紅葉",
+        altEn: "Autumn leaves in the Kitakamakura area",
+      },
+    ],
+    sections: [
+      {
+        headingJa: "鎌倉の紅葉、見頃はいつ？",
+        headingEn: "When Do the Leaves Peak in Kamakura?",
+        bodyJa:
+          "鎌倉の紅葉は例年11月下旬〜12月上旬が見頃です。関東の他エリアと比べると少し遅めなので、都心の紅葉が終わった後でも楽しめます。円覚寺は12月上旬、建長寺は11月末〜12月初めがピークの目安です。",
+        bodyEn:
+          "Kamakura's autumn colors typically peak from late November to early December - a bit later than much of the Tokyo area, so it's worth a visit even after the leaves elsewhere have passed. Engaku-ji tends to peak in early December, and Kencho-ji in late November to early December.",
+      },
+      {
+        headingJa: "明月院の「悟りの窓」",
+        headingEn: "Meigetsu-in's \"Window of Enlightenment\"",
+        bodyJa:
+          "北鎌倉を代表する紅葉スポットが明月院です。本堂の丸窓は「悟りの窓」と呼ばれ、後庭園の景色を額縁のように切り取る人気の撮影スポットになっています。この後庭園は通常非公開で、紅葉期とハナショウブ期のみ特別公開されます(拝観料とは別に500円が必要)。紅葉シーズンには丸窓の前に行列ができるほどの人気です。拝観時間は9:00〜16:00、拝観料は高校生以上500円、小中学生300円。最寄りはJR北鎌倉駅で、徒歩約10分です。",
+        bodyEn:
+          "Meigetsu-in is Kitakamakura's signature spot for autumn leaves. The round window in its main hall, known as the \"Window of Enlightenment,\" frames the rear garden like a picture - a hugely popular photo spot. That garden is normally closed to the public and only opens specially during the autumn leaves and iris seasons (an extra ¥500 on top of admission). During peak leaf season, a line forms in front of the window. Hours are 9:00-16:00, admission ¥500 for high school age and up and ¥300 for elementary and junior high students. The nearest station is JR Kitakamakura, about a 10-minute walk away.",
+      },
+      {
+        headingJa: "北鎌倉エリアの他の紅葉スポット",
+        headingEn: "Other Spots in the Kitakamakura Area",
+        bodyJa:
+          "明月院のほかにも、円覚寺・建長寺など北鎌倉には紅葉の名所が点在しています。北鎌倉駅を起点に歩いて回れる距離なので、あわせて巡るのもおすすめです。",
+        bodyEn:
+          "Beyond Meigetsu-in, Kitakamakura has several other well-known spots for fall colors, including Engaku-ji and Kencho-ji. They're all within walking distance of Kitakamakura Station, so it's easy to visit a few in one trip.",
+      },
+      {
+        headingJa: "アクセス",
+        headingEn: "Access",
+        bodyJa:
+          "大船駅からJRで北鎌倉駅までは1駅、乗り換えなし約3分です。当宿からもアクセスしやすいので、紅葉シーズンの日帰り観光にもぴったりです。",
+        bodyEn:
+          "From Ofuna Station, it's just one stop on JR to Kitakamakura - about 3 minutes, no transfer needed. It's an easy trip from our property, making it a great outing during leaf season.",
+      },
+    ],
+  },
+  {
     slug: "access-guide-kamakura-enoshima",
     publishedDate: "2026-09-15",
     titleJa: "大船駅から鎌倉・江ノ島へのアクセス完全ガイド",
