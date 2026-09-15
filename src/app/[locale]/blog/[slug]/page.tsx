@@ -77,6 +77,22 @@ export default async function BlogPostPage({
         </div>
       )}
 
+      {post.galleryImages && post.galleryImages.length > 0 && (
+        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {post.galleryImages.map((image, i) => (
+            <div key={i} className="relative aspect-square overflow-hidden rounded-xl">
+              <Image
+                src={image.src}
+                alt={locale === "ja" ? image.altJa : image.altEn}
+                fill
+                sizes="(min-width: 640px) 256px, 50vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="mt-8 space-y-8">
         {post.sections.map((section, i) => (
           <section key={i}>

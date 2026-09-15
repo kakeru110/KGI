@@ -5,6 +5,12 @@ export type BlogSection = {
   bodyEn: string;
 };
 
+export type BlogGalleryImage = {
+  src: string;
+  altJa: string;
+  altEn: string;
+};
+
 export type BlogPost = {
   slug: string;
   /** ISO date (YYYY-MM-DD), used for display and JSON-LD - update when the post is meaningfully revised. */
@@ -15,6 +21,8 @@ export type BlogPost = {
   excerptEn: string;
   /** Omit when no real photo of the place is available yet - a placeholder or unrelated photo would be misleading. */
   heroImage?: string;
+  /** Extra photos shown as a small grid after the hero image. */
+  galleryImages?: BlogGalleryImage[];
   sections: BlogSection[];
   /** Optional source link shown under posts with researched facts (e.g. a temple's own site). */
   sourceUrl?: string;
@@ -32,8 +40,16 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedDate: "2026-09-10",
     titleJa: "大船の食堂「かんのん」",
     titleEn: "Kannon (かんのん): A Restaurant in Ofuna",
-    excerptJa: "大船駅からほど近い、大船1-9-8にある食堂「かんのん」の基本情報をご紹介します。",
-    excerptEn: "Basic information about Kannon (かんのん), a restaurant in Ofuna near the station.",
+    excerptJa: "大船駅からほど近い、大船1-9-8にある活魚料理のお店「かんのん」をご紹介します。",
+    excerptEn: "Kannon (かんのん), a fresh-fish restaurant in Ofuna near the station.",
+    heroImage: "/photos/blog/kannon-ofuna-exterior.jpg",
+    galleryImages: [
+      {
+        src: "/photos/blog/kannon-ofuna-dish.jpg",
+        altJa: "かんのんの定食",
+        altEn: "A set meal at Kannon",
+      },
+    ],
     sections: [
       {
         headingJa: "お店について",
@@ -42,6 +58,14 @@ export const BLOG_POSTS: BlogPost[] = [
           "「かんのん」は神奈川県鎌倉市大船1-9-8にある食堂です。お食事の際は、お電話(0467-45-1848)でのご予約・お問い合わせがおすすめです。営業時間や定休日、メニューなど最新の情報は、下記の食べログのページでご確認ください。",
         bodyEn:
           "Kannon (かんのん) is a restaurant located at 1-9-8 Ofuna, Kamakura, Kanagawa. We recommend calling ahead (0467-45-1848) for reservations or questions. For current hours, days closed, and menu details, please check its Tabelog page linked below.",
+      },
+      {
+        headingJa: "活魚料理のお店",
+        headingEn: "A Fresh Fish Restaurant",
+        bodyJa:
+          "店頭の看板には「活魚料理」とあり、新鮮な魚介を使った料理が中心のお店です。Googleマップのクチコミ(評価4.0、659件)では、厚切りで新鮮な刺身、特にサーモンや中トロが好評で、アジフライなどの魚料理も評価されています。手頃な価格や活気ある雰囲気、親しみやすいスタッフを挙げる声がある一方、スタッフの対応がそっけないという意見も一部見られました。",
+        bodyEn:
+          "The sign outside reads \"活魚料理\" (fresh/live-fish cuisine), and the restaurant centers on dishes made with fresh seafood. According to Google Maps reviews (4.0 stars, 659 reviews), guests praise the thick-cut, fresh sashimi - especially salmon and medium fatty tuna - as well as fish dishes like aji fry (fried horse mackerel). Reviewers also mention reasonable prices, a lively atmosphere, and friendly staff, though a few reviews note the staff can come across as curt.",
       },
     ],
     sourceUrl: "https://tabelog.com/kanagawa/A1404/A140401/14002799/",
