@@ -102,6 +102,11 @@ export async function createBooking(params: {
         phone: params.guest.phone,
         price: params.total,
         notes: `Booked via website. Stripe checkout session: ${params.stripeSessionId}`,
+        // Without this, Beds24 doesn't fire its outbound webhook for
+        // API-created bookings - confirmed with Beds24 support (ticket
+        // #175338), which is why the property management company's own
+        // system wasn't picking up direct-site bookings.
+        actions: { allowWebhooks: true },
       },
     ],
   });
