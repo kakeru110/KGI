@@ -36,6 +36,68 @@ export type BlogPost = {
  */
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "kamakura-family-group-itinerary",
+    publishedDate: "2026-09-16",
+    titleJa: "子連れ・グループ向け鎌倉1泊2日モデルコース",
+    titleEn: "A 1-Night, 2-Day Kamakura Itinerary for Families and Groups",
+    excerptJa:
+      "大船を拠点に、子連れファミリーや友人グループにおすすめの鎌倉1泊2日モデルコースをご紹介します。",
+    excerptEn:
+      "A 1-night, 2-day model itinerary for families with kids or groups of friends, based out of Ofuna.",
+    heroImage: "/photos/sightseeing/tsurugaoka-hachimangu.jpg",
+    galleryImages: [
+      {
+        src: "/photos/sightseeing/komachi-dori.jpg",
+        altJa: "小町通り",
+        altEn: "Komachi-dori",
+      },
+      {
+        src: "/photos/sightseeing/kotokuin-daibutsu.jpg",
+        altJa: "鎌倉大仏(高徳院)",
+        altEn: "The Great Buddha of Kamakura (Kotoku-in)",
+      },
+      {
+        src: "/photos/sightseeing/yuigahama.jpg",
+        altJa: "由比ヶ浜",
+        altEn: "Yuigahama beach",
+      },
+    ],
+    sections: [
+      {
+        headingJa: "こんな旅行におすすめ",
+        headingEn: "Who This Course Is For",
+        bodyJa:
+          "子連れファミリーや友人グループでの鎌倉旅行に、大船を拠点にした1泊2日のモデルコースをご紹介します。移動時間を抑えつつ、鎌倉の定番スポットをしっかり楽しめる内容です。",
+        bodyEn:
+          "Here's a 1-night, 2-day model itinerary for families with kids or groups of friends visiting Kamakura, based out of Ofuna. It keeps travel time short while still covering Kamakura's classic sights.",
+      },
+      {
+        headingJa: "1日目 — 到着してのんびり",
+        headingEn: "Day 1 - Arrive and Relax",
+        bodyJa:
+          "15:00からセルフチェックインができるので、フロントでのやり取りを待たずにすぐお部屋に入れます。荷物を置いて身軽になったら、徒歩圏内の大船観音へ。高さ25mの観音像は大船駅からもすぐの距離です(詳しくは観音様のブログ記事をご覧ください)。夕方は徒歩5〜6分のスーパーやコンビニで買い出しをして、キッチンで簡単な夕食を。リビングの大型ソファと65インチテレビで、映画を見たりゲームをしたりしながら、初日はゆっくり過ごすのがおすすめです。",
+        bodyEn:
+          "Check-in opens at 15:00 and is fully self-service, so you can head straight to the room without waiting at a front desk. Once you've dropped off your bags, Ofuna Kannon - the 25m statue - is an easy walk from the station (see our separate guide for details). In the evening, pick up groceries at a nearby supermarket or convenience store, both 5-6 minutes on foot, and put together a simple dinner in the kitchen. With a large sofa and a 65-inch TV in the living room, it's a great spot to unwind with a movie or a game night on your first evening.",
+      },
+      {
+        headingJa: "2日目 — 鎌倉観光へ",
+        headingEn: "Day 2 - Exploring Kamakura",
+        bodyJa:
+          "チェックアウトは11:00までです。お荷物をお預かりする設備はないため、大船駅のコインロッカーへ預けてから身軽に出発するのがおすすめです。JRで鎌倉駅まで乗り換えなし約6分。鶴岡八幡宮を参拝したら、小町通りで食べ歩きやお土産探しを楽しめます。そこから江ノ電に乗り換えて長谷駅へ向かえば、鎌倉大仏(高徳院)や由比ヶ浜での散策も。海沿いを走る江ノ電は、子どもも喜ぶ景色です。大船駅に戻ってコインロッカーの荷物を回収すれば、旅の締めくくりです。",
+        bodyEn:
+          "Check-out is by 11:00. Since there's no luggage storage at the property, we recommend leaving your bags in a coin locker at Ofuna Station before heading out. From there, it's about a 6-minute ride on JR to Kamakura Station with no transfer. Visit Tsurugaoka Hachimangu, then browse the food stalls and shops along Komachi-dori. From Kamakura Station, the Enoden line takes you to Hase Station for the Great Buddha at Kotoku-in, plus a stroll along Yuigahama beach - the coastal Enoden ride is a treat for kids, too. Head back to Ofuna Station to collect your luggage before wrapping up the trip.",
+      },
+      {
+        headingJa: "持ち物・注意点",
+        headingEn: "A Few Tips",
+        bodyJa:
+          "お子様連れの方には、人数分のお子様用食器もご用意しています。セルフチェックインなので、小さなお子様がぐずってしまっても、フロントでのやり取りを気にせず落ち着いて対応できるのも利点です。グループでの旅行なら、キッチンで買い出したものを一緒に調理したり、リビングでゆっくり語り合ったり、一棟貸しならではの自由な時間を楽しめます。",
+        bodyEn:
+          "For families, we provide children's tableware for the whole group. Self-check-in also means you're not navigating a front desk if a little one is having a moment - one less thing to manage. For groups of friends, the kitchen makes it easy to cook something together with what you picked up nearby, and the living room gives you space to relax and catch up - the kind of freedom a whole-house rental is made for.",
+      },
+    ],
+  },
+  {
     slug: "kitakamakura-autumn-leaves-guide",
     publishedDate: "2026-09-15",
     titleJa: "北鎌倉の紅葉ガイド — 見頃と明月院「悟りの窓」",
