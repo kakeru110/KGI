@@ -44,8 +44,13 @@ export const BLOG_POSTS: BlogPost[] = [
       "大船を拠点に、子連れファミリーや友人グループにおすすめの鎌倉1泊2日モデルコースをご紹介します。",
     excerptEn:
       "A 1-night, 2-day model itinerary for families with kids or groups of friends, based out of Ofuna.",
-    heroImage: "/photos/sightseeing/tsurugaoka-hachimangu.jpg",
+    heroImage: "/photos/blog/living-room-friends.png",
     galleryImages: [
+      {
+        src: "/photos/sightseeing/tsurugaoka-hachimangu.jpg",
+        altJa: "鶴岡八幡宮",
+        altEn: "Tsurugaoka Hachimangu",
+      },
       {
         src: "/photos/sightseeing/komachi-dori.jpg",
         altJa: "小町通り",
