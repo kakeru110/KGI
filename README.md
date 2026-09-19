@@ -96,18 +96,33 @@ page still creates bookings on its own), but the webhook is the more
 reliable path and should be configured before relying on this for real
 payments.
 
-## Owner booking notification
+## Booking notification emails
 
-`src/lib/email.ts` emails the owner via [Resend](https://resend.com)'s
+`src/lib/email.ts` sends two emails via [Resend](https://resend.com)'s
 HTTP API whenever a new direct booking is created (`src/lib/checkout.ts`
-calls it right after `createBooking()` returns `isNew: true` — so it
-fires once per booking even though both the webhook and the confirm-page
-fallback can call `completeBookingFromSession()` for the same session).
-Set `RESEND_API_KEY` and `BOOKING_NOTIFICATION_EMAIL` in `.env.local` —
-see `env.example` for how to get a key and why the `from` address needs
-the `kamakuragateinn.com` domain verified in the Resend dashboard first.
-Without these set, booking creation still works; the notification email
-is just silently skipped.
+calls both right after `createBooking()` returns `isNew: true` — so they
+fire once per booking even though both the webhook and the confirm-page
+fallback can call `completeBookingFromSession()` for the same session):
+
+- **Owner notification** (`sendBookingNotificationEmail`) — booking
+  summary to `BOOKING_NOTIFICATION_EMAIL`.
+- **Guest confirmation** (`sendGuestConfirmationEmail`) — a thank-you
+  email to the guest, in whichever locale they booked in (the Stripe
+  Checkout Session's `metadata.locale`, set in `/api/checkout`), with a
+  link to `/[locale]/booking/register?bookingId=...`. That page renders
+  the same `GuestRegistrationForm` as the confirm page, but standalone —
+  it only needs the `bookingId`, not the ephemeral Stripe `session_id` —
+  so the link in the email still works if the guest never returns to
+  `/booking/confirm` right after paying. The email's `reply_to` is
+  `BUSINESS_INFO.email` (the same address the `/contact` form delivers
+  to), so a guest reply reaches a monitored inbox rather than the
+  unmonitored `notifications@` sending address.
+
+Set `RESEND_API_KEY` (and `BOOKING_NOTIFICATION_EMAIL` for the owner
+email) in `.env.local` — see `env.example` for how to get a key and why
+the `from` address needs the `kamakuragateinn.com` domain verified in the
+Resend dashboard first. Without `RESEND_API_KEY` set, booking creation
+still works; both emails are just silently skipped.
 
 ## Contact form
 

@@ -531,6 +531,8 @@ const en: Dictionary = {
     submitting: "Submitting…",
     success: "Thank you, your information has been recorded.",
     errorGeneric: "Something went wrong. Please try again later.",
+    invalidLinkHeading: "This link isn't valid",
+    invalidLinkBody: "Please use the link from your booking confirmation email instead.",
   },
   contact: {
     heading: "Contact Us",

@@ -263,6 +263,8 @@ export type Dictionary = {
     submitting: string;
     success: string;
     errorGeneric: string;
+    invalidLinkHeading: string;
+    invalidLinkBody: string;
   };
   contact: {
     heading: string;

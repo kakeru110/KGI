@@ -1,4 +1,5 @@
 import "server-only";
+import { BUSINESS_INFO } from "@/lib/business-info";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const BOOKING_NOTIFICATION_EMAIL = process.env.BOOKING_NOTIFICATION_EMAIL;
@@ -47,5 +48,91 @@ export async function sendBookingNotificationEmail(params: {
     });
   } catch {
     // Swallow errors - see the doc comment above.
+  }
+}
+
+/**
+ * Thanks the guest for a new direct booking and points them to the
+ * standalone guest-registration page (not the ephemeral Stripe
+ * session_id flow on /booking/confirm, so the link still works if they
+ * come back to it later). Sent in the same locale they booked in - see
+ * the `locale` field added to the Stripe Checkout Session metadata in
+ * src/app/api/checkout/route.ts. Uses `reply_to` so a guest hitting
+ * "reply" reaches the same inbox the /contact form already delivers to,
+ * rather than the unmonitored `from` address.
+ */
+export async function sendGuestConfirmationEmail(params: {
+  to: string;
+  guestName: string;
+  locale: "ja" | "en";
+  bookingId: number;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  total: number;
+  registrationUrl: string;
+}): Promise<void> {
+  if (!RESEND_API_KEY) return;
+
+  const { to, guestName, locale, bookingId, checkIn, checkOut, guests, total, registrationUrl } = params;
+  const isJa = locale === "ja";
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Kamakura Gate Inn <notifications@kamakuragateinn.com>",
+        reply_to: [BUSINESS_INFO.email],
+        to: [to],
+        subject: isJa
+          ? `【Kamakura Gate Inn】ご予約ありがとうございます（予約ID: ${bookingId}）`
+          : `Kamakura Gate Inn - Booking confirmed (#${bookingId})`,
+        text: isJa
+          ? [
+              `${guestName} 様`,
+              "",
+              "この度はKamakura Gate Innにご予約いただき、誠にありがとうございます。",
+              "",
+              `予約ID: ${bookingId}`,
+              `チェックイン: ${checkIn}`,
+              `チェックアウト: ${checkOut}`,
+              `人数: ${guests}名`,
+              `金額: ¥${total.toLocaleString("ja-JP")}`,
+              "",
+              "旅館業法に基づき、ご宿泊者様の情報（お名前・ご住所など）のご登録をお願いしております。",
+              "下記リンクよりご登録ください。",
+              registrationUrl,
+              "",
+              "ご不明な点がございましたら、このメールにご返信ください。",
+              "",
+              "Kamakura Gate Inn",
+            ].join("\n")
+          : [
+              `Dear ${guestName},`,
+              "",
+              "Thank you for booking with Kamakura Gate Inn.",
+              "",
+              `Booking reference: ${bookingId}`,
+              `Check-in: ${checkIn}`,
+              `Check-out: ${checkOut}`,
+              `Guests: ${guests}`,
+              `Total: ¥${total.toLocaleString("en-US")}`,
+              "",
+              "Japanese law requires us to record some information about each guest",
+              "(name, address, etc.) before your stay. Please complete your",
+              "registration using the link below.",
+              registrationUrl,
+              "",
+              "If you have any questions, just reply to this email.",
+              "",
+              "Kamakura Gate Inn",
+            ].join("\n"),
+      }),
+    });
+  } catch {
+    // Swallow errors - see the doc comment on sendBookingNotificationEmail.
   }
 }

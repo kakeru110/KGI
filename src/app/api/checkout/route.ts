@@ -74,6 +74,7 @@ export async function POST(request: Request) {
       },
     ],
     metadata: {
+      locale: body.locale,
       checkIn: offer.checkIn,
       checkOut: offer.checkOut,
       adults: String(body.adults),

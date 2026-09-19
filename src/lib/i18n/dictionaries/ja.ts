@@ -529,6 +529,8 @@ const ja: Dictionary = {
     submitting: "登録中…",
     success: "ご登録ありがとうございました。",
     errorGeneric: "登録に失敗しました。時間をおいて再度お試しください。",
+    invalidLinkHeading: "リンクが無効です",
+    invalidLinkBody: "予約確認メールに記載のリンクから改めてアクセスしてください。",
   },
   contact: {
     heading: "お問い合わせ",
