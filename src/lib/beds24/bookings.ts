@@ -173,3 +173,62 @@ export async function recordGuestRegistration(
     throw new Error(`Beds24 guest registration update failed: ${JSON.stringify(result?.errors)}`);
   }
 }
+
+export type ReviewRequestCandidate = {
+  bookingId: number;
+  guestName: string;
+  email: string;
+  locale: "ja" | "en";
+};
+
+type BookingsGetFullResponse = {
+  data: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    lang: string;
+    notes: string;
+    custom1: string;
+  }[];
+};
+
+/** Written to `custom1` once a booking's review-request email has gone out, so the daily cron doesn't resend it. */
+const REVIEW_REQUEST_SENT_MARKER = "review-request-sent";
+
+/**
+ * Finds direct-site bookings that checked out on `departureDate` and
+ * haven't been sent a review-request email yet - tracked via `custom1`
+ * (there's no database; same "Beds24 booking fields as persistence"
+ * pattern as recordGuestRegistration's use of `notes`). Scoped to direct
+ * bookings only, identified by the same "Booked via website" marker
+ * createBooking() writes to `notes` - OTA guests already get their own
+ * post-stay review prompts from Airbnb/Booking.com, and most OTA bookings
+ * carry masked forwarding addresses we couldn't reliably email anyway.
+ */
+export async function findBookingsAwaitingReviewRequest(departureDate: string): Promise<ReviewRequestCandidate[]> {
+  const response = await beds24Fetch<BookingsGetFullResponse>("/bookings", {
+    query: { propertyId: PROPERTY_ID, departureFrom: departureDate, departureTo: departureDate, status: "confirmed" },
+  });
+
+  return response.data
+    .filter((b) => b.notes?.includes("Booked via website") && b.custom1 !== REVIEW_REQUEST_SENT_MARKER)
+    .map((b) => ({
+      bookingId: b.id,
+      guestName: `${b.lastName} ${b.firstName}`.trim(),
+      email: b.email,
+      locale: b.lang === "en" ? "en" : "ja",
+    }));
+}
+
+export async function markReviewRequestSent(bookingId: number): Promise<void> {
+  const response = await beds24Fetch<BookingsPostResponse>("/bookings", {
+    method: "POST",
+    body: [{ id: bookingId, custom1: REVIEW_REQUEST_SENT_MARKER }],
+  });
+
+  const result = response[0];
+  if (!result?.success) {
+    throw new Error(`Beds24 review-request marker update failed: ${JSON.stringify(result?.errors)}`);
+  }
+}

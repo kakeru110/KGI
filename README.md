@@ -138,6 +138,37 @@ the `from` address needs the `kamakuragateinn.com` domain verified in the
 Resend dashboard first. Without `RESEND_API_KEY` set, booking creation
 still works; both emails are just silently skipped.
 
+### Review-request email (daily Cron)
+
+`src/app/api/cron/review-requests/route.ts` runs once a day via [Vercel
+Cron](https://vercel.com/docs/cron-jobs) (schedule in `vercel.json`) and
+emails `sendReviewRequestEmail` (`src/lib/email.ts`) to every direct-site
+guest whose checkout was `REVIEW_REQUEST_DAYS_AFTER_CHECKOUT` (2) days
+ago. Unlike the other two emails, this one can't fire synchronously from
+the booking flow — "a couple of days after checkout" only exists as a
+delayed send, so it needs an actual schedule.
+
+There's no database, so Beds24 itself is the only source of truth:
+`findBookingsAwaitingReviewRequest()` (`src/lib/beds24/bookings.ts`)
+queries `GET /bookings` for the target checkout date, keeps only
+bookings whose `notes` carries the same "Booked via website" marker
+`createBooking()` writes (OTA guests get their own review prompts from
+Airbnb/Booking.com already, and most OTA bookings carry masked
+forwarding addresses anyway), and skips any booking already marked sent.
+`markReviewRequestSent()` writes that mark to the booking's unused
+`custom1` field right after sending, so a retried or overlapping run
+can't double-send.
+
+**The email body is placeholder copy** — the property owner said they'd
+supply the real wording later; replace the `text` in
+`sendReviewRequestEmail` rather than tweaking it.
+
+Set `CRON_SECRET` in Vercel's project environment variables (see
+`env.example`) — Vercel sends it back as the request's `Authorization`
+header on every cron invocation, and the route refuses any request
+without a matching one, so the public URL can't be used to trigger guest
+emails from outside Vercel.
+
 ## Contact form
 
 `/[locale]/contact` (`src/components/ContactForm.tsx`) posts straight to

@@ -235,3 +235,67 @@ export async function sendGuestConfirmationEmail(params: {
     // Swallow errors - see the doc comment on sendBookingNotificationEmail.
   }
 }
+
+/**
+ * Asks the guest for a review a couple of days after checkout. Sent by
+ * `src/app/api/cron/review-requests/route.ts`, a daily Vercel Cron job -
+ * this is the one booking email NOT sent synchronously from the booking
+ * flow, since "a couple of days after checkout" only exists as a delayed
+ * send. Uses the same `reply_to`/`bcc` treatment as the guest confirmation
+ * email, for the same reasons (see its doc comment above).
+ *
+ * PLACEHOLDER COPY: the property owner said they'd supply the real
+ * wording later. Replace the `text` below (both languages) rather than
+ * tweaking it - don't treat this placeholder as approved guest-facing copy.
+ */
+export async function sendReviewRequestEmail(params: {
+  to: string;
+  guestName: string;
+  locale: "ja" | "en";
+}): Promise<void> {
+  if (!RESEND_API_KEY) return;
+
+  const { to, guestName, locale } = params;
+  const isJa = locale === "ja";
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Kamakura Gate Inn <notifications@kamakuragateinn.com>",
+        reply_to: [GUEST_REPLY_TO_EMAIL],
+        bcc: [GUEST_REPLY_TO_EMAIL],
+        to: [to],
+        subject: isJa
+          ? `【Kamakura Gate Inn】ご滞在はいかがでしたか？`
+          : `Kamakura Gate Inn - How was your stay?`,
+        text: isJa
+          ? [
+              `${guestName} 様`,
+              "",
+              "先日はKamakura Gate Innにご宿泊いただき、誠にありがとうございました。",
+              "ご滞在はいかがでしたでしょうか。",
+              "",
+              "よろしければ、ご感想をお聞かせいただけますと幸いです。",
+              "",
+              "Kamakura Gate Inn",
+            ].join("\n")
+          : [
+              `Dear ${guestName},`,
+              "",
+              "Thank you again for staying with Kamakura Gate Inn.",
+              "We hope you enjoyed your stay.",
+              "",
+              "We'd love to hear your feedback, if you have a moment to share it.",
+              "",
+              "Kamakura Gate Inn",
+            ].join("\n"),
+      }),
+    });
+  } catch {
+    // Swallow errors - see the doc comment on sendBookingNotificationEmail.
+  }
+}
