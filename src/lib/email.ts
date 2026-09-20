@@ -1,7 +1,14 @@
 import "server-only";
-import { BUSINESS_INFO } from "@/lib/business-info";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+/**
+ * The property management company's inbox - already wired into their
+ * Slack notifications for OTA guest messages. Guest replies to our
+ * confirmation email land here too, so all guest communication funnels
+ * into the one channel their team already watches.
+ */
+const GUEST_REPLY_TO_EMAIL = "fika2-ofuna@good-neighbors.link";
 const BOOKING_NOTIFICATION_EMAIL = process.env.BOOKING_NOTIFICATION_EMAIL;
 
 /**
@@ -58,8 +65,11 @@ export async function sendBookingNotificationEmail(params: {
  * come back to it later). Sent in the same locale they booked in - see
  * the `locale` field added to the Stripe Checkout Session metadata in
  * src/app/api/checkout/route.ts. Uses `reply_to` so a guest hitting
- * "reply" reaches the same inbox the /contact form already delivers to,
- * rather than the unmonitored `from` address.
+ * "reply" reaches the property management company's inbox (already
+ * wired into their Slack) rather than the unmonitored `from` address -
+ * the `from` domain itself stays kamakuragateinn.com, since Resend only
+ * allows sending from a domain DNS-verified in our own account, and
+ * good-neighbors.link is theirs, not ours.
  */
 export async function sendGuestConfirmationEmail(params: {
   to: string;
@@ -85,7 +95,7 @@ export async function sendGuestConfirmationEmail(params: {
       },
       body: JSON.stringify({
         from: "Kamakura Gate Inn <notifications@kamakuragateinn.com>",
-        reply_to: [BUSINESS_INFO.email],
+        reply_to: [GUEST_REPLY_TO_EMAIL],
         to: [to],
         subject: isJa
           ? `【Kamakura Gate Inn】ご予約ありがとうございます（予約ID: ${bookingId}）`

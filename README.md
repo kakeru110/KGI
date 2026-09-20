@@ -113,10 +113,15 @@ fallback can call `completeBookingFromSession()` for the same session):
   the same `GuestRegistrationForm` as the confirm page, but standalone —
   it only needs the `bookingId`, not the ephemeral Stripe `session_id` —
   so the link in the email still works if the guest never returns to
-  `/booking/confirm` right after paying. The email's `reply_to` is
-  `BUSINESS_INFO.email` (the same address the `/contact` form delivers
-  to), so a guest reply reaches a monitored inbox rather than the
-  unmonitored `notifications@` sending address.
+  `/booking/confirm` right after paying. The email's `reply_to` is the
+  property management company's inbox (`fika2-ofuna@good-neighbors.link`,
+  `GUEST_REPLY_TO_EMAIL` in `src/lib/email.ts`) — already wired into
+  their Slack notifications for OTA guest messages — so a guest reply
+  lands in the same channel their team already watches, rather than the
+  unmonitored `notifications@` sending address. The `from` address stays
+  on `kamakuragateinn.com` regardless: Resend only allows sending from a
+  domain verified in our own account, and `good-neighbors.link` is
+  theirs, not ours.
 
 Set `RESEND_API_KEY` (and `BOOKING_NOTIFICATION_EMAIL` for the owner
 email) in `.env.local` — see `env.example` for how to get a key and why
