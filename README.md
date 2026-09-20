@@ -118,10 +118,12 @@ fallback can call `completeBookingFromSession()` for the same session):
   `GUEST_REPLY_TO_EMAIL` in `src/lib/email.ts`) — already wired into
   their Slack notifications for OTA guest messages — so a guest reply
   lands in the same channel their team already watches, rather than the
-  unmonitored `notifications@` sending address. The `from` address stays
-  on `kamakuragateinn.com` regardless: Resend only allows sending from a
-  domain verified in our own account, and `good-neighbors.link` is
-  theirs, not ours.
+  unmonitored `notifications@` sending address. The same address is also
+  `bcc`'d (not `cc`'d, so the guest never sees it) so the management
+  company sees the outbound confirmation email itself, not just any
+  reply to it. The `from` address stays on `kamakuragateinn.com`
+  regardless: Resend only allows sending from a domain verified in our
+  own account, and `good-neighbors.link` is theirs, not ours.
 
 Set `RESEND_API_KEY` (and `BOOKING_NOTIFICATION_EMAIL` for the owner
 email) in `.env.local` — see `env.example` for how to get a key and why

@@ -66,10 +66,12 @@ export async function sendBookingNotificationEmail(params: {
  * the `locale` field added to the Stripe Checkout Session metadata in
  * src/app/api/checkout/route.ts. Uses `reply_to` so a guest hitting
  * "reply" reaches the property management company's inbox (already
- * wired into their Slack) rather than the unmonitored `from` address -
- * the `from` domain itself stays kamakuragateinn.com, since Resend only
- * allows sending from a domain DNS-verified in our own account, and
- * good-neighbors.link is theirs, not ours.
+ * wired into their Slack) rather than the unmonitored `from` address,
+ * and `bcc`s that same inbox so they also see the outbound email itself
+ * (via `bcc`, not `cc`, so the guest never sees that address in the
+ * headers). The `from` domain itself stays kamakuragateinn.com, since
+ * Resend only allows sending from a domain DNS-verified in our own
+ * account, and good-neighbors.link is theirs, not ours.
  */
 export async function sendGuestConfirmationEmail(params: {
   to: string;
@@ -96,6 +98,7 @@ export async function sendGuestConfirmationEmail(params: {
       body: JSON.stringify({
         from: "Kamakura Gate Inn <notifications@kamakuragateinn.com>",
         reply_to: [GUEST_REPLY_TO_EMAIL],
+        bcc: [GUEST_REPLY_TO_EMAIL],
         to: [to],
         subject: isJa
           ? `【Kamakura Gate Inn】ご予約ありがとうございます（予約ID: ${bookingId}）`
