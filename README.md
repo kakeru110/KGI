@@ -106,14 +106,21 @@ fallback can call `completeBookingFromSession()` for the same session):
 
 - **Owner notification** (`sendBookingNotificationEmail`) — booking
   summary to `BOOKING_NOTIFICATION_EMAIL`.
-- **Guest confirmation** (`sendGuestConfirmationEmail`) — a thank-you
-  email to the guest, in whichever locale they booked in (the Stripe
-  Checkout Session's `metadata.locale`, set in `/api/checkout`), with a
-  link to `/[locale]/booking/register?bookingId=...`. That page renders
-  the same `GuestRegistrationForm` as the confirm page, but standalone —
-  it only needs the `bookingId`, not the ephemeral Stripe `session_id` —
-  so the link in the email still works if the guest never returns to
-  `/booking/confirm` right after paying. The email's `reply_to` is the
+- **Guest confirmation** (`sendGuestConfirmationEmail`) — the full
+  pre-stay guide (self-check-in, Wi-Fi, access, parking, house rules,
+  emergency contact) to the guest, in whichever locale they booked in
+  (the Stripe Checkout Session's `metadata.locale`, set in
+  `/api/checkout`). The body text is business copy from the property
+  owner, kept verbatim in the code rather than reworded. It deliberately
+  doesn't mention the booking dates/price (the source text is a stay
+  guide, not a receipt) or the guest-registration link (the source text
+  says that's sent in a separate, later message, closer to the stay -
+  not built yet). Once that message exists, it should link to
+  `/[locale]/booking/register?bookingId=...`, which already renders the
+  same `GuestRegistrationForm` as the confirm page but standalone - it
+  only needs the `bookingId`, not an ephemeral Stripe `session_id` - so
+  the page will work as soon as something sends that link.
+  The email's `reply_to` is the
   property management company's inbox (`fika2-ofuna@good-neighbors.link`,
   `GUEST_REPLY_TO_EMAIL` in `src/lib/email.ts`) — already wired into
   their Slack notifications for OTA guest messages — so a guest reply

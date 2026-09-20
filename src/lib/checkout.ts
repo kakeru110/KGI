@@ -4,7 +4,6 @@ import { createBooking } from "@/lib/beds24/bookings";
 import type { CreatedBooking } from "@/lib/beds24/types";
 import { sendBookingNotificationEmail, sendGuestConfirmationEmail } from "@/lib/email";
 import { defaultLocale, isLocale } from "@/lib/i18n/config";
-import { SITE_URL } from "@/lib/site";
 
 /**
  * Shared by the confirm-page fallback and the Stripe webhook: verifies a
@@ -56,11 +55,6 @@ export async function completeBookingFromSession(
       guestName,
       locale,
       bookingId: booking.bookingId,
-      checkIn: booking.checkIn,
-      checkOut: booking.checkOut,
-      guests: booking.guests,
-      total: booking.total,
-      registrationUrl: `${SITE_URL}/${locale}/booking/register?bookingId=${booking.bookingId}`,
     });
   }
 
