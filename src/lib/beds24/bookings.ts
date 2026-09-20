@@ -107,25 +107,6 @@ export async function createBooking(params: {
         // #175338), which is why the property management company's own
         // system wasn't picking up direct-site bookings.
         actions: { allowWebhooks: true },
-        // Without a "payment" invoice item, Beds24 has no record that
-        // Stripe already collected this amount, so the booking shows as
-        // pay-at-property ("現地決済") instead of prepaid ("事前決済") -
-        // which in turn blocks Beds24's own pre-checkin Auto Action
-        // emails, which only fire for prepaid bookings. Confirmed the
-        // exact shape (type/subType/description/amount, no `id` since
-        // this creates a new item) against real invoiceItems on paid
-        // Airbnb/Booking.com bookings via GET /bookings/invoices -
-        // subType 202 shows up there for both channels' own settlement
-        // methods ("Channel Collect", "BankTransfer"), so it isn't
-        // method-specific; only `description` differs.
-        invoiceItems: [
-          {
-            type: "payment",
-            subType: 202,
-            description: "Stripe",
-            amount: params.total,
-          },
-        ],
       },
     ],
   });
