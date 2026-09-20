@@ -98,11 +98,13 @@ payments.
 
 ## Booking notification emails
 
-`src/lib/email.ts` sends two emails via [Resend](https://resend.com)'s
-HTTP API whenever a new direct booking is created (`src/lib/checkout.ts`
-calls both right after `createBooking()` returns `isNew: true` — so they
-fire once per booking even though both the webhook and the confirm-page
-fallback can call `completeBookingFromSession()` for the same session):
+`src/lib/email.ts` sends two emails via Gmail SMTP (through
+[nodemailer](https://nodemailer.com), authenticated with an App Password
+for `BUSINESS_INFO.email`) whenever a new direct booking is created
+(`src/lib/checkout.ts` calls both right after `createBooking()` returns
+`isNew: true` — so they fire once per booking even though both the
+webhook and the confirm-page fallback can call
+`completeBookingFromSession()` for the same session):
 
 - **Owner notification** (`sendBookingNotificationEmail`) — booking
   summary to `BOOKING_NOTIFICATION_EMAIL`.
@@ -128,15 +130,15 @@ fallback can call `completeBookingFromSession()` for the same session):
   unmonitored `notifications@` sending address. The same address is also
   `bcc`'d (not `cc`'d, so the guest never sees it) so the management
   company sees the outbound confirmation email itself, not just any
-  reply to it. The `from` address stays on `kamakuragateinn.com`
-  regardless: Resend only allows sending from a domain verified in our
-  own account, and `good-neighbors.link` is theirs, not ours.
+  reply to it. The `from` address is `BUSINESS_INFO.email` itself (a
+  gmail.com address, not a kamakuragateinn.com one) — sending via Gmail
+  needs no DNS-verified sending domain, unlike a transactional-email
+  service (Resend, SES, etc.), which is exactly why Gmail was chosen here.
 
-Set `RESEND_API_KEY` (and `BOOKING_NOTIFICATION_EMAIL` for the owner
-email) in `.env.local` — see `env.example` for how to get a key and why
-the `from` address needs the `kamakuragateinn.com` domain verified in the
-Resend dashboard first. Without `RESEND_API_KEY` set, booking creation
-still works; both emails are just silently skipped.
+Set `GMAIL_APP_PASSWORD` (and `BOOKING_NOTIFICATION_EMAIL` for the owner
+email) in `.env.local` — see `env.example` for how to generate an App
+Password. Without `GMAIL_APP_PASSWORD` set, booking creation still
+works; both emails are just silently skipped.
 
 ## Contact form
 
