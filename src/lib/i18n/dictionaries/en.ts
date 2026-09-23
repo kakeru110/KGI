@@ -401,6 +401,34 @@ const en: Dictionary = {
         season: "March 2026",
         text: "The ocean painting in the room was lovely, and the TV was nice and big - we all enjoyed playing games together. We'd love to come back as a group again.",
       },
+      {
+        season: "August 2026",
+        text: "The three of us stayed for a night and wandered over to a nearby art museum too - such a fun trip. We'd love to come back!",
+      },
+      {
+        season: "July 2026",
+        text: "It was so comfortable we didn't want to leave. We got to spend a special celebration with friends at this place, and it made us so happy.",
+      },
+      {
+        season: "August 2026",
+        text: "Four of us high school friends had our first sleepover since graduation. The room was clean and stylish - such a happy time!",
+      },
+      {
+        season: "August 2026",
+        text: "Three of us were supposed to stay, but one friend got sick and it turned into a last-minute trip for two. Still, the place was so comfortable and we had a great time. Next time, the three of us for sure!",
+      },
+      {
+        season: "September 2026",
+        text: "Six of us university friends stayed together. We'd love to come back with the friend who couldn't make it this time too.",
+      },
+      {
+        season: "August 2026",
+        text: "Spacious, clean, and so comfortable. We had a wonderful time!",
+      },
+      {
+        season: "August 2026",
+        text: "We stayed here to celebrate a birthday.",
+      },
     ],
   },
   blog: {
