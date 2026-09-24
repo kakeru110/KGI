@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { findBookingsAwaitingReviewRequest, markReviewRequestSent } from "@/lib/beds24/bookings";
 import { sendReviewRequestEmail } from "@/lib/email";
 
-/** How many days after checkout the review-request email goes out. */
-const REVIEW_REQUEST_DAYS_AFTER_CHECKOUT = 2;
+/** How many days after checkout the review-request email goes out (0 = checkout day itself). */
+const REVIEW_REQUEST_DAYS_AFTER_CHECKOUT = 0;
 
 function departureDateNDaysAgo(days: number): string {
   const date = new Date();
@@ -12,11 +12,12 @@ function departureDateNDaysAgo(days: number): string {
 }
 
 /**
- * Runs daily via Vercel Cron (see vercel.json) and emails a review request
- * to every direct-site guest whose checkout was REVIEW_REQUEST_DAYS_AFTER_CHECKOUT
- * days ago. Marks each booking as sent (Beds24 `custom1`) so a retried or
- * overlapping run can't double-send. Requires CRON_SECRET so this can't be
- * triggered by an arbitrary request to this public URL.
+ * Runs daily at 20:00 JST (11:00 UTC, see vercel.json) and emails a review
+ * request to every direct-site guest checking out that day
+ * (REVIEW_REQUEST_DAYS_AFTER_CHECKOUT). Marks each booking as sent (Beds24
+ * `custom1`) so a retried or overlapping run can't double-send. Requires
+ * CRON_SECRET so this can't be triggered by an arbitrary request to this
+ * public URL.
  */
 export async function GET(request: Request) {
   const cronSecret = process.env.CRON_SECRET;

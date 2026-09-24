@@ -140,13 +140,13 @@ still works; both emails are just silently skipped.
 
 ### Review-request email (daily Cron)
 
-`src/app/api/cron/review-requests/route.ts` runs once a day via [Vercel
-Cron](https://vercel.com/docs/cron-jobs) (schedule in `vercel.json`) and
-emails `sendReviewRequestEmail` (`src/lib/email.ts`) to every direct-site
-guest whose checkout was `REVIEW_REQUEST_DAYS_AFTER_CHECKOUT` (2) days
-ago. Unlike the other two emails, this one can't fire synchronously from
-the booking flow — "a couple of days after checkout" only exists as a
-delayed send, so it needs an actual schedule.
+`src/app/api/cron/review-requests/route.ts` runs once a day at 20:00 JST
+(11:00 UTC) via [Vercel Cron](https://vercel.com/docs/cron-jobs)
+(schedule in `vercel.json`) and emails `sendReviewRequestEmail`
+(`src/lib/email.ts`) to every direct-site guest checking out that day
+(`REVIEW_REQUEST_DAYS_AFTER_CHECKOUT`, 0). Unlike the other two emails,
+this one can't fire synchronously from the booking flow — a fixed local
+time on checkout day only exists as a scheduled send.
 
 There's no database, so Beds24 itself is the only source of truth:
 `findBookingsAwaitingReviewRequest()` (`src/lib/beds24/bookings.ts`)
