@@ -244,9 +244,9 @@ export async function sendGuestConfirmationEmail(params: {
  * send. Uses the same `reply_to`/`bcc` treatment as the guest confirmation
  * email, for the same reasons (see its doc comment above).
  *
- * PLACEHOLDER COPY: the property owner said they'd supply the real
- * wording later. Replace the `text` below (both languages) rather than
- * tweaking it - don't treat this placeholder as approved guest-facing copy.
+ * The body text is business copy from the property owner (a Google Maps
+ * review link), kept verbatim rather than reworded, same as the pre-stay
+ * guide email.
  */
 export async function sendReviewRequestEmail(params: {
   to: string;
@@ -276,20 +276,34 @@ export async function sendReviewRequestEmail(params: {
           ? [
               `${guestName} 様`,
               "",
-              "先日はKamakura Gate Innにご宿泊いただき、誠にありがとうございました。",
-              "ご滞在はいかがでしたでしょうか。",
+              "この度はKamakura Gate Innにご宿泊いただき、誠にありがとうございました。",
               "",
-              "よろしければ、ご感想をお聞かせいただけますと幸いです。",
+              "ご滞在中にご不便な点などはございませんでしたでしょうか。",
+              "もしご満足いただけましたら、Googleマップにも率直なレビューをいただけますと幸いです。",
+              "今後ご宿泊を検討されるお客様の参考にもなります。",
+              "",
+              "Googleレビューはこちら：",
+              "https://g.page/r/Ce8UGopwqFyvEBM/review",
+              "",
+              "今後の運営向上にも活かしてまいりますので、お気づきの点がございましたらぜひお知らせください。",
+              "またのお越しを心よりお待ちしております。",
               "",
               "Kamakura Gate Inn",
             ].join("\n")
           : [
               `Dear ${guestName},`,
               "",
-              "Thank you again for staying with Kamakura Gate Inn.",
-              "We hope you enjoyed your stay.",
+              "Thank you very much for staying with Kamakura Gate Inn.",
               "",
-              "We'd love to hear your feedback, if you have a moment to share it.",
+              "We hope everything about your stay went smoothly.",
+              "If you enjoyed your time with us, we would be truly grateful if you could share an honest review on Google Maps.",
+              "It would also be a great help to future guests considering a stay.",
+              "",
+              "You can leave a review here:",
+              "https://g.page/r/Ce8UGopwqFyvEBM/review",
+              "",
+              "We're always looking to improve, so please let us know if anything stood out to you.",
+              "We hope to welcome you back again soon.",
               "",
               "Kamakura Gate Inn",
             ].join("\n"),

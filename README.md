@@ -159,9 +159,10 @@ forwarding addresses anyway), and skips any booking already marked sent.
 `custom1` field right after sending, so a retried or overlapping run
 can't double-send.
 
-**The email body is placeholder copy** — the property owner said they'd
-supply the real wording later; replace the `text` in
-`sendReviewRequestEmail` rather than tweaking it.
+**The email body** is a Google Maps review request, business copy from
+the property owner kept verbatim in `sendReviewRequestEmail`
+(`src/lib/email.ts`) rather than reworded, same as the pre-stay guide
+email.
 
 Set `CRON_SECRET` in Vercel's project environment variables (see
 `env.example`) — Vercel sends it back as the request's `Authorization`
