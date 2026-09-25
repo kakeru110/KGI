@@ -108,9 +108,9 @@ export const BLOG_POSTS: BlogPost[] = [
     titleJa: "北鎌倉の紅葉ガイド — 見頃と明月院「悟りの窓」",
     titleEn: "Kitakamakura Autumn Leaves Guide: Meigetsu-in's Window of Enlightenment",
     excerptJa:
-      "鎌倉の紅葉は例年11月下旬〜12月上旬が見頃。北鎌倉を代表する紅葉スポット、明月院の「悟りの窓」を中心にご紹介します。",
+      "鎌倉の紅葉は例年11月下旬〜12月上旬が見頃。北鎌倉を代表する紅葉スポット明月院の「悟りの窓」を中心に、円覚寺・建長寺・東慶寺の拝観情報や混雑を避けるコツもご紹介します。",
     excerptEn:
-      "Kamakura's autumn colors typically peak from late November to early December. A guide centered on Kitakamakura's signature spot - Meigetsu-in's \"Window of Enlightenment.\"",
+      "Kamakura's autumn colors typically peak from late November to early December. A guide centered on Kitakamakura's signature spot, Meigetsu-in's \"Window of Enlightenment,\" plus visiting details for Engaku-ji, Kencho-ji, and Tokei-ji, and tips for avoiding the crowds.",
     heroImage: "/photos/blog/meigetsuin-madoka.jpg",
     galleryImages: [
       {
@@ -140,9 +140,17 @@ export const BLOG_POSTS: BlogPost[] = [
         headingJa: "北鎌倉エリアの他の紅葉スポット",
         headingEn: "Other Spots in the Kitakamakura Area",
         bodyJa:
-          "明月院のほかにも、円覚寺・建長寺など北鎌倉には紅葉の名所が点在しています。北鎌倉駅を起点に歩いて回れる距離なので、あわせて巡るのもおすすめです。",
+          "明月院のほかにも、北鎌倉には紅葉の名所が点在しています。円覚寺は拝観時間8:30〜16:30(12〜2月は16:00まで)、拝観料は高校生以上500円・小中学生200円で、例年11月下旬〜12月上旬が見頃です。境内の妙香池に紅葉が映り込む景色が人気の撮影スポットになっています。建長寺も拝観時間8:30〜16:30、拝観料は同じく500円・200円。総門から奥に進むほど人が少なくなり、最奥の半僧坊まで足を延ばすと落ち着いて紅葉を楽しめます。東慶寺は拝観時間9:00〜16:00で、本堂拝観料は特に定められていません(お心づけをお納めください)。いずれも北鎌倉駅を起点に歩いて回れる距離にあります。",
         bodyEn:
-          "Beyond Meigetsu-in, Kitakamakura has several other well-known spots for fall colors, including Engaku-ji and Kencho-ji. They're all within walking distance of Kitakamakura Station, so it's easy to visit a few in one trip.",
+          "Beyond Meigetsu-in, Kitakamakura has several other well-known spots for fall colors. Engaku-ji is open 8:30-16:30 (until 16:00 from December through February), with admission of ¥500 for high school age and up and ¥200 for elementary and junior high students; it typically peaks from late November to early December, and the reflection of the leaves in Myoko-chi pond is a popular photo spot. Kencho-ji keeps similar hours (8:30-16:30) and the same admission (¥500/¥200) - the crowds thin out the further you walk from the main gate, and the innermost Hansobo shrine is a quiet spot to enjoy the colors. Tokei-ji is open 9:00-16:00 with no set admission fee for the main hall (a small donation is customary). All three are within walking distance of Kitakamakura Station.",
+      },
+      {
+        headingJa: "混雑を避けるコツ",
+        headingEn: "Tips for Avoiding the Crowds",
+        bodyJa:
+          "紅葉シーズンの鎌倉は土日祝日を中心に大変混雑し、混雑のピークは午前9時〜14時頃と言われています。ゆっくり紅葉を楽しみたいなら、平日、それも開門直後の午前中がおすすめです。11月上旬や12月上旬など、ピークを少し外した時期を選ぶのも一つの方法です。当宿はセルフチェックインで到着時間の融通がきくので、朝一番の拝観に合わせて早めに出発することもできます。",
+        bodyEn:
+          "Kamakura gets very crowded during leaf season, especially on weekends and holidays, with the busiest hours typically between 9am and 2pm. For a calmer visit, aim for a weekday morning right after opening, or consider going slightly before or after the peak (early November or early December). Since check-in at our property is self-service, you're free to head out early for a first-thing visit without waiting around for a front desk.",
       },
       {
         headingJa: "アクセス",
