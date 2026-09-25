@@ -36,6 +36,53 @@ export type BlogPost = {
  */
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "ofuna-flower-center-autumn-guide",
+    publishedDate: "2026-09-25",
+    titleJa: "大船フラワーセンター秋の見どころガイド",
+    titleEn: "Ofuna Flower Center: An Autumn Highlights Guide",
+    excerptJa:
+      "当宿から徒歩圏内の大船フラワーセンターは、秋バラとモミジ・イチョウの紅葉が重なる時期がある穴場スポット。営業時間・入園料・アクセスをまとめました。",
+    excerptEn:
+      "A short walk from our property, Ofuna Flower Center has a window where autumn roses and fall foliage overlap - here's what to know about hours, admission, and getting there.",
+    sections: [
+      {
+        headingJa: "大船フラワーセンターとは",
+        headingEn: "About Ofuna Flower Center",
+        bodyJa:
+          "正式名称は神奈川県立大船フラワーセンター(愛称・運営: 日比谷花壇大船フラワーセンター)。しゃくやく・はなしょうぶ・ばらなど、季節ごとの花々を楽しめる植物園です。JR大船駅西口から徒歩約16分で、当宿からも同じく徒歩圏内。レンタカーなしでも気軽に立ち寄れます。",
+        bodyEn:
+          "Officially the Kanagawa Prefectural Ofuna Flower Center (branded and operated as Hibiya-Kadan Ofuna Flower Center), this botanical garden is known for seasonal blooms - peonies, Japanese irises, and roses among them. It's about a 16-minute walk from Ofuna Station's west exit, and an easy walk from our property too, so you don't need a car to get there.",
+      },
+      {
+        headingJa: "秋の見どころ — 秋バラともみじ・いちょう",
+        headingEn: "Autumn Highlights: Roses, Maples, and Ginkgo",
+        bodyJa:
+          "園内のばら園には約350品種、約1,200株のバラがあります。見頃は5月中旬〜7月上旬と10月中旬〜11月中旬の年2回で、秋にも一年で二度目の見頃を迎えます。秋バラは春に比べて花色が濃く香りも強くなると言われ、暑さが和らいだ時期にゆっくり見て回れるのも魅力です。11月に入るとモミジやイチョウも色づき始め、大船エリアの紅葉は例年11月下旬〜12月上旬が見頃。秋バラの見頃の終盤と、紅葉が色づき始める時期が重なる年もあります。",
+        bodyEn:
+          "The rose garden holds around 350 varieties and 1,200 plants, and blooms twice a year - mid-May to early July, and again mid-October to mid-November. Autumn roses are often said to have deeper color and a stronger scent than their spring counterparts, and the cooler weather makes for a more comfortable stroll through the garden. By November, the maples and ginkgo trees start turning too - the Ofuna area's foliage typically peaks from late November to early December - so in some years the tail end of the autumn rose bloom overlaps with the first signs of fall color.",
+      },
+      {
+        headingJa: "営業時間・入園料・アクセス",
+        headingEn: "Hours, Admission, and Access",
+        bodyJa:
+          "開園時間は3月〜10月が9:00〜17:00、11月〜2月は9:00〜16:00です。休園日は第2・第4月曜日(祝日の場合は翌日休園)と年末年始(12月29日〜1月3日)。入園料は20歳以上400円、高校生・65歳以上150円、学生(20歳未満)200円、中学生以下と障がいのある方は無料です。住所は鎌倉市岡本1018、JR大船駅西口から徒歩約16分です。",
+        bodyEn:
+          "Opening hours are 9:00-17:00 from March through October, and 9:00-16:00 from November through February. It's closed on the second and fourth Monday of each month (the following day instead, if that Monday is a holiday) and over the New Year period (December 29 - January 3). Admission is ¥400 for adults 20 and up, ¥150 for high schoolers and those 65+, ¥200 for students under 20, and free for junior high age and under as well as visitors with disabilities. The address is 1018 Okamoto, Kamakura, about a 16-minute walk from Ofuna Station's west exit.",
+      },
+      {
+        headingJa: "紅葉ガイドとあわせて",
+        headingEn: "Pair It With Our Autumn Leaves Guide",
+        bodyJa:
+          "大船駅からJRでひと駅の北鎌倉にも、明月院をはじめとした紅葉の名所が集まっています(詳しくは当ブログの紅葉ガイド記事をご覧ください)。午前中に大船フラワーセンターへ、午後は北鎌倉へ足を延ばすといった組み合わせもおすすめです。",
+        bodyEn:
+          "Kitakamakura, just one JR stop from Ofuna, has its own cluster of well-known autumn spots centered on Meigetsu-in (see our separate autumn leaves guide for details). A morning at Ofuna Flower Center followed by an afternoon in Kitakamakura makes for an easy combination.",
+      },
+    ],
+    sourceUrl: "https://www.fcofuna-kanagawa.jp/",
+    sourceLabelJa: "神奈川県立大船フラワーセンター 公式サイト",
+    sourceLabelEn: "Ofuna Flower Center official site",
+  },
+  {
     slug: "kamakura-family-group-itinerary",
     publishedDate: "2026-09-16",
     titleJa: "子連れ・グループ向け鎌倉1泊2日モデルコース",
