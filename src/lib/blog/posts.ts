@@ -44,6 +44,14 @@ export const BLOG_POSTS: BlogPost[] = [
       "当宿から徒歩圏内の大船フラワーセンターは、秋バラとモミジ・イチョウの紅葉が重なる時期がある穴場スポット。営業時間・入園料・アクセスをまとめました。",
     excerptEn:
       "A short walk from our property, Ofuna Flower Center has a window where autumn roses and fall foliage overlap - here's what to know about hours, admission, and getting there.",
+    heroImage: "/photos/blog/ofuna-flower-center-garden.jpg",
+    galleryImages: [
+      {
+        src: "/photos/blog/ofuna-flower-center-sign.jpg",
+        altJa: "大船フラワーセンターの入口の看板",
+        altEn: "The entrance sign at Ofuna Flower Center",
+      },
+    ],
     sections: [
       {
         headingJa: "大船フラワーセンターとは",
