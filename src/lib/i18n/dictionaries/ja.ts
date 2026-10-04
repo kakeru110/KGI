@@ -188,10 +188,13 @@ const ja: Dictionary = {
     heading: "フォトギャラリー",
     categories: {
       living: "リビング",
+      dining: "ダイニング",
       bedroom: "ベッドルーム",
       loft: "ロフト",
+      stairs: "階段",
       kitchen: "キッチン",
       bathroom: "バスルーム",
+      washroom: "洗面所",
       exterior: "外観",
     },
     viewAll: "すべての写真を見る",

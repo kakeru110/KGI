@@ -188,10 +188,13 @@ const en: Dictionary = {
     heading: "Photo Gallery",
     categories: {
       living: "Living",
+      dining: "Dining",
       bedroom: "Bedroom",
       loft: "Loft",
+      stairs: "Stairs",
       kitchen: "Kitchen",
       bathroom: "Bathroom",
+      washroom: "Washroom",
       exterior: "Exterior",
     },
     viewAll: "View all photos",
