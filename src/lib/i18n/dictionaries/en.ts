@@ -3,7 +3,7 @@ import type { Dictionary } from "../dictionary-type";
 const en: Dictionary = {
   meta: {
     siteName: "Kamakura Gate Inn",
-    title: "Whole-House Stay in Ofuna for Kamakura & Shonan | Kamakura Gate Inn",
+    title: "Kamakura Gate Inn | Whole-House Stay in Ofuna for Kamakura & Shonan",
     description:
       "Your base for exploring Kamakura and Shonan. A private 58sqm stay for up to 6 guests, 7 minutes on foot from Ofuna Station. Book direct with Kamakura Gate Inn.",
     ogBadge: "Official booking site",
@@ -89,7 +89,8 @@ const en: Dictionary = {
     privacy: "Privacy Policy",
   },
   hero: {
-    title: "A whole-house stay in Ofuna, your base for Kamakura and Shonan",
+    tagline: "A whole-house stay in Ofuna, your base for Kamakura and Shonan",
+    title: "Kamakura Gate Inn",
     subtitle:
       "A private 58sqm Japandi-style stay for up to 6 guests, 7 minutes on foot from Ofuna Station.",
     noFeesBadge: "No service fees when you book direct",

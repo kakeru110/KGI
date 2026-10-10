@@ -3,7 +3,7 @@ import type { Dictionary } from "../dictionary-type";
 const ja: Dictionary = {
   meta: {
     siteName: "Kamakura Gate Inn",
-    title: "鎌倉・湘南観光に便利な大船の一棟貸し宿 | Kamakura Gate Inn",
+    title: "Kamakura Gate Inn | 鎌倉・湘南観光に便利な大船の一棟貸し宿",
     description:
       "鎌倉・湘南観光の拠点に。大船駅徒歩7分、最大6名で泊まれる58㎡のプライベートステイ、Kamakura Gate Innの公式予約サイトです。",
     ogBadge: "公式予約サイト",
@@ -90,7 +90,8 @@ const ja: Dictionary = {
     privacy: "プライバシーポリシー",
   },
   hero: {
-    title: "鎌倉・湘南観光に便利な、大船の一棟貸し宿",
+    tagline: "鎌倉・湘南観光に便利な、大船の一棟貸し宿",
+    title: "Kamakura Gate Inn",
     subtitle: "大船駅徒歩7分、最大6名で泊まれる58㎡のJapandiなプライベートステイ。",
     noFeesBadge: "直接予約はサービス手数料0円",
   },
