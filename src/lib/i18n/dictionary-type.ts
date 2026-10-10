@@ -45,6 +45,7 @@ export type Dictionary = {
     privacy: string;
   };
   hero: {
+    tagline: string;
     title: string;
     subtitle: string;
     noFeesBadge: string;
